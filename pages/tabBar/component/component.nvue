@@ -15,6 +15,10 @@
 		<view>
 			<image class="index-img" src="../../../static/shuijiao.jpg"></image>
 		</view>
+		<view class="uni-flex uni-row i-links">
+			<button type="primary" @tap="goSchool()">学校信息</button>
+			<button type="primary" @tap="goSchool()">专业</button>
+		</view>
 		<!-- top img end -->
         <view class="uni-panel" v-for="(item, index) in list" :key="item.id">
             <view class="uni-panel-h" :class="item.open ? 'uni-panel-h-on' : ''" @click="triggerCollapse(index)">
@@ -39,14 +43,19 @@
         'src': "url('/static/uni.ttf')"
     });
     // #endif
-
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
     export default {
         data() {
             return {
 				searchVal: '',
+				schoolUrl:'../../component/scroll-view/scroll-view',
+				loginUrl:'../../login/login',
                 list: [{
                         id: 'view',
-                        name: '视图容器',
+                        name: '视图容器1',
                         open: false,
                         pages: [
                             'view',
@@ -140,6 +149,9 @@
                 ]
             }
         },
+		computed: {
+			...mapState(['hasLogin'])
+		},
         onShareAppMessage() {
             return {
                 title: '欢迎体验uni-app',
@@ -157,6 +169,17 @@
 					title: '搜索：' + res.value,
 					icon: 'none'
 				})
+			},
+			goSchool(){
+				if(this.hasLogin){
+					uni.navigateTo({
+						url:this.schoolUrl
+					})
+				}else{
+					uni.navigateTo({
+						url:this.loginUrl
+					})
+				}
 			},
 			examinationTime(stringTime){
 				var timestamp2 = Date.parse(new Date(stringTime));
@@ -202,4 +225,5 @@
 
 <style>
     @import '../../../common/uni-nvue.css';	
+	.i-links{width: 100%;height: 50px;justify-content: space-between;}
 </style>
