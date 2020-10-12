@@ -68,11 +68,24 @@
 			}
 		},
 		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/school/schoolList",
+			"style": {
+				"navigationBarTitleText": "推荐院校"
+			}
+		},
+		{
 			"path": "pages/component/view/view",
 			"style": {
 				"navigationBarTitleText": "view"
 			}
 		},
+		
 		{
 			"path": "pages/component/scroll-view/scroll-view",
 			"style": {

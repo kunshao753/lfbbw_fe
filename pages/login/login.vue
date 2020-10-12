@@ -6,6 +6,10 @@
 					<view class="uni-h3 uni-center uni-common-mt">已登录</view>
 					<view class="uni-hello-text uni-center">
 						<text>每个账号仅需登录 1 次，\n后续每次进入页面即可自动拉取用户信息。</text>
+						<view>code：{{jsCode}}</view>
+						<view>openid：{{openid}}</view>
+						<view>unionid：{{unionid}}</view>
+						<view>session_key：{{session_key}}</view>
 					</view>
 				</block>
 				<block v-if="hasLogin === false">
@@ -14,6 +18,8 @@
 						请点击按钮登录
 					</view>
 				</block>
+				<view v-if="userInfo">{{JSON.stringify(userInfo)}}</view>
+				<view v-if="phoneInfo">{{JSON.stringify(phoneInfo)}}</view>
 			</view>
 			<view class="uni-btn-v uni- uni-common-mt">
 				<!-- #ifdef MP-TOUTIAO -->
@@ -24,7 +30,8 @@
 				<!-- #ifndef MP-TOUTIAO -->
 				<button v-if="hasLogin === false" type="primary" class="page-body-button" v-for="(value,key) in providerList" @click="tologin(value)" :key="key">{{value.name}}</button>
 				<!-- #endif -->
-				<button v-if="hasLogin === true" type="default" @click="bindPhone()">绑定手机号</button>
+				<button v-if="hasLogin === true" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo" withCredentials="true">获取用户信息</button>
+				<button v-if="hasLogin === true" type="default" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">绑定手机号</button>
 			</view>
 		</view>
 	</view>
@@ -40,7 +47,12 @@
 			return {
 				title: 'login',
 				providerList: [],
-				userInfo:{}
+				userInfo:{},
+				jsCode:'',
+				openid:'',
+				unionid:'',
+				session_key:'',
+				phoneInfo:{}
 			}
 		},
 		computed: {
@@ -102,6 +114,7 @@
 						console.log('login success:', res);
 						// 更新保存在 store 中的登录状态
 						this.login(provider.id);
+						this.jsCode = res.code;						  
 						// #ifdef MP-WEIXIN
 						console.warn('如需获取openid请参考uni-id: https://uniapp.dcloud.net.cn/uniCloud/uni-id')					
 						// #endif
@@ -111,7 +124,20 @@
 					}
 				});
 			},
-			bindPhone(){
+			getPhoneNumber (e) {
+				if(e.detail.errMsg=="getPhoneNumber:fail user deny"){       //用户决绝授权  
+				
+				            //拒绝授权后弹出一些提示  
+				
+				}else{      //允许授权  
+					console.log(e.detail.errMsg)
+					console.log(e.detail.iv)
+					console.log(e.detail.encryptedData)
+					this.phoneInfo = e.detail.encryptedData
+				}  
+			    
+			  },
+			getUserInfo(){
 				console.log(this.loginProvider)
 				uni.getUserInfo({					
 					provider: this.loginProvider,
