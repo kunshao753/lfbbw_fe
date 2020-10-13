@@ -16,9 +16,9 @@
 /* 14 */,
 /* 15 */,
 /* 16 */
-/*!**********************************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/main.js?{"page":"pages%2FtabBar%2Fcomponent%2Fcomponent"} ***!
-  \**********************************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/main.js?{"page":"pages%2FtabBar%2Fcomponent%2Fcomponent"} ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31,9 +31,9 @@ createPage(_component.default);
 
 /***/ }),
 /* 17 */
-/*!**************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue ***!
-  \**************************************************************************/
+/*!********************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -73,9 +73,9 @@ component.options.__file = "pages/tabBar/component/component.nvue"
 
 /***/ }),
 /* 18 */
-/*!*********************************************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue?vue&type=template&id=b53287aa& ***!
-  \*********************************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue?vue&type=template&id=b53287aa& ***!
+  \***************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -94,9 +94,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 19 */
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue?vue&type=template&id=b53287aa& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue?vue&type=template&id=b53287aa& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -108,10 +108,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniCountdown: function() {
-    return __webpack_require__.e(/*! import() | components/uni-countdown/uni-countdown */ "components/uni-countdown/uni-countdown").then(__webpack_require__.bind(null, /*! @/components/uni-countdown/uni-countdown.vue */ 1152))
+    return __webpack_require__.e(/*! import() | components/uni-countdown/uni-countdown */ "components/uni-countdown/uni-countdown").then(__webpack_require__.bind(null, /*! @/components/uni-countdown/uni-countdown.vue */ 1118))
   },
   uniSearchBar: function() {
-    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1321))
+    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1125))
+  },
+  uniIcons: function() {
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1156))
   }
 }
 var render = function() {
@@ -136,9 +139,9 @@ render._withStripped = true
 
 /***/ }),
 /* 20 */
-/*!***************************************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -151,190 +154,255 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 21 */
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 15);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // TODO 修复Android v3 加载过慢问题
-var _default =
-
-
-
-
-
-
-
-{
-  data: function data() {
-    return {
-      searchVal: '',
-      list: [{
-        id: 'view',
-        name: '视图容器',
-        open: false,
-        pages: [
-        'view',
-        'scroll-view',
-        'swiper',
-
-
-        'movable-view',
-        'cover-view'] },
-
-
-      {
-        id: 'content',
-        name: '基础内容',
-        open: false,
-        pages: ['text', 'rich-text', 'progress'] },
-      {
-        id: 'form',
-        name: '表单组件',
-        open: false,
-        pages: ['button', 'checkbox', 'form', 'input', 'label', 'picker', 'picker-view', 'radio',
-        'slider',
-        'switch', 'textarea',
-
-        'editor'] },
-
-
-      {
-        id: 'nav',
-        name: '导航',
-        open: false,
-        pages: ['navigator'] },
-      {
-        id: 'media',
-        name: '媒体组件',
-        open: false,
-        pages: [
-        'image',
-        'video',
-
-        'audio'] },
-
-
-
-
-      {
-        id: 'map',
-        name: '地图',
-        open: false,
-        pages: ['map'] },
-
-
-
-
-      {
-        id: 'canvas',
-        name: '画布',
-        open: false,
-        pages: ['canvas'] },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {
-        id: 'web-view',
-        name: '网页',
-        open: false,
-        pages: ['web-view'] },
-
-
-
-      {
-        url: 'ad',
-        name: 'AD组件',
-        open: false }] };
-
-
-
-
-  },
-  onShareAppMessage: function onShareAppMessage() {
-    return {
-      title: '欢迎体验uni-app',
-      path: '/pages/tabBar/component/component' };
-
-  },
+var graceChecker = __webpack_require__(/*! ../../../common/graceChecker.js */ 154);var _default = { data: function data() {return { searchVal: '', schoolUrl: '../../school/schoolList', loginUrl: '../../login/login', array: [{ name: '北京' }, { name: '河北' }, { name: '河南' }, { name: '天津' }], index: 1, list: [{ id: 'view', name: '视图容器1', open: false, pages: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view'] }, { id: 'content', name: '基础内容', open: false, pages: ['text', 'rich-text', 'progress'] }, { id: 'form', name: '表单组件', open: false, pages: ['button', 'checkbox', 'form', 'input', 'label', 'picker', 'picker-view', 'radio', 'slider', 'switch', 'textarea', 'editor'] }, { id: 'nav', name: '导航', open: false, pages: ['navigator'] }, { id: 'media', name: '媒体组件', open: false, pages: ['image', 'video', 'audio'] }, { id: 'map', name: '地图', open: false, pages: ['map'] }, { id: 'canvas', name: '画布', open: false, pages: ['canvas'] }, { id: 'web-view', name: '网页', open: false, pages: ['web-view'] }, { url: 'ad', name: 'AD组件', open: false }] };}, computed: _objectSpread({}, (0, _vuex.mapState)(['hasLogin'])), onShareAppMessage: function onShareAppMessage() {return { title: '欢迎体验uni-app', path: '/pages/tabBar/component/component' };},
   onNavigationBarButtonTap: function onNavigationBarButtonTap(e) {
     uni.navigateTo({
       url: '/pages/about/about' });
@@ -346,6 +414,17 @@ var _default =
         title: '搜索：' + res.value,
         icon: 'none' });
 
+    },
+    goSchool: function goSchool() {
+      if (this.hasLogin) {
+        uni.navigateTo({
+          url: this.schoolUrl });
+
+      } else {
+        uni.navigateTo({
+          url: this.loginUrl });
+
+      }
     },
     examinationTime: function examinationTime(stringTime) {
       var timestamp2 = Date.parse(new Date(stringTime));
@@ -384,14 +463,38 @@ var _default =
           url: e.url });
 
       }
+    },
+    formSubmit: function formSubmit(e) {
+      console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value));
+      //定义表单规则
+      var rule = [
+      { name: "location", checkType: "notnull", checkRule: "", errorMsg: "请选择生源地" },
+      { name: "score", checkType: "between", checkRule: "0,750", errorMsg: "请填写正确的分数" },
+      { name: "query", checkType: "in", checkRule: "fschool,fspecialities,fexpert", errorMsg: "请选择查询条件" }];
+
+      //进行表单检查
+      var formData = e.detail.value;
+      var checkRes = graceChecker.check(formData, rule);
+      if (checkRes) {
+        uni.showToast({ title: "验证通过!", icon: "none" });
+      } else {
+        uni.showToast({ title: graceChecker.error, icon: "none" });
+      }
+    },
+    formReset: function formReset(e) {
+      console.log('清空数据');
+    },
+    bindPickerChange: function bindPickerChange(e) {
+      console.log('picker发送选择改变，携带值为：' + e.detail.value);
+      this.index = e.detail.value;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 22 */
-/*!***********************************************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue?vue&type=style&index=0&lang=css& ***!
-  \***********************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -404,9 +507,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 23 */
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -416,9 +519,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 24 */
-/*!***********************************************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue?vue&type=style&index=1&lang=css& ***!
-  \***********************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue?vue&type=style&index=1&lang=css& ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -431,9 +534,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 25 */
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!G:/1.工作/学习/wechat/helloworld/pages/tabBar/component/component.nvue?vue&type=style&index=1&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!G:/1.工作/学习/wechat/volunteer-bottle/pages/tabBar/component/component.nvue?vue&type=style&index=1&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

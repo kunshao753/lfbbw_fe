@@ -1935,10 +1935,10 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 1014:
-/*!********************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/components/u-charts/u-charts.js ***!
-  \********************************************************************/
+/***/ 1028:
+/*!**************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/u-charts/u-charts.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6993,10 +6993,10 @@ if ( true && typeof module.exports === "object") {
 
 /***/ }),
 
-/***/ 1043:
-/*!**********************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/common/html-parser.js ***!
-  \**********************************************************/
+/***/ 1057:
+/*!****************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/html-parser.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7357,9 +7357,9 @@ parseHtml;exports.default = _default;
 /***/ }),
 
 /***/ 11:
-/*!***************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/store/index.js ***!
-  \***************************************************/
+/*!*********************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/store/index.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7441,10 +7441,10 @@ store;exports.default = _default;
 
 /***/ }),
 
-/***/ 1126:
-/*!******************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/components/uni-icons/icons.js ***!
-  \******************************************************************/
+/***/ 1161:
+/*!************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-icons/icons.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7583,15 +7583,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 1134:
-/*!******************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/components/uni-popup/popup.js ***!
-  \******************************************************************/
+/***/ 1169:
+/*!************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-popup/popup.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 1135));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 1170));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -7618,10 +7618,10 @@ var config = {
 
 /***/ }),
 
-/***/ 1135:
-/*!********************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/components/uni-popup/message.js ***!
-  \********************************************************************/
+/***/ 1170:
+/*!**************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-popup/message.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7708,10 +7708,10 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 1316:
-/*!******************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/components/uni-swipe-action-item/mpwxs.js ***!
-  \******************************************************************************/
+/***/ 1344:
+/*!************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-swipe-action-item/mpwxs.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7834,15 +7834,15 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 1333:
-/*!********************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/components/uni-calendar/util.js ***!
-  \********************************************************************/
+/***/ 1354:
+/*!**************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-calendar/util.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _calendar = _interopRequireDefault(__webpack_require__(/*! ./calendar.js */ 1334));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _calendar = _interopRequireDefault(__webpack_require__(/*! ./calendar.js */ 1355));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var
 
 Calendar = /*#__PURE__*/function () {
   function Calendar()
@@ -8197,10 +8197,10 @@ Calendar;exports.default = _default;
 
 /***/ }),
 
-/***/ 1334:
-/*!************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/components/uni-calendar/calendar.js ***!
-  \************************************************************************/
+/***/ 1355:
+/*!******************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-calendar/calendar.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9486,116 +9486,10 @@ calendar;exports.default = _default;
 
 /***/ }),
 
-/***/ 140:
-/*!***********************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/common/graceChecker.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
-数据验证（表单验证）
-来自 grace.hcoder.net 
-作者 hcoder 深海
-*/
-module.exports = {
-  error: '',
-  check: function check(data, rule) {
-    for (var i = 0; i < rule.length; i++) {
-      if (!rule[i].checkType) {return true;}
-      if (!rule[i].name) {return true;}
-      if (!rule[i].errorMsg) {return true;}
-      if (!data[rule[i].name]) {this.error = rule[i].errorMsg;return false;}
-      switch (rule[i].checkType) {
-        case 'string':
-          var reg = new RegExp('^.{' + rule[i].checkRule + '}$');
-          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
-          break;
-        case 'int':
-          var reg = new RegExp('^(-[1-9]|[1-9])[0-9]{' + rule[i].checkRule + '}$');
-          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
-          break;
-          break;
-        case 'between':
-          if (!this.isNumber(data[rule[i].name])) {
-            this.error = rule[i].errorMsg;
-            return false;
-          }
-          var minMax = rule[i].checkRule.split(',');
-          minMax[0] = Number(minMax[0]);
-          minMax[1] = Number(minMax[1]);
-          if (data[rule[i].name] > minMax[1] || data[rule[i].name] < minMax[0]) {
-            this.error = rule[i].errorMsg;
-            return false;
-          }
-          break;
-        case 'betweenD':
-          var reg = /^-?[1-9][0-9]?$/;
-          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
-          var minMax = rule[i].checkRule.split(',');
-          minMax[0] = Number(minMax[0]);
-          minMax[1] = Number(minMax[1]);
-          if (data[rule[i].name] > minMax[1] || data[rule[i].name] < minMax[0]) {
-            this.error = rule[i].errorMsg;
-            return false;
-          }
-          break;
-        case 'betweenF':
-          var reg = /^-?[0-9][0-9]?.+[0-9]+$/;
-          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
-          var minMax = rule[i].checkRule.split(',');
-          minMax[0] = Number(minMax[0]);
-          minMax[1] = Number(minMax[1]);
-          if (data[rule[i].name] > minMax[1] || data[rule[i].name] < minMax[0]) {
-            this.error = rule[i].errorMsg;
-            return false;
-          }
-          break;
-        case 'same':
-          if (data[rule[i].name] != rule[i].checkRule) {this.error = rule[i].errorMsg;return false;}
-          break;
-        case 'notsame':
-          if (data[rule[i].name] == rule[i].checkRule) {this.error = rule[i].errorMsg;return false;}
-          break;
-        case 'email':
-          var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
-          break;
-        case 'phoneno':
-          var reg = /^1[0-9]{10,10}$/;
-          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
-          break;
-        case 'zipcode':
-          var reg = /^[0-9]{6}$/;
-          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
-          break;
-        case 'reg':
-          var reg = new RegExp(rule[i].checkRule);
-          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
-          break;
-        case 'in':
-          if (rule[i].checkRule.indexOf(data[rule[i].name]) == -1) {
-            this.error = rule[i].errorMsg;return false;
-          }
-          break;
-        case 'notnull':
-          if (data[rule[i].name] == null || data[rule[i].name].length < 1) {this.error = rule[i].errorMsg;return false;}
-          break;}
-
-    }
-    return true;
-  },
-  isNumber: function isNumber(checkVal) {
-    var reg = /^-?[1-9][0-9]?.?[0-9]*$/;
-    return reg.test(checkVal);
-  } };
-
-/***/ }),
-
-/***/ 1410:
-/*!**********************************************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/pages/template/component-communication/bus.js ***!
-  \**********************************************************************************/
+/***/ 1431:
+/*!****************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages/template/component-communication/bus.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10716,6 +10610,112 @@ var index = {
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3)))
+
+/***/ }),
+
+/***/ 154:
+/*!*****************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/graceChecker.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+数据验证（表单验证）
+来自 grace.hcoder.net 
+作者 hcoder 深海
+*/
+module.exports = {
+  error: '',
+  check: function check(data, rule) {
+    for (var i = 0; i < rule.length; i++) {
+      if (!rule[i].checkType) {return true;}
+      if (!rule[i].name) {return true;}
+      if (!rule[i].errorMsg) {return true;}
+      if (!data[rule[i].name]) {this.error = rule[i].errorMsg;return false;}
+      switch (rule[i].checkType) {
+        case 'string':
+          var reg = new RegExp('^.{' + rule[i].checkRule + '}$');
+          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
+          break;
+        case 'int':
+          var reg = new RegExp('^(-[1-9]|[1-9])[0-9]{' + rule[i].checkRule + '}$');
+          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
+          break;
+          break;
+        case 'between':
+          if (!this.isNumber(data[rule[i].name])) {
+            this.error = rule[i].errorMsg;
+            return false;
+          }
+          var minMax = rule[i].checkRule.split(',');
+          minMax[0] = Number(minMax[0]);
+          minMax[1] = Number(minMax[1]);
+          if (data[rule[i].name] > minMax[1] || data[rule[i].name] < minMax[0]) {
+            this.error = rule[i].errorMsg;
+            return false;
+          }
+          break;
+        case 'betweenD':
+          var reg = /^-?[1-9][0-9]?$/;
+          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
+          var minMax = rule[i].checkRule.split(',');
+          minMax[0] = Number(minMax[0]);
+          minMax[1] = Number(minMax[1]);
+          if (data[rule[i].name] > minMax[1] || data[rule[i].name] < minMax[0]) {
+            this.error = rule[i].errorMsg;
+            return false;
+          }
+          break;
+        case 'betweenF':
+          var reg = /^-?[0-9][0-9]?.+[0-9]+$/;
+          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
+          var minMax = rule[i].checkRule.split(',');
+          minMax[0] = Number(minMax[0]);
+          minMax[1] = Number(minMax[1]);
+          if (data[rule[i].name] > minMax[1] || data[rule[i].name] < minMax[0]) {
+            this.error = rule[i].errorMsg;
+            return false;
+          }
+          break;
+        case 'same':
+          if (data[rule[i].name] != rule[i].checkRule) {this.error = rule[i].errorMsg;return false;}
+          break;
+        case 'notsame':
+          if (data[rule[i].name] == rule[i].checkRule) {this.error = rule[i].errorMsg;return false;}
+          break;
+        case 'email':
+          var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
+          break;
+        case 'phoneno':
+          var reg = /^1[0-9]{10,10}$/;
+          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
+          break;
+        case 'zipcode':
+          var reg = /^[0-9]{6}$/;
+          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
+          break;
+        case 'reg':
+          var reg = new RegExp(rule[i].checkRule);
+          if (!reg.test(data[rule[i].name])) {this.error = rule[i].errorMsg;return false;}
+          break;
+        case 'in':
+          if (rule[i].checkRule.indexOf(data[rule[i].name]) == -1) {
+            this.error = rule[i].errorMsg;return false;
+          }
+          break;
+        case 'notnull':
+          if (data[rule[i].name] == null || data[rule[i].name].length < 1) {this.error = rule[i].errorMsg;return false;}
+          break;}
+
+    }
+    return true;
+  },
+  isNumber: function isNumber(checkVal) {
+    var reg = /^-?[1-9][0-9]?.?[0-9]*$/;
+    return reg.test(checkVal);
+  } };
 
 /***/ }),
 
@@ -16795,9 +16795,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!***********************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/pages.json ***!
-  \***********************************************/
+/*!*****************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages.json ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -16805,10 +16805,10 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 471:
-/*!*********************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/common/permission.js ***!
-  \*********************************************************/
+/***/ 485:
+/*!***************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/permission.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17061,10 +17061,10 @@ module.exports = permission;
 
 /***/ }),
 
-/***/ 516:
-/*!***************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/common/util.js ***!
-  \***************************************************/
+/***/ 530:
+/*!*********************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/util.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -17143,10 +17143,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ 897:
-/*!******************************************************!*\
-  !*** G:/1.工作/学习/wechat/helloworld/common/airport.js ***!
-  \******************************************************/
+/***/ 911:
+/*!************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/airport.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

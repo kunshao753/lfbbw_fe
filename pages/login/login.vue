@@ -30,8 +30,15 @@
 				<!-- #ifndef MP-TOUTIAO -->
 				<button v-if="hasLogin === false" type="primary" class="page-body-button" v-for="(value,key) in providerList" @click="tologin(value)" :key="key">{{value.name}}</button>
 				<!-- #endif -->
-				<button v-if="hasLogin === true" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo" withCredentials="true">获取用户信息</button>
+				<!-- #ifdef APP-PLUS || MP-ALIPAY || MP-TOUTIAO -->
+				<button v-if="hasLogin === true" type="primary" @click="getUserInfo">获取用户信息</button>
+				<!-- #endif -->
+				<!-- #ifdef MP-BAIDU || MP-QQ -->
+				<button v-if="hasLogin === true" type="primary" open-type="getUserInfo" @getuserinfo="mpGetUserInfo">获取用户信息</button>
+				<!-- #endif -->
+				<!-- #ifdef MP-WEIXIN -->
 				<button v-if="hasLogin === true" type="default" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">绑定手机号</button>
+				<!-- #endif -->
 			</view>
 		</view>
 	</view>
@@ -185,6 +192,18 @@
 					    // #endif
 					}
 				})
+			},
+			mpGetUserInfo(result) {
+				console.log('mpGetUserInfo', result);
+				if (result.detail.errMsg !== 'getUserInfo:ok') {
+					uni.showModal({
+						title: '获取用户信息失败',
+						content: '错误原因' + result.detail.errMsg,
+						showCancel: false
+					});
+					return;
+				}
+				this.userInfo = result.detail.userInfo;
 			},
 		}
 	}
