@@ -80,6 +80,12 @@
 			}
 		},
 		{
+			"path": "pages/school/schoolDetail",
+			"style": {
+				"navigationBarTitleText": "院校详情"
+			}
+		},
+		{
 			"path": "pages/component/view/view",
 			"style": {
 				"navigationBarTitleText": "view"
@@ -1182,11 +1188,11 @@
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "Hello uniapp",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"backgroundColorTop": "#F8F8F8",
-		"backgroundColorBottom": "#F4F5F6",
+		"navigationBarTitleText": "志愿瓶",
+		"navigationBarBackgroundColor": "#fff",
+		"backgroundColor": "#fff",
+		"backgroundColorTop": "#fff",
+		"backgroundColorBottom": "#fff",
 		"mp-360": {
 			"navigationStyle": "custom"
 		}

@@ -1,5 +1,5 @@
 <template>
-    <view class="uni-container">
+    <view class="uni-bg-white">
 		<!-- top search start -->
         <view class="index-top uni-flex uni-row uni-acenter">
 			<view class="uni-flex uni-row uni-acenter">
@@ -224,15 +224,18 @@
 				})
 			},
 			goSchool(){
-				if(this.hasLogin){
-					uni.navigateTo({
-						url:this.schoolUrl
-					})
-				}else{
-					uni.navigateTo({
-						url:this.loginUrl
-					})
-				}
+				// if(this.hasLogin){
+				// 	uni.navigateTo({
+				// 		url:this.schoolUrl
+				// 	})
+				// }else{
+				// 	uni.navigateTo({
+				// 		url:this.loginUrl
+				// 	})
+				// }
+				uni.navigateTo({
+			 		url:this.schoolUrl
+			 	})
 			},
 			examinationTime(stringTime){
 				var timestamp2 = Date.parse(new Date(stringTime));
@@ -273,6 +276,7 @@
                 }
             },
 			formSubmit: function(e) {
+				var t = this;
 				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
 			    //定义表单规则
 			    var rule = [
@@ -285,6 +289,24 @@
 			    var checkRes = graceChecker.check(formData, rule);
 			    if(checkRes){
 			        uni.showToast({title:"验证通过!", icon:"none"});
+					console.log(formData.query);
+					switch (formData.query){						
+						case 'fschool':
+							uni.navigateTo({
+								url:t.schoolUrl
+							});
+							break;
+						case 'fspecialities':
+							uni.navigateTo({
+								url:t.schoolUrl
+							});
+							break;
+						case 'fexpert':
+							uni.navigateTo({
+								url:t.schoolUrl
+							});
+							break;
+					}
 			    }else{
 			        uni.showToast({ title: graceChecker.error, icon: "none" });
 			    }

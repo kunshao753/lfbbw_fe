@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "推荐院校",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-tag": "/components/uni-tag/uni-tag"
+  }
 }

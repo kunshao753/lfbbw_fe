@@ -6,6 +6,7 @@
         "pages/tabBar/extUI/extUI",
         "pages/login/login",
         "pages/school/schoolList",
+        "pages/school/schoolDetail",
         "pages/component/view/view",
         "pages/component/scroll-view/scroll-view",
         "pages/component/swiper/swiper",
@@ -154,11 +155,11 @@
     "window": {
         "pageOrientation": "portrait",
         "navigationBarTextStyle": "black",
-        "navigationBarTitleText": "Hello uniapp",
-        "navigationBarBackgroundColor": "#F8F8F8",
-        "backgroundColor": "#F8F8F8",
-        "backgroundColorTop": "#F8F8F8",
-        "backgroundColorBottom": "#F4F5F6"
+        "navigationBarTitleText": "志愿瓶",
+        "navigationBarBackgroundColor": "#fff",
+        "backgroundColor": "#fff",
+        "backgroundColorTop": "#fff",
+        "backgroundColorBottom": "#fff"
     },
     "tabBar": {
         "color": "#000",
@@ -198,5 +199,5 @@
         }
     },
     "usingComponents": {},
-    "sitemapLocation": "sitemap64.json"
+    "sitemapLocation": "sitemap90.json"
 }

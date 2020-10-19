@@ -196,6 +196,7 @@ form {
 .uni-bg-blue{
 	background:#007AFF; color:#FFF;
 }
+.uni-bg-white{background: #fff;}
 /* 标题 */
 .uni-h1 {font-size: 80rpx; font-weight:700;}
 .uni-h2 {font-size: 60rpx; font-weight:700;}
