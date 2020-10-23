@@ -62,6 +62,18 @@ progress, checkbox-group{
 form {
 	width: 100%;
 }
+.mt10{
+	margin-top: 10rpx;
+}
+.mr10{
+	margin-right: 10rpx;
+}
+.mt20{
+	margin-top: 20rpx;
+}
+.mr20{
+	margin-right: 20rpx;
+}
 .uni-flex {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -119,10 +131,6 @@ form {
 }
 .uni-inline-item text{
 	margin-right: 20rpx;
-}
-.uni-inline-item text:last-child{
-	margin-right: 0rpx;
-	margin-left: 20rpx;
 }
 /* page */
 .uni-page-head{
@@ -491,6 +499,7 @@ radio-group label, checkbox-group label{
 	-webkit-box-align: center;
 	-webkit-align-items: center;
 	        align-items: center;
+	line-height: 90rpx;
 }
 .uni-list-cell-hover {
 	background-color: #eee;

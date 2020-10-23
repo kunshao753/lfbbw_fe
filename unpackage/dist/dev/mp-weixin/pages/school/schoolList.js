@@ -228,6 +228,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 // 缓存每页最多
@@ -246,7 +257,7 @@ var newsData = {
 
   data1: {
     "id": 2,
-    "title": "清华",
+    "title": "清华大学",
     "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
     "label": ['985', '211', '综合'],
     "score": 680,
@@ -283,6 +294,20 @@ var newsData = {
     return {
       newsList: [],
       cacheTab: [],
+      hotCity: [
+      { id: 0, name: '热门城市' },
+      { id: 1, name: '北京' },
+      { id: 3, name: '上海' },
+      { id: 5, name: '天津' },
+      { id: 4, name: '河北' }],
+
+      cityIndex: 0,
+      schoolType: [
+      { name: '学校类型' },
+      { name: '综合' },
+      { name: '双一流' }],
+
+      schoolTypeIndex: 0,
       tabIndex: 0,
       tabBars: [{
         name: '冲',
@@ -294,6 +319,9 @@ var newsData = {
         name: '保',
         id: 'minimum' }],
 
+      islocation: false,
+      is985: false,
+      is211: false,
       scrollInto: "",
       showTips: false,
       navigateFlag: false,
@@ -315,6 +343,31 @@ var newsData = {
     }, 350);
   },
   methods: {
+    toggleFilter: function toggleFilter(type) {
+      switch (type) {
+        case 'is985':
+          this.is985 = !this.is985;
+          break;
+        case 'is211':
+          this.is211 = !this.is211;
+          break;
+        case 'islocation':
+          this.islocation = !this.islocation;
+          break;}
+
+      console.log(this.is211);
+      console.log(this.is985);
+    },
+    changeCity: function changeCity(e) {
+      console.log(e);
+      this.cityIndex = e.detail.value;
+      var cityid = 0;
+      cityid = this.hotCity[this.cityIndex].id;
+      console.log('id', cityid);
+    },
+    changeSchoolType: function changeSchoolType(e) {
+      this.schoolTypeIndex = e.detail.value;
+    },
     getList: function getList(index) {
       var activeTab = this.newsList[index];
       var list = [];
@@ -325,31 +378,19 @@ var newsData = {
       }
       activeTab.data = activeTab.data.concat(list);
     },
-    goDetail: function goDetail(e) {var _this2 = this;
-      if (this.navigateFlag) {
-        return;
-      }
-      this.navigateFlag = true;
+    goDetail: function goDetail(e) {
+      var detail = {
+        title: e.title,
+        id: e.id };
+
       uni.navigateTo({
-        url: './detail/detail?title=' + e.title });
+        url: './schoolDetail?detailDate=' + encodeURIComponent(JSON.stringify(detail)) });
 
-      setTimeout(function () {
-        _this2.navigateFlag = false;
-      }, 200);
-    },
-    close: function close(index1, index2) {var _this3 = this;
-      uni.showModal({
-        content: '是否删除本条信息？',
-        success: function success(res) {
-          if (res.confirm) {
-            _this3.newsList[index1].data.splice(index2, 1);
-          }
-        } });
 
     },
-    loadMore: function loadMore(e) {var _this4 = this;
+    loadMore: function loadMore(e) {var _this2 = this;
       setTimeout(function () {
-        _this4.getList(_this4.tabIndex);
+        _this2.getList(_this2.tabIndex);
       }, 500);
     },
     ontabtap: function ontabtap(e) {
@@ -394,7 +435,7 @@ var newsData = {
       this.newsList[e].loadingText = "加载更多...";
     },
     refreshData: function refreshData() {},
-    onrefresh: function onrefresh(e) {var _this5 = this;
+    onrefresh: function onrefresh(e) {var _this3 = this;
       var tab = this.newsList[this.tabIndex];
       if (!tab.refreshFlag) {
         return;
@@ -403,13 +444,13 @@ var newsData = {
       tab.refreshText = "正在刷新...";
 
       setTimeout(function () {
-        _this5.refreshData();
-        _this5.pulling = true;
+        _this3.refreshData();
+        _this3.pulling = true;
         tab.refreshing = false;
         tab.refreshFlag = false;
         tab.refreshText = "已刷新";
         setTimeout(function () {// TODO fix ios和Android 动画时间相反问题
-          _this5.pulling = false;
+          _this3.pulling = false;
         }, 500);
       }, 2000);
     },

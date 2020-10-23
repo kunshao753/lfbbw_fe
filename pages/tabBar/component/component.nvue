@@ -16,12 +16,12 @@
 			<image class="index-img" src="../../../static/shuijiao.jpg"></image>
 		</view>
 		<!-- top img end -->
-		<view class="uni-flex uni-row i-links">
+		<view class="uni-row uni-jcenter i-links mt20">
 			<button type="primary" @tap="goSchool()">学校信息</button>
 			<button type="primary" @tap="goSchool()">专业信息</button>
 		</view>
 		<view class="intelligent-filling">
-			<view class="uni-flex uni-row uni-jcenter">
+			<view class="uni-row uni-jcenter subject mt20">
 				<button type="default">文科</button>
 				<button type="default">理科</button>
 			</view>
