@@ -1,11 +1,6 @@
 <template>
-    <view class="tabs uni-bg-white">
-        <view id="tab-bar" class="scroll-h">
-            <view v-for="(tab,index) in tabBars" :key="tab.id" class="uni-tab-item" :class="tabIndex==index ? 'uni-tab-item-title-active' : ''" :id="tab.id" :data-current="index" @click="ontabtap">
-                <text class="uni-tab-item-title">{{tab.name}}</text>
-            </view>
-        </view>
-        <view class="line-h"></view>
+    <view class="tabs uni-bg-white">       
+		<tabbar :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>
 		<view class="filter-box uni-flex uni-row">
 			<view class="school-filter" :class="{'school-active':is985}" @click="toggleFilter('is985')">985</view>
 			<text class="school-filter" :class="{'school-active':is211}" @click="toggleFilter('is211')">211</text>
@@ -73,7 +68,7 @@
         </view>
 </template>
 <script>
-
+	import tabbar from '../component/tabbar/tabbar.vue'
     // 缓存每页最多
     const MAX_CACHE_DATA = 100;
     // 缓存页签数量
@@ -122,7 +117,7 @@
         }
     };
 
-    export default {       
+    export default {		
         data() {
             return {
                 newsList: [],
@@ -162,7 +157,10 @@
                 refreshIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5QTFRFcHBw3Nzct7e39vb2ycnJioqK7e3tpqam29vb////D8oK7wAAAAp0Uk5T////////////ALLMLM8AAABxSURBVHja7JVBDoAgDASrjqj//7CJBi90iyYeOHTPMwmFZrHjYyyFYYUy1bwUZqtJIYVxhf1a6u0R7iUvWsCcrEtwJHp8MwMdvh2amHduiZD3rpWId9+BgPd7Cc2LIkPyqvlQvKxKBJ//Qwq/CacAAwDUv0a0YuKhzgAAAABJRU5ErkJggg=="
             }
         },
-        onLoad() {
+        components:{
+        	tabbar
+        },
+		onLoad() {
             setTimeout(()=>{
               this.tabBars.forEach((tabBar) => {
                   this.newsList.push({
@@ -226,8 +224,8 @@
                     this.getList(this.tabIndex);
                 }, 500)
             },
-            ontabtap(e) {
-                let index = e.target.dataset.current || e.currentTarget.dataset.current;
+            ontabtap(index) {				
+                //let index = e.target.dataset.current || e.currentTarget.dataset.current;
                 this.switchTab(index);
             },
             ontabchange(e) {
@@ -327,49 +325,7 @@
         /* #ifdef MP-ALIPAY || MP-BAIDU */
         height: 100vh;
         /* #endif */
-    }
-
-    .scroll-h {
-        width: 750rpx;
-        height: 80rpx;
-        flex-direction: row;
-        /* #ifndef APP-PLUS */
-        white-space: nowrap;
-        /* #endif */
-		justify-content: center;
-    }
-
-    .line-h {
-        height: 1rpx;
-        background-color: #cccccc;
-    }
-
-    .uni-tab-item {
-        /* #ifndef APP-PLUS */
-        display: inline-block;
-        /* #endif */
-        flex-wrap: nowrap;
-        padding-left: 34rpx;
-        padding-right: 34rpx;
-		flex: 1;
-		text-align: center;
-    }
-
-    .uni-tab-item-title {
-        color: #555;
-        font-size: 30rpx;
-        height: 80rpx;
-        line-height: 80rpx;
-        flex-wrap: nowrap;
-        /* #ifndef APP-PLUS */
-        white-space: nowrap;
-        /* #endif */
-    }
-
-    .uni-tab-item-title-active {
-		border-bottom:1rpx solid #007AFF;
-    }
-	.uni-tab-item-title-active .uni-tab-item-title{color: #007AFF;}
+    }    
     .swiper-box {
         flex: 1;
     }
@@ -483,7 +439,7 @@
 		justify-content: space-between;
 	}
 	.school-filter{
-		border: 1rpx solid #efefef;
+		border: 2rpx solid #efefef;
 		border-radius: 20rpx;
 		text-align: center;
 		line-height: 60rpx;

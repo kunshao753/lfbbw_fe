@@ -1935,7 +1935,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 1040:
+/***/ 1047:
 /*!**************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/u-charts/u-charts.js ***!
   \**************************************************************************/
@@ -6993,7 +6993,7 @@ if ( true && typeof module.exports === "object") {
 
 /***/ }),
 
-/***/ 1069:
+/***/ 1076:
 /*!****************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/common/html-parser.js ***!
   \****************************************************************/
@@ -7441,7 +7441,7 @@ store;exports.default = _default;
 
 /***/ }),
 
-/***/ 1149:
+/***/ 1156:
 /*!************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-icons/icons.js ***!
   \************************************************************************/
@@ -7583,7 +7583,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 1188:
+/***/ 1195:
 /*!************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-popup/popup.js ***!
   \************************************************************************/
@@ -7591,7 +7591,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 1189));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 1196));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -7618,7 +7618,7 @@ var config = {
 
 /***/ }),
 
-/***/ 1189:
+/***/ 1196:
 /*!**************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-popup/message.js ***!
   \**************************************************************************/
@@ -7708,7 +7708,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 1356:
+/***/ 1363:
 /*!************************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-swipe-action-item/mpwxs.js ***!
   \************************************************************************************/
@@ -7834,7 +7834,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 1366:
+/***/ 1373:
 /*!**************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-calendar/util.js ***!
   \**************************************************************************/
@@ -7842,7 +7842,7 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _calendar = _interopRequireDefault(__webpack_require__(/*! ./calendar.js */ 1367));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _calendar = _interopRequireDefault(__webpack_require__(/*! ./calendar.js */ 1374));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var
 
 Calendar = /*#__PURE__*/function () {
   function Calendar()
@@ -8197,7 +8197,7 @@ Calendar;exports.default = _default;
 
 /***/ }),
 
-/***/ 1367:
+/***/ 1374:
 /*!******************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-calendar/calendar.js ***!
   \******************************************************************************/
@@ -9486,7 +9486,7 @@ calendar;exports.default = _default;
 
 /***/ }),
 
-/***/ 1443:
+/***/ 1450:
 /*!****************************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/pages/template/component-communication/bus.js ***!
   \****************************************************************************************/
@@ -16805,7 +16805,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 497:
+/***/ 504:
 /*!***************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/common/permission.js ***!
   \***************************************************************/
@@ -17061,7 +17061,7 @@ module.exports = permission;
 
 /***/ }),
 
-/***/ 542:
+/***/ 549:
 /*!*********************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/common/util.js ***!
   \*********************************************************/
@@ -17143,7 +17143,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 923:
+/***/ 930:
 /*!************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/common/airport.js ***!
   \************************************************************/

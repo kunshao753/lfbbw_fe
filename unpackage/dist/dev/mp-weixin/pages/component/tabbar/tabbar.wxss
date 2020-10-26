@@ -1,0 +1,50 @@
+
+.scroll-h {
+    width: 750rpx;
+    height: 82rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+
+    white-space: nowrap;
+
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.line-h {
+    height: 2rpx;
+    background-color: #cccccc;
+}
+.uni-tab-item {
+
+    display: inline-block;
+
+    -webkit-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    padding-left: 34rpx;
+    padding-right: 34rpx;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	text-align: center;
+}
+.uni-tab-item-title {
+    color: #555;
+    font-size: 30rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    -webkit-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+
+    white-space: nowrap;
+}
+.uni-tab-item-title-active {
+	border-bottom:2rpx solid #007AFF;
+}
+.uni-tab-item-title-active .uni-tab-item-title{color: #007AFF;}
+

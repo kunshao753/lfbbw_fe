@@ -18,15 +18,39 @@
 			</view>
 		</view>
 		<!-- 顶部学校信息 end -->
+		<tabbar :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>
+		<school-infomation v-if="tabIndex==0" :schoolInfo="schoolInfo"></school-infomation>
 	</view>
 </template>
 <script>
+	import tabbar from '../component/tabbar/tabbar.vue'
+	import schoolInfomation from './component/introduction.nvue'
 	export default{
 		data(){
 			return{
 				detailDate:{},
-				
+				tabBars: [{
+				    name: '学校简介',
+				    id: '1'
+				}, {
+				    name: '招生',
+				    id: '2'
+				}, {
+				    name: '就业',
+				    id: '3'
+				}, {
+				    name: '问答',
+				    id: '4'
+				}],
+				tabIndex:0,
+				schoolInfo:{
+					text:'“清华大学（Tsinghua University）是中国著名高等学府，坐落于北京西北郊风景秀丽的清华园，是中国高层次人才培养和科学技术研究的重要基地。 校长致辞 清华大学校长邱勇二〇一九年校庆致辞 学校沿革 清华大学是中国著名高等学府，至今已有百年的发展历程 历任领导 清华大学历任领导的简要介绍 现任领导 清华大学现任领导的简要介绍 组织机构 清华大学管理机构和服务机构的设置情况 ”'
+				}
 			}
+		},
+		components:{
+			tabbar,
+			schoolInfomation
 		},
 		onLoad(event) {
 			// TODO 后面把参数名替换成 payload
@@ -42,7 +66,9 @@
 			});
 		},
 		methods:{
-			
+			ontabtap:function(index){
+				this.tabIndex = index
+			}
 		}
 	}
 </script>
