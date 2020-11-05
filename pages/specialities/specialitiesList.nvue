@@ -1,0 +1,211 @@
+<template>
+    <view class="uni-bg-white">       
+		<tabbar :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>		
+		<view>
+			<!-- 热门专业 -->
+			<view class="title plr mt20">热门专业</view>
+			<scroll-view class="scroll-h" :scroll-x="true" :show-scrollbar="false">
+			    <view v-for="(hot,index) in newsList[tabIndex].PopularMajor" :key="tab.id" class="popular">
+			        <text class="popular-title">{{hot.title}}</text>
+			    </view>
+			</scroll-view>
+			<!-- #ifdef APP-NVUE -->
+			<list class="scroll-v list" enableBackToTop="true" scroll-y>					
+				<cell  v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.id">
+					<uni-collapse class="sp-coll">
+						<uni-collapse-item :open="false" :title="newsitem.title">
+							<uni-list-item class="sub-sp-coll" v-for="(subitem1,subindex1) in newsitem.sub" :key="subindex1" showArrow :title="subitem1.title" />							
+						</uni-collapse-item>
+					</uni-collapse>	
+				</cell>
+			</list>
+			<!-- #endif -->
+			<!-- #ifndef APP-NVUE -->
+			<scroll-view class="scroll-v" enableBackToTop="true" scroll-y>	
+				
+				<view class="uni-flex uni-row" v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.id">						
+					<uni-collapse class="sp-coll">
+						<uni-collapse-item :open="false" :title="newsitem.title">
+							<uni-list>
+								<uni-list-item class="sub-sp-coll" v-for="(subitem1,subindex1) in newsitem.sub" :key="subindex1" showArrow :border="false" :title="subitem1.title" clickable @click="goDetail(subitem1)" />							
+							</uni-list>
+						</uni-collapse-item>
+					</uni-collapse>					
+				</view>
+			</scroll-view>
+			<!-- #endif -->
+		</view>
+		<!-- <swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300">
+			<swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1" @change="ontabchange">
+				
+			</swiper-item>
+		</swiper>		 -->
+	</view>
+</template>
+<script>
+	import tabbar from '../component/tabbar/tabbar.vue'
+    export default {		
+        data() {
+            return {
+                newsList: [],
+                cacheTab: [],				
+				// 顶部tab索引
+                tabIndex: 0,
+				// 顶部tab数据
+                tabBars: [{
+                    name: '本科',
+                    id: 'undergraduate'
+                },{
+                    name: '专科',
+                    id: 'speciality'
+                }],
+                scrollInto: "",
+                showTips: false,
+                navigateFlag: false,
+                pulling: false,
+                refreshIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5QTFRFcHBw3Nzct7e39vb2ycnJioqK7e3tpqam29vb////D8oK7wAAAAp0Uk5T////////////ALLMLM8AAABxSURBVHja7JVBDoAgDASrjqj//7CJBi90iyYeOHTPMwmFZrHjYyyFYYUy1bwUZqtJIYVxhf1a6u0R7iUvWsCcrEtwJHp8MwMdvh2amHduiZD3rpWId9+BgPd7Cc2LIkPyqvlQvKxKBJ//Qwq/CacAAwDUv0a0YuKhzgAAAABJRU5ErkJggg=="
+            }
+        },
+        components:{
+        	tabbar
+        },
+		onLoad() {
+            setTimeout(()=>{
+              this.tabBars.forEach((tabBar) => {
+                  this.newsList.push({
+                      data: [],
+					  PopularMajor:[]
+                  });
+              });
+              this.getList(0);
+            },350)
+        },
+        methods: {
+			// 获取院校列表
+            getList(index) {
+                let activeTab = this.newsList[index];
+                let list = [
+					{id:'zhexue',title:'哲学',hasSub:true,sub:[
+						{id:'zhexuelei',title:'哲学类',hasSub:false},
+						{id:'zhexuelei',title:'心理学类',hasSub:false}],
+					},
+					{id:'yixue',title:'医学',hasSub:true,sub:[
+						{id:'jichuyixue',title:'基础医学类',hasSub:false},
+						{id:'linchuangyixue',title:'临床医学类',hasSub:false}],
+					},
+					{id:'zhexue',title:'哲学',hasSub:true,sub:[
+						{id:'zhexuelei',title:'哲学类',hasSub:false},
+						{id:'zhexuelei',title:'心理学类',hasSub:false}],
+					},
+					{id:'yixue',title:'医学',hasSub:true,sub:[
+						{id:'jichuyixue',title:'基础医学类',hasSub:false},
+						{id:'linchuangyixue',title:'临床医学类',hasSub:false}],
+					}
+				];
+                activeTab.data = activeTab.data.concat(list);
+				activeTab.PopularMajor = [
+					{id:'zhexue',title:'哲学'},
+					{id:'jisuanji',title:'计算机'},
+					{id:'xiguan',title:'信息管理'},
+					{id:'jingguan',title:'经济管理'}]
+            },
+			// 跳转到院校详情
+            goDetail(e) {
+                let detail = {
+                	title: e.title,
+                	id: e.id
+                };
+                uni.navigateTo({
+                    url: './specialitiesSubList?detailDate=' + encodeURIComponent(JSON.stringify(detail))
+                });                
+            },
+			// tabbar点击切换
+            ontabtap(index) {
+                this.switchTab(index);
+            }, 
+		    ontabchange(e) {
+			    let index = e.target.current || e.detail.current;
+			    this.switchTab(index);
+		    },
+            switchTab(index) {
+                if (this.newsList[index].data.length === 0) {
+                    this.getList(index);
+                }
+                if (this.tabIndex === index) {
+                    return;
+                }
+                this.tabIndex = index;
+                this.scrollInto = this.tabBars[index].id;
+               
+            },
+                  
+        }
+    }
+</script>
+
+<style>
+    /* #ifndef APP-PLUS */
+    page {
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+    }
+
+    /* #endif */
+
+    .tabs {
+        flex: 1;
+        flex-direction: column;
+        overflow: hidden;
+        /* #ifdef MP-ALIPAY || MP-BAIDU */
+        height: 100vh;
+        /* #endif */
+    }    
+    .swiper-box {
+        flex: 1;
+    }
+
+    .swiper-item {
+        flex: 1;
+        flex-direction: row;
+    }
+
+    .scroll-v {
+        flex: 1;
+        /* #ifndef MP-ALIPAY */
+        flex-direction: column;
+        /* #endif */
+        width: 750rpx;
+    }	
+	.scroll-h {
+	    width: 750rpx;
+	    flex-direction: row;
+	    /* #ifndef APP-PLUS */
+	    white-space: nowrap;
+	    /* #endif */
+	    /* flex-wrap: nowrap; */
+	    /* border-color: #cccccc;
+		border-bottom-style: solid;
+		border-bottom-width: 1px; */
+	}
+	.popular{
+		/* #ifndef APP-PLUS */
+		display: inline-block;
+		/* #endif */
+		flex-wrap: nowrap;
+		border: 2rpx solid #ccc;
+		margin: 40rpx 20rpx;
+		width: 23%;
+		text-align: center;
+		height: 100rpx;
+		line-height: 100rpx;
+	}
+	
+	.sp-coll{
+		width: 100%;
+		border-color: #e5e5e5;
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+	}
+    .sub-sp-coll{padding: 0 30rpx;border-top-color: #e5e5e5;border-top-width: 2rpx;border-top-style:solid;}
+</style>

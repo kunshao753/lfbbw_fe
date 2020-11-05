@@ -115,17 +115,16 @@
 <style scoped>
 	.uni-collapse-cell {
 		flex-direction: column;
-		border-color: #e5e5e5;
+		/* border-color: #e5e5e5;
 		border-bottom-width: 1px;
-		border-bottom-style: solid;
+		border-bottom-style: solid; */
 	}
-
 	.uni-collapse-cell--hover {
 		background-color: #f1f1f1;
 	}
 
 	.uni-collapse-cell--open {
-		background-color: #f1f1f1;
+		background-color: #fff;
 	}
 
 	.uni-collapse-cell--disabled {

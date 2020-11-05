@@ -4,15 +4,15 @@
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
 	        flex-direction: column;
-	border-color: #e5e5e5;
+	/* border-color: #e5e5e5;
 	border-bottom-width: 1px;
-	border-bottom-style: solid;
+	border-bottom-style: solid; */
 }
 .uni-collapse-cell--hover.data-v-8f47561c {
 	background-color: #f1f1f1;
 }
 .uni-collapse-cell--open.data-v-8f47561c {
-	background-color: #f1f1f1;
+	background-color: #fff;
 }
 .uni-collapse-cell--disabled.data-v-8f47561c {
 	background-color: #f1f1f1;

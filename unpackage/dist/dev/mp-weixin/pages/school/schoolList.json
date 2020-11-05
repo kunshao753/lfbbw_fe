@@ -1,7 +1,8 @@
 {
-  "navigationBarTitleText": "推荐院校",
+  "navigationBarTitleText": "院校优先填报",
   "usingComponents": {
-    "uni-tag": "/components/uni-tag/uni-tag",
-    "tabbar": "/pages/component/tabbar/tabbar"
+    "tabbar": "/pages/component/tabbar/tabbar",
+    "filter": "/pages/component/filter/filter",
+    "school-cell": "/pages/component/schoolcell/schoolcell"
   }
 }

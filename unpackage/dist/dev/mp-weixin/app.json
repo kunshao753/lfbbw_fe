@@ -1,12 +1,14 @@
 {
     "pages": [
-        "pages/tabBar/component/component",
+        "pages/tabBar/index/index",
         "pages/tabBar/API/API",
         "pages/tabBar/template/template",
         "pages/tabBar/extUI/extUI",
         "pages/login/login",
         "pages/school/schoolList",
         "pages/school/schoolDetail",
+        "pages/specialities/specialitiesList",
+        "pages/specialities/specialitiesSubList",
         "pages/component/view/view",
         "pages/component/scroll-view/scroll-view",
         "pages/component/swiper/swiper",
@@ -168,10 +170,10 @@
         "backgroundColor": "#F8F8F8",
         "list": [
             {
-                "pagePath": "pages/tabBar/component/component",
+                "pagePath": "pages/tabBar/index/index",
                 "iconPath": "static/component.png",
                 "selectedIconPath": "static/componentHL.png",
-                "text": "内置组件"
+                "text": "首页"
             },
             {
                 "pagePath": "pages/tabBar/API/API",
@@ -199,5 +201,5 @@
         }
     },
     "usingComponents": {},
-    "sitemapLocation": "sitemap75.json"
+    "sitemapLocation": "sitemap61.json"
 }

@@ -1,0 +1,69 @@
+<template>
+	<view class="uni-bg-white">
+		<!-- 专业子类展示 start -->
+		<view class="uni-flex sub-speci-box">
+			<view class="sub-speci" v-for="(item,index) in listData" :key="index">
+				<view class="uni-flex sub-speci-tit">
+					<text class="uni-flex-item uni-ellipsis">{{item.name}}</text>
+					<uni-icons type="heart" size="25" :color="item.isFavorite?'#ff0000':'#000'" @click="addtoFavorite(item.id,listData)"></uni-icons>
+				</view>
+				<view><text>在招校数{{item.school}}</text></view>
+			</view>
+		</view>
+		<!-- 专业子类展示 end -->
+	</view>
+</template>
+<script>	
+	var volunteerBase = require('../../common/volunteerBase.js')
+	export default{
+		data(){
+			return{
+				detailDate:{},
+				listData:[
+					{id:'zx',name:'哲学',school:20,isFavorite:false},
+					{id:'ljx',name:'逻辑学',school:20,isFavorite:false},
+					{id:'zjx',name:'旅游管理与服务教育',school:20,isFavorite:true},
+					{id:'llx',name:'伦理学',school:20,isFavorite:false}
+				]
+			}
+		},		
+		onLoad(event) {
+			// TODO 后面把参数名替换成 payload
+			const payload = event.detailDate || event.payload;
+			// 目前在某些平台参数会被主动 decode，暂时这样处理。
+			try {
+				this.detailDate = JSON.parse(decodeURIComponent(payload));
+			} catch (error) {
+				this.detailDate = JSON.parse(payload);
+			}
+			uni.setNavigationBarTitle({
+				title: this.detailDate.title
+			});
+		},
+		methods:{
+			//收藏
+			addtoFavorite(id,data){
+				volunteerBase.addtoFavorite(id,data)
+			}
+		}
+	}
+</script>
+<style>
+	.sub-speci-box{
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 20rpx 60rpx;
+	}
+	.sub-speci{
+		/* #ifndef APP-PLUS */
+		display: inline-block;
+		/* #endif */		
+		border: 2rpx solid #ccc;
+		margin: 20rpx 0;
+		width: 46%;
+		padding: 20rpx;
+	}
+	.sub-speci-tit{
+		line-height: 50rpx;
+	}
+</style>

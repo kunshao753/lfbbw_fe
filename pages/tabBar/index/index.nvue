@@ -1,24 +1,18 @@
 <template>
-    <view class="uni-bg-white">
+    <view class="wrapper uni-bg-white">
 		<!-- top search start -->
-        <view class="index-top uni-flex uni-row uni-acenter">
-			<view class="uni-flex uni-row uni-acenter">
-				<text style="width: 30px;line-height: 18px;">距离高考</text>
-				<uni-countdown :show-hour="false" :show-min="false" :show-second="false" :backgroundColor="transparent" :timestamp="examinationTime('2021-06-08')"/>
-			</view>
-			<view class="index-search">
-				<uni-search-bar placeholder="搜索院校" @confirm="search" @input="input" @cancel="cancel" clearButton="none" cancelButton="none" />
-			</view>			
-		</view>
+        <view class="top-search">
+        	<uni-search-bar bgColor="#fff" placeholder="搜索大学,专业" @confirm="search" @input="input" @cancel="cancel" clearButton="none" />
+        </view>	
 		<!-- top search end -->
 		<!-- top img srart -->
-		<view>
+		<view class="uni-common-mt">
 			<image class="index-img" src="../../../static/shuijiao.jpg"></image>
 		</view>
 		<!-- top img end -->
-		<view class="uni-row uni-jcenter i-links mt20">
-			<button type="primary" @tap="goSchool()">学校信息</button>
-			<button type="primary" @tap="goSchool()">专业信息</button>
+		<view class="uni-flex i-links uni-common-mt">
+			<button class="top-btn" @tap="goSchool()">学校信息</button>
+			<button class="top-btn" @tap="goSpecialities()">专业信息</button>
 		</view>
 		<view class="intelligent-filling">
 			<view class="uni-row uni-jcenter subject mt20">
@@ -36,23 +30,23 @@
 								<view style="text-align: right;">{{array[index].name}}</view>
 							</picker>
 						</view>
-						<view>
-							<uni-icons type="arrowright" size="25" />
+						<view class="mr20">
+							<uni-icons type="arrowright" size="18" />
 						</view>
 					</view>
 					<view class="uni-list-cell">
 						<view class="uni-list-cell-left">高考总分</view>
 						<input class="uni-list-cell-db" type="number" name="score" />
-						<text>分</text>
+						<text class="mr20">分</text>
 					</view>
 					<view class="uni-list-cell">
 						<view class="uni-list-cell-left">全省排名</view>
 						<input class="uni-list-cell-db" type="number" name="ranking" />
-						<text>名</text>
+						<text class="mr20">名</text>
 					</view>
 					<view class="uni-form-item uni-column">
 						<view class="title">选择查询方式</view>
-						<radio-group name="query" class="uni-flex uni-column">
+						<radio-group name="query" class="uni-flex uni-column fill-radio">
 							<label class="uni-flex-item">
 								<radio value="fschool" /><text>院校优先填报</text>
 							</label>
@@ -64,8 +58,8 @@
 							</label>
 						</radio-group>
 					</view>
-					<view class="uni-btn-v">
-						<button form-type="submit">立即查询</button>
+					<view class="uni-btn-v uni-column uni-acenter">
+						<button class="fill-sub" form-type="submit">立即查询</button>
 					</view>
 				</form>
 			</view>			
@@ -237,11 +231,16 @@
 			 		url:this.schoolUrl
 			 	})
 			},
-			examinationTime(stringTime){
-				var timestamp2 = Date.parse(new Date(stringTime));
-				timestamp2 = timestamp2 / 1000; 
-				return timestamp2;
-			},
+			goSpecialities(){
+				uni.navigateTo({
+					url:'../../specialities/specialitiesList'
+				})
+			},				
+			// examinationTime(stringTime){
+			// 	var timestamp2 = Date.parse(new Date(stringTime));
+			// 	timestamp2 = timestamp2 / 1000; 
+			// 	return timestamp2;
+			// },
 			input(res) {
 				this.searchVal = res.value
 			},
@@ -323,5 +322,13 @@
 </script>
 
 <style>
-    @import '../../../common/uni-nvue.css';		
+    @import '../../../common/uni-nvue.css';
+	.index-img{width: 100%;border-radius: 20rpx;}
+	.i-links{width: 100%;height: 100rpx;justify-content: space-between;}
+	.top-btn{width: 48%;margin: 0;border-width: 0;background-color: #c4c4c4;color: #fff;line-height: 100rpx;}
+	.top-btn::after{border-width: 0;}
+	.intelligent-filling{border-width: 2rpx;border-style: solid;border-color: #C4C4C4;border-radius: 8rpx;margin-top: 36rpx;}
+	.fill-radio label{padding-top: 20rpx;}
+	.fill-radio radio{margin: 0 20rpx 0 30rpx;}
+	.fill-sub{width: 60%;}
 </style>

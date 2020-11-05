@@ -1,0 +1,1 @@
+<view class="intro-box"><view class="{{['intro-txt-box',(!viewMore)?'active':'']}}"><text class="intro-txt">{{content}}</text></view><view data-event-opts="{{[['tap',[['toggleMore',['$event']]]]]}}" class="intro-more" bindtap="__e">{{viewMore?'查看全部':'收起'}}</view></view>

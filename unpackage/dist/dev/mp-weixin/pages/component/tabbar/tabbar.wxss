@@ -1,7 +1,7 @@
 
 .scroll-h {
     width: 750rpx;
-    height: 82rpx;
+    height: 58rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -18,7 +18,7 @@
 }
 .line-h {
     height: 2rpx;
-    background-color: #cccccc;
+    background-color: #e0e0e0;
 }
 .uni-tab-item {
 
@@ -26,25 +26,27 @@
 
     -webkit-flex-wrap: nowrap;
             flex-wrap: nowrap;
-    padding-left: 34rpx;
-    padding-right: 34rpx;
-	-webkit-box-flex: 1;
-	-webkit-flex: 1;
-	        flex: 1;
+    margin-left: 40rpx;
+    margin-right: 40rpx;
 	text-align: center;
+	position: relative;
+	bottom: -2rpx;
+	z-index: 1;
+	min-width: 104rpx;
+}
+.uni-tab-item-active {
+	border-bottom:4rpx solid #000;
 }
 .uni-tab-item-title {
-    color: #555;
-    font-size: 30rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    -webkit-flex-wrap: nowrap;
+    color: #000;
+    font-size: 28rpx;
+    height: 58rpx;
+    line-height: 58rpx;		
+    -webkit-flex-wrap: nowrap;		
             flex-wrap: nowrap;
 
     white-space: nowrap;
 }
-.uni-tab-item-title-active {
-	border-bottom:2rpx solid #007AFF;
-}
-.uni-tab-item-title-active .uni-tab-item-title{color: #007AFF;}
+
+
 

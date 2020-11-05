@@ -1,12 +1,38 @@
 <template>
-	<view class="school-info">
-		<view class="intro-box">
-			<view class="intro-txt-box" :class="{active:!viewMore}"><text class="intro-txt">{{schoolInfo.text}}</text></view>
-			<view class="intro-more" @click="toggleMore">{{viewMore?'查看全部':'收起'}}</view>
+	<view class="school-info">		
+		<viewall :content="schoolInfo.text"></viewall>
+		<view class="plr mt20">专业分数线</view>
+		<view class="plr mt20 uni-flex filter-box">			
+			<filter class="sub-filter-box" :filterIndex="yearIndex" :filterInfo="yearInfo" :showTriangle="true" @change="changeYear"></filter>
+			<filter class="sub-filter-box" :filterIndex="disciplinesIndex" :filterInfo="disciplinesInfo" :showTriangle="true" @change="changeDisciplines"></filter>
+			<filter class="sub-filter-box" :filterIndex="probabilityIndex" :filterInfo="probabilityInfo" :showTriangle="true" @change="changeProbability"></filter>			
 		</view>
+		<!-- table s -->
+		<view>
+			<uni-table border stripe>
+				<uni-tr>
+					<uni-th align="center"></uni-th>
+					<uni-th align="center">专业名称</uni-th>
+					<uni-th align="center">平均分</uni-th>
+					<uni-th align="center">最低分</uni-th>
+					<uni-th align="center">百分比</uni-th>
+				</uni-tr>
+				<uni-tr v-for="(item,index) in tableData" :key="index">
+					<uni-td align="center"><uni-icons type="heart" size="25" :color="item.isFavorite?'#ff0000':'#000'" @click="addtoFavorite(item.id,tableData)"></uni-icons></uni-td>
+					<uni-td align="center">{{item.name}}</uni-td>
+					<uni-td align="center">{{item.average}}</uni-td>
+					<uni-td align="center">{{item.lowestScore}}</uni-td>
+					<uni-td align="center">{{item.percent}}</uni-td>
+				</uni-tr>
+			</uni-table>
+		</view>
+		<!-- table e -->
 	</view>
 </template>
 <script>
+	import viewall from '../../component/viewall/viewall.vue'
+	import filter from '../../component/filter/filter.vue'
+	var volunteerBase = require('../../../common/volunteerBase.js')
 	export default{
 		name:'school-infomation',
 		props:{
@@ -17,19 +43,59 @@
 		},
 		data(){
 			return{
-				viewMore:true
+				yearIndex:0,//年份索引
+				disciplinesIndex:0,//重点学科索引
+				probabilityIndex:0,//录取概率索引
+				// 筛选年份数据
+				yearInfo:[
+					{id:0,name:'年份'},
+					{id:1,name:'2019'},
+					{id:2,name:'2018'},
+					{id:3,name:'2017'},
+				],
+				// 重点学科数据
+				disciplinesInfo:[
+					{id:0,name:'重点学科'},
+					{id:1,name:'计算机'},
+					{id:2,name:'工商管理'},
+					{id:3,name:'土木工程'},
+				],
+				probabilityInfo:[
+					{id:0,name:'录取概率'},
+					{id:1,name:'80%'},
+					{id:2,name:'70%'},
+				],
+				tableData:[
+					{id:'1',name:'信息管理',average:560,lowestScore:500,percent:'90%',isFavorite:true},
+					{id:'2',name:'计算机',average:560,lowestScore:500,percent:'90%',isFavorite:false},
+					{id:'3',name:'会计学',average:560,lowestScore:500,percent:'90%',isFavorite:true}
+				]				
 			}
 		},
+		components:{
+			viewall,
+			filter
+		},
 		methods:{
-			toggleMore:function(){
-				this.viewMore = !this.viewMore
+			// 选择年份
+			changeYear(index){
+				this.yearIndex = index;
+			},
+			// 选择重点学科
+			changeDisciplines(index){
+				this.disciplinesIndex = index;
+			},
+			// 选择录取概率
+			changeProbability(index){
+				this.probabilityIndex = index;
+			},
+			//收藏			
+			addtoFavorite(id,data){
+				volunteerBase.addtoFavorite(id,data)
 			}
 		}
 	}
 </script>
 <style>
-	.intro-box{position: relative;padding: 30rpx 40rpx;border-bottom:2rpx solid #ccc;}
-	.intro-txt-box{height: 150rpx;line-height: 50rpx;overflow: hidden;}
-	.active{height: auto;overflow: visible;}
-	.intro-more{color: #007AFF;padding: 10rpx;background-color: #fff;position: absolute;bottom: 24rpx;right: 30rpx;}
+	.school-info .sub-filter-box{width: 30%;}
 </style>

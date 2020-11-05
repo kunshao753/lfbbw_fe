@@ -2,73 +2,23 @@
     <view class="tabs uni-bg-white">       
 		<tabbar :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>
 		<view class="filter-box uni-flex uni-row">
-			<view class="school-filter" :class="{'school-active':is985}" @click="toggleFilter('is985')">985</view>
-			<text class="school-filter" :class="{'school-active':is211}" @click="toggleFilter('is211')">211</text>
-			<picker class="school-filter f-picker" :class="{'school-active':cityIndex!=0}" @change="changeCity" :value="cityIndex" :range="hotCity" range-key="name" name="location">
-				<view class="filter-con">{{hotCity[cityIndex].name}}</view>
-			</picker>
-			<text class="school-filter" :class="{'school-active':islocation}" @click="toggleFilter('islocation')">本省</text>
-			<picker class="school-filter f-picker" :class="{'school-active':schoolTypeIndex!=0}" @change="changeSchoolType" :value="schoolTypeIndex" :range="schoolType" range-key="name" name="location">
-				<view class="filter-con">{{schoolType[schoolTypeIndex].name}}</view>
-			</picker>
+			<view class="sub-filter" :class="{'filter-active':is985}" @click="toggleFilter('is985')">985</view>
+			<text class="sub-filter" :class="{'filter-active':is211}" @click="toggleFilter('is211')">211</text>			
+			<filter class="f-picker" :filterIndex="cityIndex" :filterInfo="hotCity" @change="changeCity"></filter>
+			<text class="sub-filter" :class="{'filter-active':islocation}" @click="toggleFilter('islocation')">本省</text>			
+			<filter class="f-picker" :filterIndex="schoolTypeIndex" :filterInfo="schoolType" @change="changeSchoolType"></filter>
 		</view>
 		<swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
 		        <swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
-					<!-- #ifdef APP-NVUE -->
-					<list class="scroll-v list" enableBackToTop="true" scroll-y loadmoreoffset="15" @loadmore="loadMore(index1)">
-						<refresh class="refresh" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" :display="tab.refreshing ? 'show' : 'hide'">
-							<div class="refresh-view">
-								<image class="refresh-icon" :src="refreshIcon" :style="{width: (tab.refreshing || pulling) ? 0: '30px'}" :class="{'refresh-icon-active': tab.refreshFlag}"></image>
-								<loading-indicator class="loading-icon" animating="true" v-if="tab.refreshing"></loading-indicator>
-								<text class="loading-text">{{tab.refreshText}}</text>
-							</div>
-						</refresh>
-						<cell v-for="(newsitem,index2) in tab.data" :key="newsitem.id">
-							<view class="media-item uni-flex uni-row" @click="goDetail(newsitem)">
-								<image class="image-list" :src="newsitem.image_url"></image>
-								<view class="school-m uni-flex-item">
-									<text class="media-title" v-text="newsitem.title"></text>
-									<uni-tag v-for="(tag,tindex) in newsitem.label" :inverted="true" :text="tag" :key="tindex" />
-								</view>
-								<view class="school-r">
-									<text>{{newsitem.score}}分</text>
-									<text>{{newsitem.percent}}</text>
-								</view>							
-							</view>
-						</cell>
-						<cell class="loading-more" v-if="tab.isLoading || tab.data.length > 4">
-							<text class="loading-more-text">{{tab.loadingText}}</text>
-						</cell>
-					</list>
-					<!-- #endif -->
-					<!-- #ifndef APP-NVUE -->
-					<scroll-view class="scroll-v list" enableBackToTop="true" scroll-y @scrolltolower="loadMore(index1)">
-						<view class="media-item uni-flex uni-row" v-for="(newsitem,index2) in tab.data" :key="newsitem.id" @click="goDetail(newsitem)">						
-							<image class="image-list" :src="newsitem.image_url"></image>
-							<view class="school-m uni-flex-item">
-								<text class="media-title" v-text="newsitem.title"></text>
-								<view class="uni-flex uni-row">
-									<uni-tag class="school-tag" v-for="(tag,tindex) in newsitem.label" :inverted="true" :text="tag" :key="tindex" />
-								</view>
-								
-							</view>
-							<view class="school-r">
-								<text>{{newsitem.score}}分</text>
-								<text>{{newsitem.percent}}</text>
-							</view>
-							
-						</view>
-						<view class="loading-more" v-if="tab.isLoading || tab.data.length > 4">
-							<text class="loading-more-text">{{tab.loadingText}}</text>
-						</view>
-					</scroll-view>
-					<!-- #endif -->
+					<school-cell class="swiper-box" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail"></school-cell>					
 		        </swiper-item>
 		    </swiper>		
         </view>
 </template>
 <script>
 	import tabbar from '../component/tabbar/tabbar.vue'
+	import filter from '../component/filter/filter.vue'
+	import schoolCell from '../component/schoolcell/schoolcell.vue'
     // 缓存每页最多
     const MAX_CACHE_DATA = 100;
     // 缓存页签数量
@@ -122,6 +72,7 @@
             return {
                 newsList: [],
                 cacheTab: [],
+				//热门城市数据
 				hotCity:[
 					{id:0,name:'热门城市'},
 					{id:1,name:'北京'},
@@ -129,26 +80,34 @@
 					{id:5,name:'天津'},
 					{id:4,name:'河北'},					
 				],
+				//热门城市索引
 				cityIndex:0,
+				// 学校类型数据
 				schoolType:[
 					{name:'学校类型'},
 					{name:'综合'},
 					{name:'双一流'},
 				],
+				// 学校类型索引
 				schoolTypeIndex:0,
+				// 顶部tab索引
                 tabIndex: 0,
+				// 顶部tab数据
                 tabBars: [{
-                    name: '冲',
+                    name: '冲刺',
                     id: 'sprint'
                 }, {
-                    name: '稳',
+                    name: '稳妥',
                     id: 'safe'
                 }, {
-                    name: '保',
+                    name: '保底',
                     id: 'minimum'
                 }],
+				// 筛选本省
 				islocation:false,
+				// 筛选985
 				is985:false,
+				// 筛选211
 				is211:false,
                 scrollInto: "",
                 showTips: false,
@@ -158,7 +117,9 @@
             }
         },
         components:{
-        	tabbar
+        	tabbar,
+			filter,
+			schoolCell
         },
 		onLoad() {
             setTimeout(()=>{
@@ -174,6 +135,7 @@
             },350)
         },
         methods: {
+			// 选择985,211,本省
 			toggleFilter(type){
 				switch (type){
 					case 'is985':
@@ -189,16 +151,18 @@
 				console.log(this.is211)
 				console.log(this.is985)
 			},
-			changeCity(e){
-				console.log(e);
-				this.cityIndex = e.detail.value;
+			//选择热门城市
+			changeCity(index){
+				this.cityIndex = index;
 				let cityid = 0;
 				cityid = this.hotCity[this.cityIndex].id;
 				console.log('id',cityid)
 			},
-			changeSchoolType(e){
-				this.schoolTypeIndex = e.detail.value;
+			// 选择学校类型
+			changeSchoolType(index){
+				this.schoolTypeIndex = index;
 			},
+			// 获取院校列表
             getList(index) {
                 let activeTab = this.newsList[index];
                 let list = [];
@@ -209,10 +173,11 @@
                 }
                 activeTab.data = activeTab.data.concat(list);
             },
-            goDetail(e) {
+			// 跳转到院校详情
+            goDetail(data) {
                 let detail = {
-                	title: e.title,
-                	id: e.id
+                	title: data.title,
+                	id: data.id
                 };
                 uni.navigateTo({
                     url: './schoolDetail?detailDate=' + encodeURIComponent(JSON.stringify(detail))
@@ -224,6 +189,7 @@
                     this.getList(this.tabIndex);
                 }, 500)
             },
+			// tabbar点击切换
             ontabtap(index) {				
                 //let index = e.target.dataset.current || e.currentTarget.dataset.current;
                 this.switchTab(index);
@@ -265,7 +231,6 @@
                 this.newsList[e].data.length = 0;
                 this.newsList[e].loadingText = "加载更多...";
             },
-            refreshData() {},
             onrefresh(e) {
                 var tab = this.newsList[this.tabIndex];
                 if (!tab.refreshFlag) {
@@ -327,6 +292,7 @@
         /* #endif */
     }    
     .swiper-box {
+		display: flex;
         flex: 1;
     }
 
@@ -334,124 +300,9 @@
         flex: 1;
         flex-direction: row;
     }
-
-    .scroll-v {
-        flex: 1;
-        /* #ifndef MP-ALIPAY */
-        flex-direction: column;
-        /* #endif */
-        width: 750rpx;
-    }
-	.media-item{
-		padding: 30rpx;
-		/* border-bottom: 1rpx solid #BEBEBE; */
-		justify-content: space-between;
-	}
-	.image-list{
-		width: 100rpx;
-		height: 100rpx;
-		border-radius: 50rpx;
-		margin-right: 10rpx;
-		margin-top: 20rpx;
-	}
-	.school-r{
-		width: 90rpx;
-		display: flex;
-		flex-direction: column;
-		margin-top: 20rpx;
-		text-align: center;
-	}
-	.media-title{
-		font-size: 30rpx;
-	}
-	.school-tag{margin: 5rpx 10rpx 0 0;}
-    .update-tips {
-        position: absolute;
-        left: 0;
-        top: 41px;
-        right: 0;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        background-color: #FDDD9B;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .update-tips-text {
-        font-size: 14px;
-        color: #ffffff;
-    }
-
-    .refresh {
-        width: 750rpx;
-        height: 64px;
-        justify-content: center;
-    }
-
-    .refresh-view {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: center;
-    }
-
-	.refresh-icon {
-		width: 30px;
-		height: 30px;
-		transition-duration: .5s;
-		transition-property: transform;
-		transform: rotate(0deg);
-		transform-origin: 15px 15px;
-	}
-
-	.refresh-icon-active {
-		transform: rotate(180deg);
-	}
-
-	.loading-icon {
-		width: 20px;
-		height: 20px;
-		margin-right: 5px;
-		color: #999999;
-	}
-
-    .loading-text {
-        margin-left: 2px;
-        font-size: 16px;
-        color: #999999;
-    }
-
-    .loading-more {
-        align-items: center;
-        justify-content: center;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        text-align: center;
-    }
-
-    .loading-more-text {
-        font-size: 28rpx;
-        color: #999;
-    }
-	.filter-box{
-		padding: 20rpx;
-		justify-content: space-between;
-	}
-	.school-filter{
-		border: 2rpx solid #efefef;
-		border-radius: 20rpx;
-		text-align: center;
-		line-height: 60rpx;
-		padding: 0 20rpx;
-	}
+    	
 	.f-picker{
-		width: 150rpx;
+		width: 180rpx;
 		padding: 0;
 	}
-	.school-active{
-		color: #007AFF;
-		border-color: #007AFF;
-	}
-	.filter-con{text-align: center;line-height: 60rpx;}
 </style>

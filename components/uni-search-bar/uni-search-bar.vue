@@ -142,7 +142,6 @@
 		/* #endif */
 		flex-direction: row;
 		position: relative;
-		padding: 0 8px;
 	}
 
 	.uni-searchbar__box {
@@ -156,11 +155,12 @@
 		justify-content: center;
 		flex-direction: row;
 		align-items: center;
-		height: 36px;
+		height: 32px;
 		padding: 5px 8px 5px 0px;
 		border-width: 0.5px;
 		border-style: solid;
-		border-color: #e5e5e5;
+		border-color: #e0e0e0;
+		border-radius: 5px;
 	}
 
 	.uni-searchbar__box-icon-search {
@@ -194,7 +194,7 @@
 
 	.uni-searchbar__cancel {
 		padding-left: 10px;
-		line-height: 36px;
+		line-height: 32px;
 		font-size: 14px;
 		color: #333;
 	}

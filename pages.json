@@ -2,7 +2,7 @@
 	"pages": [
 		// pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/tabBar/component/component",
+			"path": "pages/tabBar/index/index",
 			"style": {
 				"navigationBarTitleText": "志愿瓶",
 				// "navigationStyle":"custom",
@@ -76,13 +76,25 @@
 		{
 			"path": "pages/school/schoolList",
 			"style": {
-				"navigationBarTitleText": "推荐院校"
+				"navigationBarTitleText": "院校优先填报"
 			}
 		},
 		{
 			"path": "pages/school/schoolDetail",
 			"style": {
 				"navigationBarTitleText": "院校详情"
+			}
+		},
+		{
+			"path": "pages/specialities/specialitiesList",
+			"style": {
+				"navigationBarTitleText": "选择专业"
+			}
+		},
+		{
+			"path": "pages/specialities/specialitiesSubList",
+			"style": {
+				"navigationBarTitleText": "专业大类"
 			}
 		},
 		{
@@ -1203,10 +1215,10 @@
 		"borderStyle": "black",
 		"backgroundColor": "#F8F8F8",
 		"list": [{
-				"pagePath": "pages/tabBar/component/component",
+				"pagePath": "pages/tabBar/index/index",
 				"iconPath": "static/component.png",
 				"selectedIconPath": "static/componentHL.png",
-				"text": "内置组件"
+				"text": "首页"
 			},
 			{
 				"pagePath": "pages/tabBar/API/API",

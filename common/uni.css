@@ -9,6 +9,7 @@
 view{
 	font-size:28rpx;
 	line-height:1.8;
+	box-sizing: border-box;
 }
 progress, checkbox-group{
 	width: 100%;
@@ -28,6 +29,7 @@ form {
 .mr20{
 	margin-right: 20rpx;
 }
+.plr{padding-left: 40rpx;padding-right: 40rpx;}
 .uni-flex {
 	display: flex;
 	flex-direction: row;
@@ -39,6 +41,7 @@ form {
 	flex-direction: row;
 }
 .uni-column {
+	display: flex;
 	flex-direction: column;
 }
 .uni-jcenter{
@@ -62,7 +65,31 @@ form {
 .uni-inline-item text{
 	margin-right: 20rpx;
 }
-
+.filter-box{
+		padding: 20rpx;
+		justify-content: space-between;
+	}
+.sub-filter{
+	border: 2rpx solid #efefef;
+	border-radius: 20rpx;
+	text-align: center;
+	line-height: 60rpx;
+	padding: 0 20rpx;
+}
+.filter-active{
+	color: #007AFF;
+	border-color: #007AFF;
+}
+.filter-con{text-align: center;line-height: 60rpx;align-items: center;}
+.down-triangle{
+	width: 0;
+	height: 0;
+	border-width: 12rpx;
+	border-style: solid;
+	border-color: #000 transparent transparent transparent;
+	margin-top: 16rpx;
+}
+.filter-active .down-triangle{border-color: #007AFF transparent transparent transparent;}
 /* page */
 .uni-page-head{
 	padding:35rpx;
@@ -123,6 +150,7 @@ form {
 .uni-common-mt{
 	margin-top:30rpx;
 }
+.wrapper{padding: 20rpx 30rpx 40rpx;}
 /* 背景色 */
 .uni-bg-red{
 	background:#F76260; color:#FFF;
@@ -151,7 +179,8 @@ form {
 	padding:10rpx 0;
 }
 .uni-btn-v button{margin:20rpx 0;}
-
+button{font-size: 17px;border-width: 0;}
+button::after{border-width: 0;}
 /* 表单 */
 .uni-form-item{
 	display:flex;
@@ -159,7 +188,7 @@ form {
 	padding:10rpx 0;
 }
 .uni-form-item .title{
-	padding:10rpx 25rpx;
+	padding:16rpx 30rpx;
 }
 .uni-label {
 	width: 210rpx;
@@ -393,7 +422,7 @@ radio-group label, checkbox-group label{
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	line-height: 90rpx;
+	line-height: 84rpx;
 }
 .uni-list-cell-hover {
 	background-color: #eee;
@@ -415,12 +444,12 @@ radio-group label, checkbox-group label{
 	z-index: 3;
 	right: 0;
 	bottom: 0;
-	left: 30rpx;
+	left: 0;
 	height: 1px;
 	content: '';
 	-webkit-transform: scaleY(.5);
 	transform: scaleY(.5);
-	background-color: #c8c7cc;
+	background-color: #e0e0e0;
 }
 .uni-list .uni-list-cell:last-child::after {
 	height: 0rpx;
