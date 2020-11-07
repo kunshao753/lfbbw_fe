@@ -76,6 +76,7 @@ form {
 .mr20{
 	margin-right: 20rpx;
 }
+.page{width: 100%;min-height: 100%;}
 .plr{padding-left: 40rpx;padding-right: 40rpx;}
 .uni-flex {
 	display: -webkit-box;
@@ -139,24 +140,23 @@ form {
 	margin-right: 20rpx;
 }
 .filter-box{
-		padding: 20rpx;
-		-webkit-box-pack: justify;
-		-webkit-justify-content: space-between;
-		        justify-content: space-between;
+	padding: 28rpx 0 14rpx;
 }
 .sub-filter{
-	border: 2rpx solid #efefef;
-	-webkit-border-radius: 20rpx;
-	        border-radius: 20rpx;
+	border: 2rpx solid #e0e0e0;
+	-webkit-border-radius: 26rpx;
+	        border-radius: 26rpx;
 	text-align: center;
-	line-height: 60rpx;
+	line-height: 50rpx;
 	padding: 0 20rpx;
+	margin-right: 20rpx;
+	white-space: nowrap;
 }
 .filter-active{
-	color: #007AFF;
-	border-color: #007AFF;
+	color: #000000;
+	border-color: #000000;
 }
-.filter-con{text-align: center;line-height: 60rpx;-webkit-box-align: center;-webkit-align-items: center;align-items: center;}
+.filter-con{text-align: center;line-height: 50rpx;-webkit-box-align: center;-webkit-align-items: center;align-items: center;}
 .down-triangle{
 	width: 0;
 	height: 0;
@@ -228,7 +228,7 @@ form {
 .uni-common-mt{
 	margin-top:30rpx;
 }
-.wrapper{padding: 20rpx 30rpx 40rpx;}
+.wrapper{padding: 0 20rpx;width: 100%;-webkit-box-sizing: border-box;box-sizing: border-box;}
 /* 背景色 */
 .uni-bg-red{
 	background:#F76260; color:#FFF;
@@ -239,7 +239,7 @@ form {
 .uni-bg-blue{
 	background:#007AFF; color:#FFF;
 }
-.uni-bg-white{background: #fff;min-height: 100%;}
+.uni-bg-white{background: #fff;}
 /* 标题 */
 .uni-h1 {font-size: 80rpx; font-weight:700;}
 .uni-h2 {font-size: 60rpx; font-weight:700;}
@@ -793,7 +793,7 @@ radio-group label, checkbox-group label{
 /* 九宫格 */
 .uni-grid-9 {
 	background: #f2f2f2;
-	width: 750rpx;
+	width: 100%;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -1104,7 +1104,7 @@ radio-group label, checkbox-group label{
 	height: 100%;
 }
 .uni-tab-bar .list {
-	width: 750rpx;
+	width: 100%;
 	height: 100%;
 }
 .uni-swiper-tab {

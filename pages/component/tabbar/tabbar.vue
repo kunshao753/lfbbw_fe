@@ -37,7 +37,7 @@
 
 <style>
 	.scroll-h {
-	    width: 750rpx;
+	    width: 100%;
 	    height: 58rpx;
 		display: flex;
 	    flex-direction: row;

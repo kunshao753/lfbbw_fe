@@ -7441,7 +7441,7 @@ store;exports.default = _default;
 
 /***/ }),
 
-/***/ 1170:
+/***/ 1163:
 /*!************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-icons/icons.js ***!
   \************************************************************************/
@@ -7594,7 +7594,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 13);
 
 /***/ }),
 
-/***/ 1256:
+/***/ 1249:
 /*!************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-popup/popup.js ***!
   \************************************************************************/
@@ -7602,7 +7602,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 13);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 1257));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 1250));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -7629,7 +7629,7 @@ var config = {
 
 /***/ }),
 
-/***/ 1257:
+/***/ 1250:
 /*!**************************************************************************!*\
   !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-popup/message.js ***!
   \**************************************************************************/

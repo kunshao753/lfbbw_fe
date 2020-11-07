@@ -29,6 +29,7 @@ form {
 .mr20{
 	margin-right: 20rpx;
 }
+.page{width: 100%;min-height: 100%;}
 .plr{padding-left: 40rpx;padding-right: 40rpx;}
 .uni-flex {
 	display: flex;
@@ -66,21 +67,22 @@ form {
 	margin-right: 20rpx;
 }
 .filter-box{
-		padding: 20rpx;
-		justify-content: space-between;
-	}
+	padding: 28rpx 0 14rpx;
+}
 .sub-filter{
-	border: 2rpx solid #efefef;
-	border-radius: 20rpx;
+	border: 2rpx solid #e0e0e0;
+	border-radius: 26rpx;
 	text-align: center;
-	line-height: 60rpx;
+	line-height: 50rpx;
 	padding: 0 20rpx;
+	margin-right: 20rpx;
+	white-space: nowrap;
 }
 .filter-active{
-	color: #007AFF;
-	border-color: #007AFF;
+	color: #000000;
+	border-color: #000000;
 }
-.filter-con{text-align: center;line-height: 60rpx;align-items: center;}
+.filter-con{text-align: center;line-height: 50rpx;align-items: center;}
 .down-triangle{
 	width: 0;
 	height: 0;
@@ -150,7 +152,7 @@ form {
 .uni-common-mt{
 	margin-top:30rpx;
 }
-.wrapper{padding: 20rpx 30rpx 40rpx;}
+.wrapper{padding: 0 20rpx;width: 100%;box-sizing: border-box;}
 /* 背景色 */
 .uni-bg-red{
 	background:#F76260; color:#FFF;
@@ -161,7 +163,7 @@ form {
 .uni-bg-blue{
 	background:#007AFF; color:#FFF;
 }
-.uni-bg-white{background: #fff;min-height: 100%;}
+.uni-bg-white{background: #fff;}
 /* 标题 */
 .uni-h1 {font-size: 80rpx; font-weight:700;}
 .uni-h2 {font-size: 60rpx; font-weight:700;}
@@ -632,7 +634,7 @@ radio-group label, checkbox-group label{
 /* 九宫格 */
 .uni-grid-9 {
 	background: #f2f2f2;
-	width: 750rpx;
+	width: 100%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -891,7 +893,7 @@ radio-group label, checkbox-group label{
 }
 
 .uni-tab-bar .list {
-	width: 750rpx;
+	width: 100%;
 	height: 100%;
 }
 

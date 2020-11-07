@@ -9,17 +9,21 @@
 			</div>
 		</refresh>
 		<cell v-for="(newsitem,index2) in cellData.data" :key="newsitem.id">
-			<view class="media-item uni-flex uni-row" @click="goDetail(newsitem)">
-				<image class="image-list" :src="newsitem.image_url"></image>
-				<view class="school-m uni-flex-item">
-					<text class="media-title" v-text="newsitem.title"></text>
-					<uni-tag v-for="(tag,tindex) in newsitem.label" :inverted="true" :text="tag" :key="tindex" />
+			<view class="school-cell">
+				<view class="media-item uni-flex" @click="goDetail(newsitem)">
+					<image class="image-list" :src="newsitem.image_url"></image>
+					<view class="school-m uni-flex-item">
+						<text class="media-title" v-text="newsitem.title"></text>
+						<uni-tag v-for="(tag,tindex) in newsitem.label" :inverted="true" :text="tag" :key="tindex" />
+					</view>
+					<view class="school-r">
+						<text>{{newsitem.score}}分</text>
+						<text>{{newsitem.percent}}</text>
+					</view>							
 				</view>
-				<view class="school-r">
-					<text>{{newsitem.score}}分</text>
-					<text>{{newsitem.percent}}</text>
-				</view>							
+				<view>匹配专业<text>10</text><uni-icons ></uni-icons></view>
 			</view>
+			
 		</cell>
 		<cell class="loading-more" v-if="cellData.isLoading || cellData.data.length > 4">
 			<text class="loading-more-text">{{cellData.loadingText}}</text>
@@ -28,21 +32,25 @@
 	<!-- #endif -->
 	<!-- #ifndef APP-NVUE -->
 	<scroll-view class="scroll-v list" enableBackToTop="true" scroll-y @scrolltolower="loadMore">
-		<view class="media-item uni-flex uni-row" v-for="(newsitem,index2) in cellData.data" :key="newsitem.id" @click="goDetail(newsitem)">						
-			<image class="image-list" :src="newsitem.image_url"></image>
-			<view class="school-m uni-flex-item">
-				<text class="media-title" v-text="newsitem.title"></text>
-				<view class="uni-flex uni-row">
-					<uni-tag class="school-tag" v-for="(tag,tindex) in newsitem.label" :inverted="true" :text="tag" :key="tindex" />
+		<view class="school-cell" v-for="(newsitem,index2) in cellData.data" :key="newsitem.id">
+			<view class="media-item uni-flex uni-row" @click="goDetail(newsitem)">
+				<image class="image-list" :src="newsitem.image_url"></image>
+				<view class="school-m uni-flex-item">
+					<text class="media-title" v-text="newsitem.title"></text>
+					<view class="uni-flex uni-row">
+						<uni-tag class="school-tag" v-for="(tag,tindex) in newsitem.label" :inverted="true" :text="tag" :key="tindex" />
+					</view>
+					
+				</view>
+				<view class="school-r">
+					<text>{{newsitem.score}}分</text>
+					<text>{{newsitem.percent}}</text>
 				</view>
 				
 			</view>
-			<view class="school-r">
-				<text>{{newsitem.score}}分</text>
-				<text>{{newsitem.percent}}</text>
-			</view>
-			
+			<view class="uni-flex uni-jcenter matching">匹配专业<text>10</text><uni-icons ></uni-icons></view>
 		</view>
+		
 		<view class="loading-more" v-if="cellData.isLoading || cellData.data.length > 4">
 			<text class="loading-more-text">{{cellData.loadingText}}</text>
 		</view>
@@ -84,15 +92,14 @@
 	}
 </script>
 <style>
+	.school-cell{background: #fff;margin: 20rpx 20rpx 0;padding: 20rpx;border-radius: 20rpx;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);}
 	.scroll-v {
 	    flex: 1;
 	    /* #ifndef MP-ALIPAY */
 	    flex-direction: column;
 	    /* #endif */
-	    width: 750rpx;
 	}
 	.media-item{
-		padding: 30rpx;
 		/* border-bottom: 1rpx solid #BEBEBE; */
 		justify-content: space-between;
 	}
@@ -133,7 +140,7 @@
 	}
 	
 	.refresh {
-	    width: 750rpx;
+	    width: 100%;
 	    height: 64px;
 	    justify-content: center;
 	}
@@ -183,4 +190,5 @@
 	    font-size: 28rpx;
 	    color: #999;
 	}
+	.matching{padding-top: 20rpx;border-top: 2rpx solid #e0e0e0;margin-top: 20rpx;}
 </style>

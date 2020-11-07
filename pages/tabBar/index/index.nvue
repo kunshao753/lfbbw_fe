@@ -1,7 +1,7 @@
 <template>
-    <view class="wrapper uni-bg-white">
+    <view class="page wrapper uni-bg-white">
 		<!-- top search start -->
-        <view class="top-search">
+        <view class="top-search mt20">
         	<uni-search-bar bgColor="#fff" placeholder="搜索大学,专业" @confirm="search" @input="input" @cancel="cancel" clearButton="none" />
         </view>	
 		<!-- top search end -->

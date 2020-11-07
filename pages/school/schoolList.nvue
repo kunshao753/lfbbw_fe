@@ -1,19 +1,21 @@
 <template>
-    <view class="tabs uni-bg-white">       
-		<tabbar :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>
-		<view class="filter-box uni-flex uni-row">
-			<view class="sub-filter" :class="{'filter-active':is985}" @click="toggleFilter('is985')">985</view>
-			<text class="sub-filter" :class="{'filter-active':is211}" @click="toggleFilter('is211')">211</text>			
-			<filter class="f-picker" :filterIndex="cityIndex" :filterInfo="hotCity" @change="changeCity"></filter>
-			<text class="sub-filter" :class="{'filter-active':islocation}" @click="toggleFilter('islocation')">本省</text>			
-			<filter class="f-picker" :filterIndex="schoolTypeIndex" :filterInfo="schoolType" @change="changeSchoolType"></filter>
-		</view>
+    <view class="page">
+		<view class="wrapper uni-bg-white">
+			<tabbar :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>
+			<view class="filter-box uni-flex">
+				<view class="sub-filter" :class="{'filter-active':is985}" @click="toggleFilter('is985')">985</view>
+				<text class="sub-filter" :class="{'filter-active':is211}" @click="toggleFilter('is211')">211</text>			
+				<filter class="f-picker" :filterIndex="cityIndex" :filterInfo="hotCity" @change="changeCity"></filter>
+				<text class="sub-filter" :class="{'filter-active':islocation}" @click="toggleFilter('islocation')">本省</text>			
+				<filter class="f-picker" :filterIndex="schoolTypeIndex" :filterInfo="schoolType" @change="changeSchoolType"></filter>
+			</view>
+		</view>		
 		<swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
-		        <swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
-					<school-cell class="swiper-box" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail"></school-cell>					
-		        </swiper-item>
-		    </swiper>		
-        </view>
+			<swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
+				<school-cell class="swiper-box" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail"></school-cell>					
+			</swiper-item>
+		</swiper>		
+	</view>
 </template>
 <script>
 	import tabbar from '../component/tabbar/tabbar.vue'
@@ -282,18 +284,11 @@
     }
 
     /* #endif */
-
-    .tabs {
-        flex: 1;
-        flex-direction: column;
-        overflow: hidden;
-        /* #ifdef MP-ALIPAY || MP-BAIDU */
-        height: 100vh;
-        /* #endif */
-    }    
+      
     .swiper-box {
 		display: flex;
         flex: 1;
+		background: #E7E6E7;
     }
 
     .swiper-item {
@@ -302,7 +297,7 @@
     }
     	
 	.f-picker{
-		width: 180rpx;
+		width: 190rpx;
 		padding: 0;
 	}
 </style>
