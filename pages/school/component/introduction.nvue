@@ -1,27 +1,28 @@
 <template>
-	<view class="school-info">		
+	<view class="school-info">	
+		<view class="uni-bold-tit"><text>学校简介</text></view>
 		<viewall :content="schoolInfo.text"></viewall>
-		<view class="plr mt20">专业分数线</view>
-		<view class="plr mt20 uni-flex filter-box">			
-			<filter class="sub-filter-box" :filterIndex="yearIndex" :filterInfo="yearInfo" :showTriangle="true" @change="changeYear"></filter>
-			<filter class="sub-filter-box" :filterIndex="disciplinesIndex" :filterInfo="disciplinesInfo" :showTriangle="true" @change="changeDisciplines"></filter>
-			<filter class="sub-filter-box" :filterIndex="probabilityIndex" :filterInfo="probabilityInfo" :showTriangle="true" @change="changeProbability"></filter>			
+		<view class="uni-bold-tit"><text>专业分数线</text></view>
+		<view class="mt20 uni-flex filter-box">			
+			<filter class="sub-filter-box" :filterIndex="yearIndex" :filterInfo="yearInfo" @change="changeYear"></filter>
+			<filter class="sub-filter-box" :filterIndex="disciplinesIndex" :filterInfo="disciplinesInfo" @change="changeDisciplines"></filter>
+			<filter class="sub-filter-box" :filterIndex="probabilityIndex" :filterInfo="probabilityInfo" @change="changeProbability"></filter>			
 		</view>
 		<!-- table s -->
-		<view>
-			<uni-table border stripe>
+		<view class="mt20">
+			<uni-table stripe>
 				<uni-tr>
 					<uni-th align="center"></uni-th>
 					<uni-th align="center">专业名称</uni-th>
 					<uni-th align="center">平均分</uni-th>
-					<uni-th align="center">最低分</uni-th>
+					<uni-th align="center">最低分/位次</uni-th>
 					<uni-th align="center">百分比</uni-th>
 				</uni-tr>
 				<uni-tr v-for="(item,index) in tableData" :key="index">
 					<uni-td align="center"><uni-icons type="heart" size="25" :color="item.isFavorite?'#ff0000':'#000'" @click="addtoFavorite(item.id,tableData)"></uni-icons></uni-td>
 					<uni-td align="center">{{item.name}}</uni-td>
 					<uni-td align="center">{{item.average}}</uni-td>
-					<uni-td align="center">{{item.lowestScore}}</uni-td>
+					<uni-td align="center">{{item.lowestScore}}/{{item.rank}}</uni-td>
 					<uni-td align="center">{{item.percent}}</uni-td>
 				</uni-tr>
 			</uni-table>
@@ -66,9 +67,9 @@
 					{id:2,name:'70%'},
 				],
 				tableData:[
-					{id:'1',name:'信息管理',average:560,lowestScore:500,percent:'90%',isFavorite:true},
-					{id:'2',name:'计算机',average:560,lowestScore:500,percent:'90%',isFavorite:false},
-					{id:'3',name:'会计学',average:560,lowestScore:500,percent:'90%',isFavorite:true}
+					{id:'1',name:'信息管理',average:560,lowestScore:500,rank:2000,percent:'90%',isFavorite:true},
+					{id:'2',name:'计算机',average:560,lowestScore:500,rank:2000,percent:'90%',isFavorite:false},
+					{id:'3',name:'会计学',average:560,lowestScore:500,rank:2000,percent:'90%',isFavorite:true}
 				]				
 			}
 		},

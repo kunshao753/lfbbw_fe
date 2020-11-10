@@ -1,6 +1,6 @@
 <template>
     <!-- :class="{'table--border':border}"  -->
-	<view class="uni-table-td" :class="{'table--border':border}" :style="{width:width + 'px','text-align':align}">
+	<view class="uni-table-td" :class="{'table--border':border,'td-border':tdborder}" :style="{width:width + 'px','text-align':align}">
 		<slot></slot>
 	</view>
 </template>
@@ -25,6 +25,10 @@
 			align: {
 				type: String,
 				default: 'left'
+			},
+			tdborder:{
+				type:Boolean,
+				default:false
 			}
 		},
 		data() {
@@ -57,16 +61,17 @@
 <style lang="scss">
 	.uni-table-td {
 		display: table-cell;
-		padding: 12px 10px;
+		padding: 6px 10px;
 		// text-align: center;
 		vertical-align: middle;
-		border-bottom: 1px #ddd solid;
 		// min-width: 150px;
-		color: #666;
+		color: #000;
 		font-size: 14px;
         box-sizing: border-box;
 	}
-
+	.td--border{
+		border-bottom: 1px #ddd solid;
+	}
 	.table--border {
 		border-right: 1px #ddd solid;
 	}

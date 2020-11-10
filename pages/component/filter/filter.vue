@@ -2,7 +2,7 @@
 	<picker class="sub-filter" :class="{'filter-active':filterIndex!=0}" @change="changeFilter" :value="filterIndex" :range="filterInfo" range-key="name" name="location">
 		<view class="filter-con uni-flex">
 			<text class="uni-flex-item">{{filterInfo[filterIndex].name}}</text>
-			<view v-if="showTriangle" class="down-triangle"></view>
+			<uni-icons v-if="showTriangle" type="arrowdown" color="#000" size="18"></uni-icons>
 			</view>				
 	</picker>
 </template>

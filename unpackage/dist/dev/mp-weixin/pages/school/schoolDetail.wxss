@@ -1,8 +1,6 @@
 
-.school-detail{padding: 40rpx;}
-.sd-logo{width: 180rpx;height: 180rpx;-webkit-border-radius: 90rpx;border-radius: 90rpx;margin-right: 40rpx;}
-.sd-tag{padding: 2rpx 20rpx;border: 1rpx solid #eee;margin-right: 16rpx;}
-.sd-title{font-size: 32rpx;}
-.sd-add{vertical-align: middle;margin-left: 40rpx;}
-.sd-addressicon{width: 40rpx; height: 40rpx;}
+.school-top{padding-bottom: 40rpx;}
+.sub-box{width: 45%;}
+.sd-add{vertical-align: middle;margin-left: 20rpx;background: #C4C4C4;-webkit-border-radius: 25rpx;border-radius: 25rpx;}
+.sd-addressicon{width: 40rpx; height: 40rpx;margin-right: 30rpx;}
 

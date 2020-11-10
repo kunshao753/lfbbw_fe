@@ -140,7 +140,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     align: {
       type: String,
-      default: 'left' } },
+      default: 'left' },
+
+    tdborder: {
+      type: Boolean,
+      default: false } },
 
 
   data: function data() {

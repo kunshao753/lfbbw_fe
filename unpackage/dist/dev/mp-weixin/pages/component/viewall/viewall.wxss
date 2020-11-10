@@ -1,6 +1,5 @@
 
-.intro-box{position: relative;padding: 30rpx 40rpx;border-bottom:2rpx solid #ccc;}
-.intro-txt-box{height: 150rpx;line-height: 50rpx;overflow: hidden;}
+.intro-box{padding-top: 20rpx;border-bottom:2rpx solid #E0E0E0;}
+.intro-txt-box{height: 120rpx;line-height: 40rpx;overflow: hidden;}
 .active{height: auto;overflow: visible;}
-.intro-more{color: #007AFF;padding: 10rpx;background-color: #fff;position: absolute;bottom: 24rpx;right: 30rpx;}
 

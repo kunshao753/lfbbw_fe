@@ -157,22 +157,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
       detailDate: {},
       tabBars: [{
-        name: '学校简介',
+        name: '学校',
         id: '1' },
       {
         name: '招生',
         id: '2' },
       {
         name: '就业',
-        id: '3' },
-      {
-        name: '问答',
-        id: '4' }],
+        id: '3' }],
 
       tabIndex: 0,
       schoolInfo: {

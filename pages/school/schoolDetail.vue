@@ -1,20 +1,27 @@
 <template>
-	<view class="uni-bg-white">
+	<view class="wrapper uni-bg-white">
 		<!-- 顶部学校信息 start -->
-		<view class="school-detail uni-flex uni-row">
-			<view><image class="sd-logo" src="../../static/shuijiao.jpg"></image></view>
+		<view class="uni-flex uni-row school-top">
+			<view><image class="image-list" src="../../static/shuijiao.jpg"></image></view>
 			<view class="uni-flex-item">
-				<view class="mt10">
-					<text class="sd-title">{{detailDate.title}}</text>
+				<view class="mt10 uni-inline-item">
+					<text class="uni-title">{{detailDate.title}}</text>
 					<button class="sd-add" type="default" size="mini">+关注</button>
 				</view>
 				<view class="uni-inline-item mt20">
-					<text class="sd-tag">985</text>
-					<text class="sd-tag">211</text>
-					<text class="sd-tag">综合</text>
+					<text class="school-tag">985</text>
+					<text class="school-tag">211</text>
+					<text class="school-tag">综合</text>
 				</view>
-				<view class="uni-inline-item mt10"><image class="sd-addressicon" src="../../static/location.png"></image><text>北京</text></view>
-				<view class="sd-rank mt10">综合排名：1</view>
+				<view class="uni-inline-item mt10">
+					<view class="sub-box uni-inline-item">
+						<image class="sd-addressicon" src="../../static/location.png"></image><text>北京</text>
+					</view>
+					<view class="sub-box uni-inline-item">
+						<image class="sd-addressicon" src="../../static/location.png"></image>
+						<text>综合排名：1</text>
+					</view>
+				</view>				
 			</view>
 		</view>
 		<!-- 顶部学校信息 end -->
@@ -30,7 +37,7 @@
 			return{
 				detailDate:{},
 				tabBars: [{
-				    name: '学校简介',
+				    name: '学校',
 				    id: '1'
 				}, {
 				    name: '招生',
@@ -38,9 +45,6 @@
 				}, {
 				    name: '就业',
 				    id: '3'
-				}, {
-				    name: '问答',
-				    id: '4'
 				}],
 				tabIndex:0,
 				schoolInfo:{
@@ -73,10 +77,8 @@
 	}
 </script>
 <style>
-	.school-detail{padding: 40rpx;}
-	.sd-logo{width: 180rpx;height: 180rpx;border-radius: 90rpx;margin-right: 40rpx;}
-	.sd-tag{padding: 2rpx 20rpx;border: 1rpx solid #eee;margin-right: 16rpx;}
-	.sd-title{font-size: 32rpx;}
-	.sd-add{vertical-align: middle;margin-left: 40rpx;}
-	.sd-addressicon{width: 40rpx; height: 40rpx;}
+	.school-top{padding-bottom: 40rpx;}
+	.sub-box{width: 45%;}
+	.sd-add{vertical-align: middle;margin-left: 20rpx;background: #C4C4C4;border-radius: 25rpx;}
+	.sd-addressicon{width: 40rpx; height: 40rpx;margin-right: 30rpx;}
 </style>

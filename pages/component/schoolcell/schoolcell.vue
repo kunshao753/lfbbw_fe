@@ -12,16 +12,24 @@
 			<view class="school-cell">
 				<view class="media-item uni-flex" @click="goDetail(newsitem)">
 					<image class="image-list" :src="newsitem.image_url"></image>
-					<view class="school-m uni-flex-item">
-						<text class="media-title" v-text="newsitem.title"></text>
-						<uni-tag v-for="(tag,tindex) in newsitem.label" :inverted="true" :text="tag" :key="tindex" />
-					</view>
-					<view class="school-r">
-						<text>{{newsitem.score}}分</text>
-						<text>{{newsitem.percent}}</text>
-					</view>							
+					<view class="school-r uni-flex-item">
+						<view class="uni-flex uni-space-between">
+							<text class="uni-title" v-text="newsitem.title"></text>
+							<text class="uni-title">{{newsitem.score}}分</text>
+						</view>
+						<view class="uni-flex uni-space-between">
+							<view class="uni-flex uni-row">
+								<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag"></text>
+							</view>
+							<text>{{newsitem.percent}}</text>
+						</view>
+						<view class="uni-flex uni-acenter mt10">
+							<image class="sd-addressicon" src="../../../static/location.png"></image>
+							<text>{{newsitem.location}}</text>
+						</view>
+					</view>					
 				</view>
-				<view>匹配专业<text>10</text><uni-icons ></uni-icons></view>
+				<view class="uni-inline-item uni-jcenter matching">匹配专业<text>10</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
 			</view>
 			
 		</cell>
@@ -33,22 +41,27 @@
 	<!-- #ifndef APP-NVUE -->
 	<scroll-view class="scroll-v list" enableBackToTop="true" scroll-y @scrolltolower="loadMore">
 		<view class="school-cell" v-for="(newsitem,index2) in cellData.data" :key="newsitem.id">
-			<view class="media-item uni-flex uni-row" @click="goDetail(newsitem)">
+			<view class="media-item uni-flex" @click="goDetail(newsitem)">
 				<image class="image-list" :src="newsitem.image_url"></image>
-				<view class="school-m uni-flex-item">
-					<text class="media-title" v-text="newsitem.title"></text>
-					<view class="uni-flex uni-row">
-						<uni-tag class="school-tag" v-for="(tag,tindex) in newsitem.label" :inverted="true" :text="tag" :key="tindex" />
+				<view class="school-r uni-flex-item">
+					<view class="uni-flex uni-space-between title-box">
+						<text class="uni-title" v-text="newsitem.title"></text>
+						<text class="uni-title">{{newsitem.score}}分</text>
 					</view>
-					
-				</view>
-				<view class="school-r">
-					<text>{{newsitem.score}}分</text>
-					<text>{{newsitem.percent}}</text>
+					<view class="uni-flex uni-space-between">
+						<view class="uni-flex uni-row">
+							<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag"></text>
+						</view>
+						<text>{{newsitem.percent}}</text>
+					</view>
+					<view class="uni-flex uni-acenter mt10">
+						<image class="sd-addressicon" src="../../../static/location.png"></image>
+						<text>{{newsitem.location}}</text>
+					</view>
 				</view>
 				
 			</view>
-			<view class="uni-flex uni-jcenter matching">匹配专业<text>10</text><uni-icons ></uni-icons></view>
+			<view class="uni-inline-item uni-jcenter matching">匹配专业<text>10</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
 		</view>
 		
 		<view class="loading-more" v-if="cellData.isLoading || cellData.data.length > 4">
@@ -103,24 +116,7 @@
 		/* border-bottom: 1rpx solid #BEBEBE; */
 		justify-content: space-between;
 	}
-	.image-list{
-		width: 100rpx;
-		height: 100rpx;
-		border-radius: 50rpx;
-		margin-right: 10rpx;
-		margin-top: 20rpx;
-	}
-	.school-r{
-		width: 90rpx;
-		display: flex;
-		flex-direction: column;
-		margin-top: 20rpx;
-		text-align: center;
-	}
-	.media-title{
-		font-size: 30rpx;
-	}
-	.school-tag{margin: 5rpx 10rpx 0 0;}
+	.title-box{padding: 10rpx 0;}
 	.update-tips {
 	    position: absolute;
 	    left: 0;
@@ -190,5 +186,7 @@
 	    font-size: 28rpx;
 	    color: #999;
 	}
-	.matching{padding-top: 20rpx;border-top: 2rpx solid #e0e0e0;margin-top: 20rpx;}
+	.matching{padding-top: 20rpx;border-top: 2rpx solid #e0e0e0;margin-top: 20rpx;color: #4f4f4f;}
+	.matching text{color: #000;font-weight: bold;margin-right: 30rpx;margin-left: 10rpx;}
+	.sd-addressicon{width: 40rpx;height: 40rpx;}
 </style>

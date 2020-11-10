@@ -16,30 +16,7 @@
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 }
-.image-list{
-	width: 100rpx;
-	height: 100rpx;
-	-webkit-border-radius: 50rpx;
-	        border-radius: 50rpx;
-	margin-right: 10rpx;
-	margin-top: 20rpx;
-}
-.school-r{
-	width: 90rpx;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	        flex-direction: column;
-	margin-top: 20rpx;
-	text-align: center;
-}
-.media-title{
-	font-size: 30rpx;
-}
-.school-tag{margin: 5rpx 10rpx 0 0;}
+.title-box{padding: 10rpx 0;}
 .update-tips {
     position: absolute;
     left: 0;
@@ -125,5 +102,7 @@
     font-size: 28rpx;
     color: #999;
 }
-.matching{padding-top: 20rpx;border-top: 2rpx solid #e0e0e0;margin-top: 20rpx;}
+.matching{padding-top: 20rpx;border-top: 2rpx solid #e0e0e0;margin-top: 20rpx;color: #4f4f4f;}
+.matching text{color: #000;font-weight: bold;margin-right: 30rpx;margin-left: 10rpx;}
+.sd-addressicon{width: 40rpx;height: 40rpx;}
 

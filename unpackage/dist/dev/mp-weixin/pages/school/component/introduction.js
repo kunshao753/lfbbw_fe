@@ -164,6 +164,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
 var volunteerBase = __webpack_require__(/*! ../../../common/volunteerBase.js */ 99);var _default =
 {
   name: 'school-infomation',
@@ -198,9 +199,9 @@ var volunteerBase = __webpack_require__(/*! ../../../common/volunteerBase.js */ 
       { id: 2, name: '70%' }],
 
       tableData: [
-      { id: '1', name: '信息管理', average: 560, lowestScore: 500, percent: '90%', isFavorite: true },
-      { id: '2', name: '计算机', average: 560, lowestScore: 500, percent: '90%', isFavorite: false },
-      { id: '3', name: '会计学', average: 560, lowestScore: 500, percent: '90%', isFavorite: true }] };
+      { id: '1', name: '信息管理', average: 560, lowestScore: 500, rank: 2000, percent: '90%', isFavorite: true },
+      { id: '2', name: '计算机', average: 560, lowestScore: 500, rank: 2000, percent: '90%', isFavorite: false },
+      { id: '3', name: '会计学', average: 560, lowestScore: 500, rank: 2000, percent: '90%', isFavorite: true }] };
 
 
   },

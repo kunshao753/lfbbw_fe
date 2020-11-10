@@ -95,6 +95,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
+  uniSearchBar: function() {
+    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1151))
+  },
+  uniIcons: function() {
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1158))
+  },
   uniCollapse: function() {
     return __webpack_require__.e(/*! import() | components/uni-collapse/uni-collapse */ "components/uni-collapse/uni-collapse").then(__webpack_require__.bind(null, /*! @/components/uni-collapse/uni-collapse.vue */ 1204))
   },
@@ -145,7 +151,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabbar = function tabbar() {__webpack_require__.e(/*! require.ensure | pages/component/tabbar/tabbar */ "pages/component/tabbar/tabbar").then((function () {return resolve(__webpack_require__(/*! ../component/tabbar/tabbar.vue */ 1178));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabbar = function tabbar() {__webpack_require__.e(/*! require.ensure | pages/component/tabbar/tabbar */ "pages/component/tabbar/tabbar").then((function () {return resolve(__webpack_require__(/*! ../component/tabbar/tabbar.vue */ 1178));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 
@@ -216,6 +222,41 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+var undergraduate = [
+{
+  "sid": 1,
+  "sname": "哲学",
+  "cinfo": [
+  {
+    "cid": 101,
+    "cname": "哲学类" }] },
+
+
+
+{
+  "sid": 2,
+  "sname": "经济学",
+  "cinfo": [
+  {
+    "cid": 201,
+    "cname": "经济与贸易类" },
+
+  {
+    "cid": 202,
+    "cname": "金融学类" }] }];var _default =
 
 
 
@@ -223,6 +264,7 @@ __webpack_require__.r(__webpack_exports__);
 {
   data: function data() {
     return {
+      searchVal: '',
       newsList: [],
       cacheTab: [],
       // 顶部tab索引
@@ -234,6 +276,16 @@ __webpack_require__.r(__webpack_exports__);
       {
         name: '专科',
         id: 'speciality' }],
+
+      PopularMajor: [
+      { id: 'zhexue', title: '哲学' },
+      { id: 'jisuanji', title: '计算机' },
+      { id: 'xiguan', title: '信息管理' },
+      { id: 'jingguan', title: '经济管理' },
+      { id: 'zhexue', title: '哲学' },
+      { id: 'jisuanji', title: '计算机' },
+      { id: 'xiguan', title: '信息管理' },
+      { id: 'jingguan', title: '经济管理' }],
 
       scrollInto: "",
       showTips: false,
@@ -257,6 +309,21 @@ __webpack_require__.r(__webpack_exports__);
     }, 350);
   },
   methods: {
+    search: function search(res) {
+      uni.showToast({
+        title: '搜索：' + res.value,
+        icon: 'none' });
+
+    },
+    input: function input(res) {
+      this.searchVal = res.value;
+    },
+    cancel: function cancel(res) {
+      uni.showToast({
+        title: '点击取消，输入值为：' + res.value,
+        icon: 'none' });
+
+    },
     // 获取院校列表
     getList: function getList(index) {
       var activeTab = this.newsList[index];

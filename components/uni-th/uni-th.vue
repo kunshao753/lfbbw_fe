@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-table-th" :class="{'table--border':border}" :style="{width:width + 'px','text-align':align}">
+	<view class="uni-table-th" :class="{'table--border':border,'th--border':thborder}" :style="{width:width + 'px','text-align':align}">
 		<slot></slot>
 	</view>
 </template>
@@ -29,6 +29,10 @@
 			align: {
 				type: String,
 				default: 'left'
+			},
+			thborder:{
+				type:Boolean,
+				default:false
 			}
 		},
 		data() {
@@ -62,15 +66,17 @@
 
 <style lang="scss">
 	.uni-table-th {
-		padding: 12px 10px;
+		padding: 6px 10px;
 		display: table-cell;
 		// text-align: center;
-		color: #333;
-		font-weight: 500;
-		border-bottom: 1px #ddd solid;
+		color: #000;
+		font-weight: 500;		
 		font-size: 14px;
         // background-color: #efefef;
         box-sizing: border-box;
+	}
+	.th--border{
+		border-bottom: 1px #ddd solid;
 	}
 	.table--border {
 		border-right: 1px #ddd solid;

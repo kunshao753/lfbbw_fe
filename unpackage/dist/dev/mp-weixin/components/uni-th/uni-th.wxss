@@ -25,14 +25,16 @@
 /* 透明度 */
 /* 文章场景相关 */
 .uni-table-th {
-  padding: 12px 10px;
+  padding: 6px 10px;
   display: table-cell;
-  color: #333;
+  color: #000;
   font-weight: 500;
-  border-bottom: 1px #ddd solid;
   font-size: 14px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+.th--border {
+  border-bottom: 1px #ddd solid;
 }
 .table--border {
   border-right: 1px #ddd solid;

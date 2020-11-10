@@ -1,14 +1,28 @@
 <template>
-    <view class="uni-bg-white">       
-		<tabbar :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>		
-		<view>
-			<!-- 热门专业 -->
-			<view class="title plr mt20">热门专业</view>
-			<scroll-view class="scroll-h" :scroll-x="true" :show-scrollbar="false">
-			    <view v-for="(hot,index) in newsList[tabIndex].PopularMajor" :key="tab.id" class="popular">
-			        <text class="popular-title">{{hot.title}}</text>
-			    </view>
-			</scroll-view>
+    <view class="wrapper uni-bg-white">  
+		 <!-- top search start -->
+		 <view class="top-search mt20">
+		 	<uni-search-bar bgColor="#fff" placeholder="搜索专业" @confirm="search" @input="input" @cancel="cancel" clearButton="none" />
+		 </view>	
+		 <!-- top search end -->
+		<view class="uni-flex uni-jcenter diploma-box">
+			<view class="uni-inline-item diploma">
+				<text>本科</text><uni-icons type="arrowdown"></uni-icons>
+			</view>
+			<view class="uni-inline-item diploma">
+				<text>专科</text><uni-icons type="arrowdown"></uni-icons>
+			</view>
+		</view>		
+		<view class="uni-bg-white">
+			<!-- 热门专业 s-->
+			<view class="uni-bold-tit"><text>热门专业</text></view>
+			<view class="uni-flex popular-box">
+				<view v-for="(hot,index) in PopularMajor" :key="hot.id" class="popular">
+					<image class="hot-img" src="../../static/60x60.png" mode="widthFix"></image>
+				    <text class="popular-title">{{hot.title}}</text>
+				</view>
+			</view>
+			<!-- 热门专业 e-->
 			<!-- #ifdef APP-NVUE -->
 			<list class="scroll-v list" enableBackToTop="true" scroll-y>					
 				<cell  v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.id">
@@ -34,19 +48,41 @@
 				</view>
 			</scroll-view>
 			<!-- #endif -->
-		</view>
-		<!-- <swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300">
-			<swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1" @change="ontabchange">
-				
-			</swiper-item>
-		</swiper>		 -->
+		</view>		
 	</view>
 </template>
 <script>
 	import tabbar from '../component/tabbar/tabbar.vue'
+	const undergraduate=[
+		{
+		            "sid": 1,
+		            "sname": "哲学",
+		            "cinfo": [
+		                {
+		                    "cid": 101,
+		                    "cname": "哲学类"
+		                }
+		            ]
+		        },
+		        {
+		            "sid": 2,
+		            "sname": "经济学",
+		            "cinfo": [
+		                {
+		                    "cid": 201,
+		                    "cname": "经济与贸易类"
+		                },
+		                {
+		                    "cid": 202,
+		                    "cname": "金融学类"
+		                }
+		            ]
+		        }
+	]
     export default {		
         data() {
             return {
+				searchVal: '',
                 newsList: [],
                 cacheTab: [],				
 				// 顶部tab索引
@@ -59,6 +95,16 @@
                     name: '专科',
                     id: 'speciality'
                 }],
+				PopularMajor:[
+					{id:'zhexue',title:'哲学'},
+					{id:'jisuanji',title:'计算机'},
+					{id:'xiguan',title:'信息管理'},
+					{id:'jingguan',title:'经济管理'},
+					{id:'zhexue',title:'哲学'},
+					{id:'jisuanji',title:'计算机'},
+					{id:'xiguan',title:'信息管理'},
+					{id:'jingguan',title:'经济管理'},
+				],
                 scrollInto: "",
                 showTips: false,
                 navigateFlag: false,
@@ -81,6 +127,21 @@
             },350)
         },
         methods: {
+			search(res) {
+				uni.showToast({
+					title: '搜索：' + res.value,
+					icon: 'none'
+				})
+			},
+			input(res) {
+				this.searchVal = res.value
+			},
+			cancel(res) {
+				uni.showToast({
+					title: '点击取消，输入值为：' + res.value,
+					icon: 'none'
+				})
+			},
 			// 获取院校列表
             getList(index) {
                 let activeTab = this.newsList[index];
@@ -153,54 +214,24 @@
 
     /* #endif */
 
-    .tabs {
-        flex: 1;
-        flex-direction: column;
-        overflow: hidden;
-        /* #ifdef MP-ALIPAY || MP-BAIDU */
-        height: 100vh;
-        /* #endif */
-    }    
-    .swiper-box {
-        flex: 1;
-    }
 
-    .swiper-item {
-        flex: 1;
-        flex-direction: row;
-    }
 
-    .scroll-v {
-        flex: 1;
-        /* #ifndef MP-ALIPAY */
-        flex-direction: column;
-        /* #endif */
-        width: 750rpx;
-    }	
-	.scroll-h {
-	    width: 750rpx;
-	    flex-direction: row;
-	    /* #ifndef APP-PLUS */
-	    white-space: nowrap;
-	    /* #endif */
-	    /* flex-wrap: nowrap; */
-	    /* border-color: #cccccc;
-		border-bottom-style: solid;
-		border-bottom-width: 1px; */
-	}
+
+ 
+	 .popular-box{
+		 flex-wrap: wrap;
+		 justify-content: space-between;
+	 }
 	.popular{
 		/* #ifndef APP-PLUS */
 		display: inline-block;
 		/* #endif */
-		flex-wrap: nowrap;
-		border: 2rpx solid #ccc;
-		margin: 40rpx 20rpx;
-		width: 23%;
-		text-align: center;
-		height: 100rpx;
-		line-height: 100rpx;
+		margin-top: 36rpx;
+		width: 47%;
 	}
-	
+	.hot-img{
+		max-width: 100%;
+	}
 	.sp-coll{
 		width: 100%;
 		border-color: #e5e5e5;
@@ -208,4 +239,7 @@
 		border-bottom-style: solid;
 	}
     .sub-sp-coll{padding: 0 30rpx;border-top-color: #e5e5e5;border-top-width: 2rpx;border-top-style:solid;}
+	.diploma-box{padding: 20rpx;border-bottom:2rpx solid #e0e0e0;}
+	.diploma{margin: 0 22rpx;padding: 0 30rpx;border: 2rpx solid #000;border-radius: 28rpx;height: 56rpx;}
+	.diploma text{padding-right: 10rpx;}
 </style>

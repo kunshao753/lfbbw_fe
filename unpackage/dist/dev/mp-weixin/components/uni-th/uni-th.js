@@ -144,7 +144,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     align: {
       type: String,
-      default: 'left' } },
+      default: 'left' },
+
+    thborder: {
+      type: Boolean,
+      default: false } },
 
 
   data: function data() {

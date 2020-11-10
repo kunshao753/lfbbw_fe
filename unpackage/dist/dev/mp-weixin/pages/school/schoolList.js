@@ -196,7 +196,8 @@ var newsData = {
     "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
     "label": ['985', '211', '综合'],
     "score": 680,
-    "percent": '90%' },
+    "percent": '90%',
+    "location": '北京' },
 
   data1: {
     "id": 2,
@@ -204,7 +205,8 @@ var newsData = {
     "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
     "label": ['985', '211', '综合'],
     "score": 680,
-    "percent": '90%' },
+    "percent": '90%',
+    "location": '北京' },
 
   data2: {
     "id": 5,
@@ -212,7 +214,8 @@ var newsData = {
     "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
     "label": ['985', '211', '综合'],
     "score": 680,
-    "percent": '90%' },
+    "percent": '90%',
+    "location": '北京' },
 
   data3: {
     "id": 3,
@@ -220,7 +223,8 @@ var newsData = {
     "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
     "label": ['985', '211', '综合'],
     "score": 680,
-    "percent": '90%' },
+    "percent": '90%',
+    "location": '北京' },
 
   data4: {
     "id": 4,
@@ -228,7 +232,8 @@ var newsData = {
     "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
     "label": ['985', '211', '综合'],
     "score": 680,
-    "percent": '90%' } };var _default =
+    "percent": '90%',
+    "location": '北京' } };var _default =
 
 
 

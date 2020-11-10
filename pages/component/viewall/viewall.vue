@@ -1,7 +1,10 @@
 <template>
 	<view class="intro-box">
 		<view class="intro-txt-box" :class="{active:!viewMore}"><text class="intro-txt">{{content}}</text></view>
-		<view class="intro-more" @click="toggleMore">{{viewMore?'查看全部':'收起'}}</view>
+		<view class="intro-more uni-jcenter uni-inline-item" @click="toggleMore">
+			<text>{{viewMore?'查看全部':'收起'}}</text>
+			<uni-icons :type="viewMore?'arrowdown':'arrowup'" color="#000" size="18"></uni-icons>
+		</view>
 	</view>
 </template>
 <script>
@@ -26,8 +29,7 @@
 	}
 </script>
 <style>
-	.intro-box{position: relative;padding: 30rpx 40rpx;border-bottom:2rpx solid #ccc;}
-	.intro-txt-box{height: 150rpx;line-height: 50rpx;overflow: hidden;}
+	.intro-box{padding-top: 20rpx;border-bottom:2rpx solid #E0E0E0;}
+	.intro-txt-box{height: 120rpx;line-height: 40rpx;overflow: hidden;}
 	.active{height: auto;overflow: visible;}
-	.intro-more{color: #007AFF;padding: 10rpx;background-color: #fff;position: absolute;bottom: 24rpx;right: 30rpx;}
 </style>
