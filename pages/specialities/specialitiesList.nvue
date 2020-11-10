@@ -1,19 +1,16 @@
 <template>
-    <view class="wrapper uni-bg-white">  
+    <view class="page uni-bg-white">  
 		 <!-- top search start -->
-		 <view class="top-search mt20">
+		 <view class="wrapper" style="padding-top: 20rpx;">
 		 	<uni-search-bar bgColor="#fff" placeholder="搜索专业" @confirm="search" @input="input" @cancel="cancel" clearButton="none" />
 		 </view>	
 		 <!-- top search end -->
-		<view class="uni-flex uni-jcenter diploma-box">
-			<view class="uni-inline-item diploma">
-				<text>本科</text><uni-icons type="arrowdown"></uni-icons>
-			</view>
-			<view class="uni-inline-item diploma">
-				<text>专科</text><uni-icons type="arrowdown"></uni-icons>
+		<view class="wrapper uni-flex uni-jcenter diploma-box">
+			<view v-for="(item,index) in tabBars" :key="item.id" class="uni-inline-item diploma" :class="{'cur':tabIndex==index&&isOpen}" @click="switchTab(index,item.id)">
+				<text>{{item.name}}</text><uni-icons type="arrowdown"></uni-icons>
 			</view>
 		</view>		
-		<view class="uni-bg-white">
+		<view class="wrapper uni-bg-white" v-show="!isOpen">
 			<!-- 热门专业 s-->
 			<view class="uni-bold-tit"><text>热门专业</text></view>
 			<view class="uni-flex popular-box">
@@ -22,79 +19,95 @@
 				    <text class="popular-title">{{hot.title}}</text>
 				</view>
 			</view>
-			<!-- 热门专业 e-->
-			<!-- #ifdef APP-NVUE -->
-			<list class="scroll-v list" enableBackToTop="true" scroll-y>					
-				<cell  v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.id">
-					<uni-collapse class="sp-coll">
-						<uni-collapse-item :open="false" :title="newsitem.title">
-							<uni-list-item class="sub-sp-coll" v-for="(subitem1,subindex1) in newsitem.sub" :key="subindex1" showArrow :title="subitem1.title" />							
-						</uni-collapse-item>
-					</uni-collapse>	
-				</cell>
-			</list>
-			<!-- #endif -->
-			<!-- #ifndef APP-NVUE -->
-			<scroll-view class="scroll-v" enableBackToTop="true" scroll-y>	
-				
-				<view class="uni-flex uni-row" v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.id">						
-					<uni-collapse class="sp-coll">
-						<uni-collapse-item :open="false" :title="newsitem.title">
-							<uni-list>
-								<uni-list-item class="sub-sp-coll" v-for="(subitem1,subindex1) in newsitem.sub" :key="subindex1" showArrow :border="false" :title="subitem1.title" clickable @click="goDetail(subitem1)" />							
-							</uni-list>
-						</uni-collapse-item>
-					</uni-collapse>					
+			<!-- 热门专业 e-->			
+		</view>	
+		<scroll-view class="scroll-v wrapper" enableBackToTop="true" scroll-y v-if="isOpen">
+			<view v-show="!isSub">
+				<view class="uni-bold mt20">选择专业大类</view>
+				<view v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.sid">						
+					<view class="uni-bold mt20">{{newsitem.sname}}</view>
+					<view class="uni-inline-item major-list">
+						<text v-for="(subitem1,subindex1) in newsitem.cinfo" :key="subitem1.cid" v-text="subitem1.cname" :class="{'select':curMajor.includes(subitem1.cid)}" @click="chooseMajor(subitem1.cid,curMajor)"></text>
+					</view>				
 				</view>
-			</scroll-view>
-			<!-- #endif -->
-		</view>		
+				<view class="bottom-btn">
+					<button class="major-btn" type="default" @click="goSubMajor(curMajor)">下一步</button>
+				</view>
+			</view>
+			<view v-show="isSub">
+				<view class="uni-bold mt20">选择专业</view>
+				<view v-for="(item,index) in majorSubList" :key="item.cid">						
+					<view class="uni-bold mt20">{{item.cname}}</view>
+					<view class="uni-inline-item major-list">
+						<text v-for="(subitem1,subindex1) in item.minfo" :key="subitem1.mid" v-text="subitem1.mname" :class="{'select':curMajorSub.includes(subitem1.mid)}" @click="chooseMajor(subitem1.mid,curMajorSub)"></text>
+					</view>				
+				</view>
+				<view class="bottom-btn uni-inline-item go-search-chool">
+					<button class="major-btn" @click="clearInfo">返回专业大类</button>
+					<button class="major-btn" type="default" @click="goSubMajor(curMajorSub)">搜索院校</button>
+				</view>
+			</view>
+		</scroll-view>
 	</view>
 </template>
 <script>
-	import tabbar from '../component/tabbar/tabbar.vue'
-	const undergraduate=[
+	const undergraduate1=[
 		{
-		            "sid": 1,
-		            "sname": "哲学",
-		            "cinfo": [
-		                {
-		                    "cid": 101,
-		                    "cname": "哲学类"
-		                }
-		            ]
-		        },
-		        {
-		            "sid": 2,
-		            "sname": "经济学",
-		            "cinfo": [
-		                {
-		                    "cid": 201,
-		                    "cname": "经济与贸易类"
-		                },
-		                {
-		                    "cid": 202,
-		                    "cname": "金融学类"
-		                }
-		            ]
-		        }
+			"sid": 1,
+			"sname": "哲学",
+			"cinfo": [
+				{
+					"cid": 101,
+					"cname": "哲学类"
+				}
+			]
+		},
+		{
+			"sid": 2,
+			"sname": "经济学",
+			"cinfo": [
+				{
+					"cid": 201,
+					"cname": "经济与贸易类"
+				},
+				{
+					"cid": 202,
+					"cname": "金融学类"
+				}
+			]
+		}
+	]
+	const undergraduate2=[
+		{
+			"sid": 1,
+			"sname": "法学",
+			"cinfo": [
+				{
+					"cid": 101,
+					"cname": "法学类"
+				}
+			]
+		},
+		{
+			"sid": 2,
+			"sname": "经济学",
+			"cinfo": [
+				{
+					"cid": 201,
+					"cname": "经济与贸易类"
+				},
+				{
+					"cid": 202,
+					"cname": "金融学类"
+				}
+			]
+		}
 	]
     export default {		
         data() {
             return {
 				searchVal: '',
                 newsList: [],
-                cacheTab: [],				
-				// 顶部tab索引
-                tabIndex: 0,
-				// 顶部tab数据
-                tabBars: [{
-                    name: '本科',
-                    id: 'undergraduate'
-                },{
-                    name: '专科',
-                    id: 'speciality'
-                }],
 				PopularMajor:[
 					{id:'zhexue',title:'哲学'},
 					{id:'jisuanji',title:'计算机'},
@@ -105,26 +118,44 @@
 					{id:'xiguan',title:'信息管理'},
 					{id:'jingguan',title:'经济管理'},
 				],
-                scrollInto: "",
-                showTips: false,
-                navigateFlag: false,
-                pulling: false,
-                refreshIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5QTFRFcHBw3Nzct7e39vb2ycnJioqK7e3tpqam29vb////D8oK7wAAAAp0Uk5T////////////ALLMLM8AAABxSURBVHja7JVBDoAgDASrjqj//7CJBi90iyYeOHTPMwmFZrHjYyyFYYUy1bwUZqtJIYVxhf1a6u0R7iUvWsCcrEtwJHp8MwMdvh2amHduiZD3rpWId9+BgPd7Cc2LIkPyqvlQvKxKBJ//Qwq/CacAAwDUv0a0YuKhzgAAAABJRU5ErkJggg=="
+				// 顶部tab索引
+                tabIndex: 0,
+				// 顶部tab数据
+                tabBars: [{
+                    name: '本科',
+                    id: '7'
+                },{
+                    name: '专科',
+                    id: '5'
+                }],
+				//专业下拉框是否打开
+				isOpen:false,
+				//专业子类是否打开
+				isSub:false,
+				//已选择的二级专业id
+				curMajor:[],
+				//已选择的三级专业id
+				curMajorSub:[],
+				//三级专业数据
+				majorSubList:[]
             }
-        },
-        components:{
-        	tabbar
-        },
+        },        
 		onLoad() {
             setTimeout(()=>{
               this.tabBars.forEach((tabBar) => {
                   this.newsList.push({
-                      data: [],
-					  PopularMajor:[]
+                        data: [],
+					    PopularMajor:[]
                   });
+				  // this.curMajor.push({
+					 //    data:[]
+				  // });
+				  // this.curMajorSub.push({
+						// data:[]
+				  // });
               });
-              this.getList(0);
-            },350)
+              //this.getList(0);
+            },0)
         },
         methods: {
 			search(res) {
@@ -143,32 +174,13 @@
 				})
 			},
 			// 获取院校列表
-            getList(index) {
+            getList(index,id) {
                 let activeTab = this.newsList[index];
-                let list = [
-					{id:'zhexue',title:'哲学',hasSub:true,sub:[
-						{id:'zhexuelei',title:'哲学类',hasSub:false},
-						{id:'zhexuelei',title:'心理学类',hasSub:false}],
-					},
-					{id:'yixue',title:'医学',hasSub:true,sub:[
-						{id:'jichuyixue',title:'基础医学类',hasSub:false},
-						{id:'linchuangyixue',title:'临床医学类',hasSub:false}],
-					},
-					{id:'zhexue',title:'哲学',hasSub:true,sub:[
-						{id:'zhexuelei',title:'哲学类',hasSub:false},
-						{id:'zhexuelei',title:'心理学类',hasSub:false}],
-					},
-					{id:'yixue',title:'医学',hasSub:true,sub:[
-						{id:'jichuyixue',title:'基础医学类',hasSub:false},
-						{id:'linchuangyixue',title:'临床医学类',hasSub:false}],
-					}
-				];
-                activeTab.data = activeTab.data.concat(list);
-				activeTab.PopularMajor = [
-					{id:'zhexue',title:'哲学'},
-					{id:'jisuanji',title:'计算机'},
-					{id:'xiguan',title:'信息管理'},
-					{id:'jingguan',title:'经济管理'}]
+				if(id==7){
+					activeTab.data = activeTab.data.concat(undergraduate1);
+				}else if(id==5){
+					activeTab.data = activeTab.data.concat(undergraduate2);
+				}	
             },
 			// 跳转到院校详情
             goDetail(e) {
@@ -180,26 +192,86 @@
                     url: './specialitiesSubList?detailDate=' + encodeURIComponent(JSON.stringify(detail))
                 });                
             },
-			// tabbar点击切换
-            ontabtap(index) {
-                this.switchTab(index);
-            }, 
-		    ontabchange(e) {
-			    let index = e.target.current || e.detail.current;
-			    this.switchTab(index);
-		    },
-            switchTab(index) {
+			// tabbar点击切换            
+            switchTab(index,id) {
                 if (this.newsList[index].data.length === 0) {
-                    this.getList(index);
+                    this.getList(index,id);
                 }
                 if (this.tabIndex === index) {
-                    return;
-                }
-                this.tabIndex = index;
-                this.scrollInto = this.tabBars[index].id;
-               
-            },
-                  
+                    this.isOpen = !this.isOpen;
+					//return
+                }else{
+					this.isOpen = true;
+				}
+				this.isSub = false;
+                this.tabIndex = index;				
+                this.clearInfo()
+            },			
+			//选择专业
+			chooseMajor(id,arr){
+				if(arr.includes(id)){
+					arr=arr.filter(function (ele){return ele != id;});
+				}else{
+					arr.push(id);
+				}
+				
+			},
+			//下一步
+			goSubMajor(cur){
+				var t = this;			
+				let id = ''
+				if(cur.length>0){
+					id = cur.join(',')
+					console.log(id)
+					if(cur==t.curMajor){
+						t.majorSubList=[
+							{
+								"cid": 201,
+								"cname": "经济与贸易类",
+								"minfo": [
+									{
+										"mid": "52aedf5b747aec1cfc84158f",
+										"mname": "国际经济与贸易"
+									}
+								]
+							},
+							{
+								"cid": 202,
+								"cname": "金融学类",
+								"minfo": [
+									{
+										"mid": "52aedf5b747aec1cfc841588",
+										"mname": "金融学"
+									},
+									{
+										"mid": "52aedf5b747aec1cfc841589",
+										"mname": "金融工程"
+									}
+								]
+							}
+						]
+						t.isSub = !t.isSub
+					}else if(cur==t.curMajorSub){
+						uni.navigateTo({
+							url:'../school/schoolList'
+						})
+					}
+					
+				}else{
+					uni.showToast({
+						title:'请选择专业',
+						icon:'none'
+					})
+				}
+				
+			},
+			//返回大类，清空已选信息
+			clearInfo(){
+				var t = this;
+				t.isSub = false;
+				t.curMajor = [];
+				t.curMajorSub = [];
+			}
         }
     }
 </script>
@@ -211,16 +283,11 @@
         min-height: 100%;
         display: flex;
     }
-
     /* #endif */
-
-
-
-
- 
 	 .popular-box{
 		 flex-wrap: wrap;
-		 justify-content: space-between;
+		 justify-content: space-between;		 
+		 padding-bottom: 40rpx;
 	 }
 	.popular{
 		/* #ifndef APP-PLUS */
@@ -232,14 +299,16 @@
 	.hot-img{
 		max-width: 100%;
 	}
-	.sp-coll{
-		width: 100%;
-		border-color: #e5e5e5;
-		border-bottom-width: 1px;
-		border-bottom-style: solid;
-	}
-    .sub-sp-coll{padding: 0 30rpx;border-top-color: #e5e5e5;border-top-width: 2rpx;border-top-style:solid;}
 	.diploma-box{padding: 20rpx;border-bottom:2rpx solid #e0e0e0;}
 	.diploma{margin: 0 22rpx;padding: 0 30rpx;border: 2rpx solid #000;border-radius: 28rpx;height: 56rpx;}
 	.diploma text{padding-right: 10rpx;}
+	.cur{border-color: #C4C4C4;background: #C4C4C4;}
+	.scroll-v{background: #F2F2F2;flex: 1;}
+	.major-list{flex-wrap: wrap;}
+	.major-list text{height: 56rpx;line-height: 56rpx;padding: 0 24rpx;margin-right: 8rpx;margin-top: 30rpx;border-radius: 16rpx;background: #C4C4C4;}
+	.bottom-btn{position: fixed;bottom: 0;left: 0;right: 0;background: #F2F2F2;padding: 28rpx;border-top:2rpx solid #e0e0e0;}
+	.major-btn{width: 100%;}
+	.major-list text.select{background: #828282;}
+	.go-search-chool{justify-content: space-between;}
+	.go-search-chool .major-btn{width: 46%;}
 </style>

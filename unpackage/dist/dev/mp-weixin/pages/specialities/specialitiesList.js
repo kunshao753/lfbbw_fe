@@ -100,24 +100,61 @@ var components = {
   },
   uniIcons: function() {
     return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1158))
-  },
-  uniCollapse: function() {
-    return __webpack_require__.e(/*! import() | components/uni-collapse/uni-collapse */ "components/uni-collapse/uni-collapse").then(__webpack_require__.bind(null, /*! @/components/uni-collapse/uni-collapse.vue */ 1204))
-  },
-  uniCollapseItem: function() {
-    return __webpack_require__.e(/*! import() | components/uni-collapse-item/uni-collapse-item */ "components/uni-collapse-item/uni-collapse-item").then(__webpack_require__.bind(null, /*! @/components/uni-collapse-item/uni-collapse-item.vue */ 1211))
-  },
-  uniList: function() {
-    return __webpack_require__.e(/*! import() | components/uni-list/uni-list */ "components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/components/uni-list/uni-list.vue */ 1218))
-  },
-  uniListItem: function() {
-    return __webpack_require__.e(/*! import() | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/components/uni-list-item/uni-list-item.vue */ 1225))
   }
 }
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l1 = _vm.isOpen
+    ? _vm.__map(_vm.newsList[_vm.tabIndex].data, function(newsitem, index2) {
+        var $orig = _vm.__get_orig(newsitem)
+
+        var l0 = _vm.__map(newsitem.cinfo, function(subitem1, subindex1) {
+          var $orig = _vm.__get_orig(subitem1)
+
+          var g0 = _vm.curMajor.includes(subitem1.cid)
+          return {
+            $orig: $orig,
+            g0: g0
+          }
+        })
+
+        return {
+          $orig: $orig,
+          l0: l0
+        }
+      })
+    : null
+  var l3 = _vm.isOpen
+    ? _vm.__map(_vm.majorSubList, function(item, index) {
+        var $orig = _vm.__get_orig(item)
+
+        var l2 = _vm.__map(item.minfo, function(subitem1, subindex1) {
+          var $orig = _vm.__get_orig(subitem1)
+
+          var g1 = _vm.curMajorSub.includes(subitem1.mid)
+          return {
+            $orig: $orig,
+            g1: g1
+          }
+        })
+
+        return {
+          $orig: $orig,
+          l2: l2
+        }
+      })
+    : null
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l1: l1,
+        l3: l3
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -151,91 +188,89 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabbar = function tabbar() {__webpack_require__.e(/*! require.ensure | pages/component/tabbar/tabbar */ "pages/component/tabbar/tabbar").then((function () {return resolve(__webpack_require__(/*! ../component/tabbar/tabbar.vue */ 1178));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var undergraduate = [
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var undergraduate1 = [
 {
   "sid": 1,
   "sname": "哲学",
@@ -243,6 +278,32 @@ var undergraduate = [
   {
     "cid": 101,
     "cname": "哲学类" }] },
+
+
+
+{
+  "sid": 2,
+  "sname": "经济学",
+  "cinfo": [
+  {
+    "cid": 201,
+    "cname": "经济与贸易类" },
+
+  {
+    "cid": 202,
+    "cname": "金融学类" }] }];
+
+
+
+
+var undergraduate2 = [
+{
+  "sid": 1,
+  "sname": "法学",
+  "cinfo": [
+  {
+    "cid": 101,
+    "cname": "法学类" }] },
 
 
 
@@ -266,17 +327,6 @@ var undergraduate = [
     return {
       searchVal: '',
       newsList: [],
-      cacheTab: [],
-      // 顶部tab索引
-      tabIndex: 0,
-      // 顶部tab数据
-      tabBars: [{
-        name: '本科',
-        id: 'undergraduate' },
-      {
-        name: '专科',
-        id: 'speciality' }],
-
       PopularMajor: [
       { id: 'zhexue', title: '哲学' },
       { id: 'jisuanji', title: '计算机' },
@@ -287,16 +337,28 @@ var undergraduate = [
       { id: 'xiguan', title: '信息管理' },
       { id: 'jingguan', title: '经济管理' }],
 
-      scrollInto: "",
-      showTips: false,
-      navigateFlag: false,
-      pulling: false,
-      refreshIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5QTFRFcHBw3Nzct7e39vb2ycnJioqK7e3tpqam29vb////D8oK7wAAAAp0Uk5T////////////ALLMLM8AAABxSURBVHja7JVBDoAgDASrjqj//7CJBi90iyYeOHTPMwmFZrHjYyyFYYUy1bwUZqtJIYVxhf1a6u0R7iUvWsCcrEtwJHp8MwMdvh2amHduiZD3rpWId9+BgPd7Cc2LIkPyqvlQvKxKBJ//Qwq/CacAAwDUv0a0YuKhzgAAAABJRU5ErkJggg==" };
+      // 顶部tab索引
+      tabIndex: 0,
+      // 顶部tab数据
+      tabBars: [{
+        name: '本科',
+        id: '7' },
+      {
+        name: '专科',
+        id: '5' }],
+
+      //专业下拉框是否打开
+      isOpen: false,
+      //专业子类是否打开
+      isSub: false,
+      //已选择的二级专业id
+      curMajor: [],
+      //已选择的三级专业id
+      curMajorSub: [],
+      //三级专业数据
+      majorSubList: [] };
 
   },
-  components: {
-    tabbar: tabbar },
-
   onLoad: function onLoad() {var _this = this;
     setTimeout(function () {
       _this.tabBars.forEach(function (tabBar) {
@@ -304,9 +366,15 @@ var undergraduate = [
           data: [],
           PopularMajor: [] });
 
+        // this.curMajor.push({
+        //    data:[]
+        // });
+        // this.curMajorSub.push({
+        // data:[]
+        // });
       });
-      _this.getList(0);
-    }, 350);
+      //this.getList(0);
+    }, 0);
   },
   methods: {
     search: function search(res) {
@@ -325,32 +393,13 @@ var undergraduate = [
 
     },
     // 获取院校列表
-    getList: function getList(index) {
+    getList: function getList(index, id) {
       var activeTab = this.newsList[index];
-      var list = [
-      { id: 'zhexue', title: '哲学', hasSub: true, sub: [
-        { id: 'zhexuelei', title: '哲学类', hasSub: false },
-        { id: 'zhexuelei', title: '心理学类', hasSub: false }] },
-
-      { id: 'yixue', title: '医学', hasSub: true, sub: [
-        { id: 'jichuyixue', title: '基础医学类', hasSub: false },
-        { id: 'linchuangyixue', title: '临床医学类', hasSub: false }] },
-
-      { id: 'zhexue', title: '哲学', hasSub: true, sub: [
-        { id: 'zhexuelei', title: '哲学类', hasSub: false },
-        { id: 'zhexuelei', title: '心理学类', hasSub: false }] },
-
-      { id: 'yixue', title: '医学', hasSub: true, sub: [
-        { id: 'jichuyixue', title: '基础医学类', hasSub: false },
-        { id: 'linchuangyixue', title: '临床医学类', hasSub: false }] }];
-
-
-      activeTab.data = activeTab.data.concat(list);
-      activeTab.PopularMajor = [
-      { id: 'zhexue', title: '哲学' },
-      { id: 'jisuanji', title: '计算机' },
-      { id: 'xiguan', title: '信息管理' },
-      { id: 'jingguan', title: '经济管理' }];
+      if (id == 7) {
+        activeTab.data = activeTab.data.concat(undergraduate1);
+      } else if (id == 5) {
+        activeTab.data = activeTab.data.concat(undergraduate2);
+      }
     },
     // 跳转到院校详情
     goDetail: function goDetail(e) {
@@ -362,24 +411,85 @@ var undergraduate = [
         url: './specialitiesSubList?detailDate=' + encodeURIComponent(JSON.stringify(detail)) });
 
     },
-    // tabbar点击切换
-    ontabtap: function ontabtap(index) {
-      this.switchTab(index);
-    },
-    ontabchange: function ontabchange(e) {
-      var index = e.target.current || e.detail.current;
-      this.switchTab(index);
-    },
-    switchTab: function switchTab(index) {
+    // tabbar点击切换            
+    switchTab: function switchTab(index, id) {
       if (this.newsList[index].data.length === 0) {
-        this.getList(index);
+        this.getList(index, id);
       }
       if (this.tabIndex === index) {
-        return;
+        this.isOpen = !this.isOpen;
+        //return
+      } else {
+        this.isOpen = true;
       }
+      this.isSub = false;
       this.tabIndex = index;
-      this.scrollInto = this.tabBars[index].id;
+      this.clearInfo();
+    },
+    //选择专业
+    chooseMajor: function chooseMajor(id, arr) {
+      if (arr.includes(id)) {
+        arr = arr.filter(function (ele) {return ele != id;});
+      } else {
+        arr.push(id);
+      }
 
+    },
+    //下一步
+    goSubMajor: function goSubMajor(cur) {
+      var t = this;
+      var id = '';
+      if (cur.length > 0) {
+        id = cur.join(',');
+        console.log(id);
+        if (cur == t.curMajor) {
+          t.majorSubList = [
+          {
+            "cid": 201,
+            "cname": "经济与贸易类",
+            "minfo": [
+            {
+              "mid": "52aedf5b747aec1cfc84158f",
+              "mname": "国际经济与贸易" }] },
+
+
+
+          {
+            "cid": 202,
+            "cname": "金融学类",
+            "minfo": [
+            {
+              "mid": "52aedf5b747aec1cfc841588",
+              "mname": "金融学" },
+
+            {
+              "mid": "52aedf5b747aec1cfc841589",
+              "mname": "金融工程" }] }];
+
+
+
+
+          t.isSub = !t.isSub;
+        } else if (cur == t.curMajorSub) {
+          uni.navigateTo({
+            url: '../school/schoolList' });
+
+        }
+
+      } else {
+        uni.showToast({
+          title: '请选择专业',
+          icon: 'none' });
+
+      }
+
+    },
+    //返回大类，清空已选信息
+    clearInfo: function clearInfo() {
+      var t = this;
+      t.isSub = false;
+      t.curMajor = [];
+      t.curMajorSub = [];
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

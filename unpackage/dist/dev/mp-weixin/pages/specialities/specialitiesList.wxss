@@ -53,7 +53,8 @@ page {
 		         flex-wrap: wrap;
 		 -webkit-box-pack: justify;
 		 -webkit-justify-content: space-between;
-		         justify-content: space-between;
+		         justify-content: space-between;		 
+		 padding-bottom: 40rpx;
 }
 .popular{
 
@@ -65,14 +66,16 @@ page {
 .hot-img{
 		max-width: 100%;
 }
-.sp-coll{
-		width: 100%;
-		border-color: #e5e5e5;
-		border-bottom-width: 1px;
-		border-bottom-style: solid;
-}
-.sub-sp-coll{padding: 0 30rpx;border-top-color: #e5e5e5;border-top-width: 2rpx;border-top-style:solid;}
 .diploma-box{padding: 20rpx;border-bottom:2rpx solid #e0e0e0;}
 .diploma{margin: 0 22rpx;padding: 0 30rpx;border: 2rpx solid #000;-webkit-border-radius: 28rpx;border-radius: 28rpx;height: 56rpx;}
 .diploma text{padding-right: 10rpx;}
+.cur{border-color: #C4C4C4;background: #C4C4C4;}
+.scroll-v{background: #F2F2F2;-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
+.major-list{-webkit-flex-wrap: wrap;flex-wrap: wrap;}
+.major-list text{height: 56rpx;line-height: 56rpx;padding: 0 24rpx;margin-right: 8rpx;margin-top: 30rpx;-webkit-border-radius: 16rpx;border-radius: 16rpx;background: #C4C4C4;}
+.bottom-btn{position: fixed;bottom: 0;left: 0;right: 0;background: #F2F2F2;padding: 28rpx;border-top:2rpx solid #e0e0e0;}
+.major-btn{width: 100%;}
+.major-list text.select{background: #828282;}
+.go-search-chool{-webkit-box-pack: justify;-webkit-justify-content: space-between;justify-content: space-between;}
+.go-search-chool .major-btn{width: 46%;}
 
