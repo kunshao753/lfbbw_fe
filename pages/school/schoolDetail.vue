@@ -35,7 +35,7 @@
 	export default{
 		data(){
 			return{
-				detailDate:{},
+				paramaDate:{},
 				tabBars: [{
 				    name: '学校',
 				    id: '1'
@@ -58,15 +58,15 @@
 		},
 		onLoad(event) {
 			// TODO 后面把参数名替换成 payload
-			const payload = event.detailDate || event.payload;
+			const payload = event.paramaDate || event.payload;
 			// 目前在某些平台参数会被主动 decode，暂时这样处理。
 			try {
-				this.detailDate = JSON.parse(decodeURIComponent(payload));
+				this.paramaDate = JSON.parse(decodeURIComponent(payload));
 			} catch (error) {
-				this.detailDate = JSON.parse(payload);
+				this.paramaDate = JSON.parse(payload);
 			}
 			uni.setNavigationBarTitle({
-				title: this.detailDate.title
+				title: this.paramaDate.title
 			});
 		},
 		methods:{

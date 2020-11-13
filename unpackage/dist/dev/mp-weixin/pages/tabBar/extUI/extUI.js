@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uLink: function() {
-    return __webpack_require__.e(/*! import() | components/u-link/u-link */ "components/u-link/u-link").then(__webpack_require__.bind(null, /*! @/components/u-link/u-link.vue */ 1166))
+    return __webpack_require__.e(/*! import() | components/u-link/u-link */ "components/u-link/u-link").then(__webpack_require__.bind(null, /*! @/components/u-link/u-link.vue */ 1164))
   }
 }
 var render = function() {

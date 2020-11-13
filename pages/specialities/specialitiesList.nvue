@@ -27,11 +27,11 @@
 				<view v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.sid">						
 					<view class="uni-bold mt20">{{newsitem.sname}}</view>
 					<view class="uni-inline-item major-list">
-						<text v-for="(subitem1,subindex1) in newsitem.cinfo" :key="subitem1.cid" v-text="subitem1.cname" :class="{'select':curMajor.includes(subitem1.cid)}" @click="chooseMajor(subitem1.cid,curMajor)"></text>
+						<text v-for="(subitem1,subindex1) in newsitem.cinfo" :key="subitem1.cid" v-text="subitem1.cname" :class="{'select':curMajor.includes(subitem1.cid)}" @click="chooseMajor(subitem1.cid)"></text>
 					</view>				
 				</view>
 				<view class="bottom-btn">
-					<button class="major-btn" type="default" @click="goSubMajor(curMajor)">下一步</button>
+					<button class="major-btn" type="default" @click="clickBtn(isSub)">下一步</button>
 				</view>
 			</view>
 			<view v-show="isSub">
@@ -39,12 +39,12 @@
 				<view v-for="(item,index) in majorSubList" :key="item.cid">						
 					<view class="uni-bold mt20">{{item.cname}}</view>
 					<view class="uni-inline-item major-list">
-						<text v-for="(subitem1,subindex1) in item.minfo" :key="subitem1.mid" v-text="subitem1.mname" :class="{'select':curMajorSub.includes(subitem1.mid)}" @click="chooseMajor(subitem1.mid,curMajorSub)"></text>
+						<text v-for="(subitem1,subindex1) in item.minfo" :key="subitem1.mid" v-text="subitem1.mname" :class="{'select':curMajor.includes(subitem1.mid)}" @click="chooseMajor(subitem1.mid)"></text>
 					</view>				
 				</view>
 				<view class="bottom-btn uni-inline-item go-search-chool">
 					<button class="major-btn" @click="clearInfo">返回专业大类</button>
-					<button class="major-btn" type="default" @click="goSubMajor(curMajorSub)">搜索院校</button>
+					<button class="major-btn" type="default" @click="clickBtn(isSub)">搜索院校</button>
 				</view>
 			</view>
 		</scroll-view>
@@ -132,10 +132,10 @@
 				isOpen:false,
 				//专业子类是否打开
 				isSub:false,
-				//已选择的二级专业id
+				//已选择的专业id
 				curMajor:[],
 				//已选择的三级专业id
-				curMajorSub:[],
+				//curMajorSub:[],
 				//三级专业数据
 				majorSubList:[]
             }
@@ -208,22 +208,28 @@
                 this.clearInfo()
             },			
 			//选择专业
-			chooseMajor(id,arr){
-				if(arr.includes(id)){
-					arr=arr.filter(function (ele){return ele != id;});
+			chooseMajor(id){
+				if(this.curMajor.includes(id)){
+					this.curMajor=this.curMajor.filter(function (ele){return ele != id;});
+					console.log(this.curMajor)
 				}else{
-					arr.push(id);
+					this.curMajor.push(id);
 				}
 				
 			},
-			//下一步
-			goSubMajor(cur){
-				var t = this;			
-				let id = ''
-				if(cur.length>0){
-					id = cur.join(',')
+			clickBtn(isSub){
+				var t = this;
+				if(t.curMajor.length>0){
+					let id = ''
+					id = t.curMajor.join(',')
 					console.log(id)
-					if(cur==t.curMajor){
+					//搜索院校
+					if(isSub){
+						uni.navigateTo({
+							url:'../school/schoolList'
+						})
+					}else{
+						//下一步
 						t.majorSubList=[
 							{
 								"cid": 201,
@@ -250,27 +256,22 @@
 								]
 							}
 						]
-						t.isSub = !t.isSub
-					}else if(cur==t.curMajorSub){
-						uni.navigateTo({
-							url:'../school/schoolList'
-						})
-					}
-					
+						t.isSub = true	
+						t.curMajor = []
+					}					
 				}else{
 					uni.showToast({
 						title:'请选择专业',
 						icon:'none'
 					})
 				}
-				
-			},
+			},			
 			//返回大类，清空已选信息
 			clearInfo(){
 				var t = this;
 				t.isSub = false;
 				t.curMajor = [];
-				t.curMajorSub = [];
+				//t.curMajorSub = [];
 			}
         }
     }

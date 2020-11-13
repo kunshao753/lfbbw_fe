@@ -12,7 +12,7 @@
 
 			<view class="example-body">
 				<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="showDrawer('showLeft')"><text class="word-btn-white">显示Drawer</text></view>
-				<uni-drawer ref="showLeft" mode="left" :width="320" @change="change($event,'showLeft')">
+				<uni-drawer ref="showLeft" mode="bottom" :width="320" @change="change($event,'showLeft')">
 					<view class="close">
 						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showLeft')"><text class="word-btn-white">关闭Drawer</text></view>
 					</view>

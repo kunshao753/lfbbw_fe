@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "填报专业详情",
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
+}

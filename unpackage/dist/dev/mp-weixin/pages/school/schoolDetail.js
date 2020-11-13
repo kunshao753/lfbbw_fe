@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabbar = function tabbar() {__webpack_require__.e(/*! require.ensure | pages/component/tabbar/tabbar */ "pages/component/tabbar/tabbar").then((function () {return resolve(__webpack_require__(/*! ../component/tabbar/tabbar.vue */ 1178));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var schoolInfomation = function schoolInfomation() {Promise.all(/*! require.ensure | pages/school/component/introduction */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/school/component/introduction")]).then((function () {return resolve(__webpack_require__(/*! ./component/introduction.nvue */ 1197));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabbar = function tabbar() {__webpack_require__.e(/*! require.ensure | pages/component/tabbar/tabbar */ "pages/component/tabbar/tabbar").then((function () {return resolve(__webpack_require__(/*! ../component/tabbar/tabbar.vue */ 1176));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var schoolInfomation = function schoolInfomation() {Promise.all(/*! require.ensure | pages/school/component/introduction */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/school/component/introduction")]).then((function () {return resolve(__webpack_require__(/*! ./component/introduction.nvue */ 1195));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -167,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 {
   data: function data() {
     return {
-      detailDate: {},
+      paramaDate: {},
       tabBars: [{
         name: '学校',
         id: '1' },
@@ -190,15 +190,15 @@ __webpack_require__.r(__webpack_exports__);
 
   onLoad: function onLoad(event) {
     // TODO 后面把参数名替换成 payload
-    var payload = event.detailDate || event.payload;
+    var payload = event.paramaDate || event.payload;
     // 目前在某些平台参数会被主动 decode，暂时这样处理。
     try {
-      this.detailDate = JSON.parse(decodeURIComponent(payload));
+      this.paramaDate = JSON.parse(decodeURIComponent(payload));
     } catch (error) {
-      this.detailDate = JSON.parse(payload);
+      this.paramaDate = JSON.parse(payload);
     }
     uni.setNavigationBarTitle({
-      title: this.detailDate.title });
+      title: this.paramaDate.title });
 
   },
   methods: {

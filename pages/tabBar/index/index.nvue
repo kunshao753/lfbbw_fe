@@ -201,8 +201,8 @@
 		},
         onShareAppMessage() {
             return {
-                title: '欢迎体验uni-app',
-                path: '/pages/tabBar/component/component'
+                title: '99%的家长不知道的高考志愿填报的坑',
+                path: '/pages/tabBar/index/index'
             }
         },
         onNavigationBarButtonTap(e) {

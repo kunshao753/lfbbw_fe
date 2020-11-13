@@ -108,10 +108,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniSearchBar: function() {
-    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1151))
+    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1149))
   },
   uniIcons: function() {
-    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1158))
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1156))
   }
 }
 var render = function() {
@@ -381,8 +381,8 @@ var _vuex = __webpack_require__(/*! vuex */ 15);function ownKeys(object, enumera
 var graceChecker = __webpack_require__(/*! ../../../common/graceChecker.js */ 22);var _default = { data: function data() {return { searchVal: '', schoolUrl: '../../school/schoolList', loginUrl: '../../login/login', array: [{ name: '北京' }, { name: '河北' }, { name: '河南' }, { name: '天津' }], index: 1, list: [{ id: 'view', name: '视图容器1', open: false, pages: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view'] }, { id: 'content', name: '基础内容', open: false, pages: ['text', 'rich-text', 'progress'] }, { id: 'form', name: '表单组件', open: false, pages: ['button', 'checkbox', 'form', 'input', 'label', 'picker', 'picker-view', 'radio', 'slider', 'switch', 'textarea', 'editor'] }, { id: 'nav', name: '导航', open: false, pages: ['navigator'] }, { id: 'media', name: '媒体组件', open: false, pages: ['image', 'video', 'audio'] }, { id: 'map', name: '地图', open: false, pages: ['map'] }, { id: 'canvas', name: '画布', open: false, pages: ['canvas'] }, { id: 'web-view', name: '网页', open: false, pages: ['web-view'] }, { url: 'ad', name: 'AD组件', open: false }] };}, computed: _objectSpread({}, (0, _vuex.mapState)(['hasLogin'])),
   onShareAppMessage: function onShareAppMessage() {
     return {
-      title: '欢迎体验uni-app',
-      path: '/pages/tabBar/component/component' };
+      title: '99%的家长不知道的高考志愿填报的坑',
+      path: '/pages/tabBar/index/index' };
 
   },
   onNavigationBarButtonTap: function onNavigationBarButtonTap(e) {

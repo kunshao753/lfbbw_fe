@@ -88,13 +88,13 @@
 		{
 			"path": "pages/specialities/specialitiesList",
 			"style": {
-				"navigationBarTitleText": "选择专业"
+				"navigationBarTitleText": "选择专业类别"
 			}
 		},
 		{
-			"path": "pages/specialities/specialitiesSubList",
+			"path": "pages/specialities/specialitiesDetail",
 			"style": {
-				"navigationBarTitleText": "专业大类"
+				"navigationBarTitleText": "填报专业详情"
 			}
 		},
 		{

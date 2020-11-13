@@ -12,7 +12,7 @@
 		</view>		
 		<swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
 			<swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
-				<school-cell class="swiper-box" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail"></school-cell>					
+				<school-cell class="swiper-box" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail" @gomajor="goMajor"></school-cell>					
 			</swiper-item>
 		</swiper>		
 	</view>
@@ -34,7 +34,8 @@
     		"label":['985','211','综合'],
             "score": 680,
             "percent": '90%',
-			"location":'北京'
+			"location":'北京',
+			"matchingMajor":10
         },
         data1: {
             "id":2,
@@ -43,7 +44,8 @@
             "label":['985','211','综合'],
             "score": 680,
             "percent": '90%',
-			"location":'北京'
+			"location":'北京',
+			"matchingMajor":10
         },
         data2: {
             "id":5,
@@ -52,7 +54,8 @@
             "label":['985','211','综合'],
             "score": 680,
             "percent": '90%',
-			"location":'北京'
+			"location":'北京',
+			"matchingMajor":10
         },
         data3: {
             "id":3,
@@ -61,7 +64,8 @@
             "label":['985','211','综合'],
             "score": 680,
             "percent": '90%',
-			"location":'北京'
+			"location":'北京',
+			"matchingMajor":10
         },
         data4: {
             "id":4,
@@ -70,7 +74,8 @@
             "label":['985','211','综合'],
             "score": 680,
             "percent": '90%',
-			"location":'北京'
+			"location":'北京',
+			"matchingMajor":10
         }
     };
 
@@ -187,10 +192,20 @@
                 	id: data.id
                 };
                 uni.navigateTo({
-                    url: './schoolDetail?detailDate=' + encodeURIComponent(JSON.stringify(detail))
+                    url: './schoolDetail?paramaDate=' + encodeURIComponent(JSON.stringify(detail))
                 });
                 
-            },            
+            }, 
+			//跳转到匹配专业
+			goMajor(data){
+				let detail = {
+                	title: data.title,
+                	id: data.id
+                };
+                uni.navigateTo({
+                    url: '../specialities/specialitiesDetail?paramaDate=' + encodeURIComponent(JSON.stringify(detail))
+                });
+			},
             loadMore(e) {
                 setTimeout(() => {
                     this.getList(this.tabIndex);

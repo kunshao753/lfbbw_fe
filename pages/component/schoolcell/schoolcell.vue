@@ -61,7 +61,7 @@
 				</view>
 				
 			</view>
-			<view class="uni-inline-item uni-jcenter matching">匹配专业<text>10</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
+			<view class="uni-inline-item uni-jcenter matching" @click="goMajor(newsitem)">匹配专业<text>{{newsitem.matchingMajor}}</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
 		</view>
 		
 		<view class="loading-more" v-if="cellData.isLoading || cellData.data.length > 4">
@@ -100,12 +100,14 @@
 			},
 			goDetail(data){
 				this.$emit('godetail',data)
-			}
+			},
+			goMajor(data){
+				this.$emit('gomajor',data)
+			},
 		}
 	}
 </script>
 <style>
-	.school-cell{background: #fff;margin: 20rpx 20rpx 0;padding: 20rpx;border-radius: 20rpx;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);}
 	.scroll-v {
 	    flex: 1;
 	    /* #ifndef MP-ALIPAY */

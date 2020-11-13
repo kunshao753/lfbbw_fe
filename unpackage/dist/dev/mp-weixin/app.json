@@ -8,7 +8,7 @@
     "pages/school/schoolList",
     "pages/school/schoolDetail",
     "pages/specialities/specialitiesList",
-    "pages/specialities/specialitiesSubList",
+    "pages/specialities/specialitiesDetail",
     "pages/component/view/view",
     "pages/component/scroll-view/scroll-view",
     "pages/component/swiper/swiper",

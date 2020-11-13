@@ -96,10 +96,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniSearchBar: function() {
-    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1151))
+    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1149))
   },
   uniIcons: function() {
-    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1158))
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1156))
   }
 }
 var render = function() {
@@ -133,7 +133,7 @@ var render = function() {
         var l2 = _vm.__map(item.minfo, function(subitem1, subindex1) {
           var $orig = _vm.__get_orig(subitem1)
 
-          var g1 = _vm.curMajorSub.includes(subitem1.mid)
+          var g1 = _vm.curMajor.includes(subitem1.mid)
           return {
             $orig: $orig,
             g1: g1
@@ -351,10 +351,10 @@ var undergraduate2 = [
       isOpen: false,
       //专业子类是否打开
       isSub: false,
-      //已选择的二级专业id
+      //已选择的专业id
       curMajor: [],
       //已选择的三级专业id
-      curMajorSub: [],
+      //curMajorSub:[],
       //三级专业数据
       majorSubList: [] };
 
@@ -427,22 +427,28 @@ var undergraduate2 = [
       this.clearInfo();
     },
     //选择专业
-    chooseMajor: function chooseMajor(id, arr) {
-      if (arr.includes(id)) {
-        arr = arr.filter(function (ele) {return ele != id;});
+    chooseMajor: function chooseMajor(id) {
+      if (this.curMajor.includes(id)) {
+        this.curMajor = this.curMajor.filter(function (ele) {return ele != id;});
+        console.log(this.curMajor);
       } else {
-        arr.push(id);
+        this.curMajor.push(id);
       }
 
     },
-    //下一步
-    goSubMajor: function goSubMajor(cur) {
+    clickBtn: function clickBtn(isSub) {
       var t = this;
-      var id = '';
-      if (cur.length > 0) {
-        id = cur.join(',');
+      if (t.curMajor.length > 0) {
+        var id = '';
+        id = t.curMajor.join(',');
         console.log(id);
-        if (cur == t.curMajor) {
+        //搜索院校
+        if (isSub) {
+          uni.navigateTo({
+            url: '../school/schoolList' });
+
+        } else {
+          //下一步
           t.majorSubList = [
           {
             "cid": 201,
@@ -469,27 +475,22 @@ var undergraduate2 = [
 
 
 
-          t.isSub = !t.isSub;
-        } else if (cur == t.curMajorSub) {
-          uni.navigateTo({
-            url: '../school/schoolList' });
-
+          t.isSub = true;
+          t.curMajor = [];
         }
-
       } else {
         uni.showToast({
           title: '请选择专业',
           icon: 'none' });
 
       }
-
     },
     //返回大类，清空已选信息
     clearInfo: function clearInfo() {
       var t = this;
       t.isSub = false;
       t.curMajor = [];
-      t.curMajorSub = [];
+      //t.curMajorSub = [];
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
