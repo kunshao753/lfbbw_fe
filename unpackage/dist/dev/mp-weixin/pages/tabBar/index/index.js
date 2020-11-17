@@ -108,10 +108,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniSearchBar: function() {
-    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1149))
+    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 1151))
   },
   uniIcons: function() {
-    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1156))
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 1158))
   }
 }
 var render = function() {
@@ -467,17 +467,17 @@ var graceChecker = __webpack_require__(/*! ../../../common/graceChecker.js */ 22
       var formData = e.detail.value;
       var checkRes = graceChecker.check(formData, rule);
       if (checkRes) {
-        uni.showToast({ title: "验证通过!", icon: "none" });
+        //uni.showToast({title:"验证通过!", icon:"none"});
         console.log(formData.query);
         switch (formData.query) {
           case 'fschool':
             uni.navigateTo({
-              url: t.schoolUrl });
+              url: '../../school/schoolList' });
 
             break;
           case 'fspecialities':
             uni.navigateTo({
-              url: t.schoolUrl });
+              url: '../../specialities/specialitiesList' });
 
             break;
           case 'fexpert':

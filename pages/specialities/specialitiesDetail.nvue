@@ -5,8 +5,8 @@
 				<view class="uni-flex">
 					<text class="uni-title uni-flex-item" v-text="item.name"></text>
 					<view class="sp-top-right">
-						<button v-if="!(isFill||item.isFill)" size="mini" @click="fillHandle(item.id)">+ 填报</button>
-						<button v-if="isFill||item.isFill" size="mini" disabled="">已填报</button>
+						<button v-if="!item.isFill" size="mini" @click="fillHandle(item.id)">+ 填报</button>
+						<button v-if="item.isFill" size="mini" disabled="">已填报</button>
 						<text v-text="item.percent"></text>
 					</view>
 				</view>
@@ -27,33 +27,43 @@
 					</view>
 				</view>
 			</view>
-		</block>
-		<view class="fixed uni-column" @click="showVlist">志愿预览</view>
-		<uni-popup id="popup" ref="popup" type="bottom" :animation="true">
-			<view class="wrapper uni-bg-white popup-box">
-				<view class="uni-title mt20">预览志愿</view>
-			</view>
-		</uni-popup>
+		</block>	
+		<volunteer-list :fill-list="fillList"></volunteer-list>
 	</view>
 </template>
 <script>	
 	var volunteerBase = require('../../common/volunteerBase.js')
+	import volunteerList from '../component/volunteerList/volunteerList.vue'
 	export default{
 		data(){
 			return{
+				options:[
+				        {
+				            text: '取消',
+				            style: {
+				                backgroundColor: '#007aff'
+				            }
+				        }, {
+				            text: '确认',
+				            style: {
+				                backgroundColor: '#dd524d'
+				            }
+				        }
+				      ],
 				paramaDate:{},
 				thisYear:'',
 				detailData:[
 					{id:'zx',name:'财务管理（中外合作办学）（与英国萨里大学合作办学）',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:false},
-					{id:'zx',name:'财务管理',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:true},
-					{id:'zx',name:'财务管理（中外合作办学）（与英国萨里大学合作办学）',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:false},
-					{id:'zx',name:'财务管理（中外合作办学）（与英国萨里大学合作办学）',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:false},
-					{id:'zx',name:'财务管理',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:false},
+					{id:'cw',name:'财务管理',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:false},
+					{id:'gl',name:'财务管理（中外合作办学）（与英国萨里大学合作办学）',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:false},
+					{id:'zw',name:'财务管理（中外合作办学）（与英国萨里大学合作办学）',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:false},
+					{id:'ty',name:'财务管理',percent:'87%',number:23,lowestScore:568,lowestRank:3453,isFill:false},
 				],
 				isFill:false,
 				fillList:[],
 			}
-		},		
+		},	
+		components:{volunteerList},
 		onLoad(event) {
 			// TODO 后面把参数名替换成 payload
 			const payload = event.paramaDate || event.payload;
@@ -76,17 +86,27 @@
 			//填报
 			fillHandle(id){
 				var t = this;
-				t.isFill = true
-				t.fillList.push(id)
-				uni.showToast({
-					title:'填报成功，已加入填报清单',
-					icon:'none'
-				})
-			},
-			//志愿预览
-			showVlist(){
-				this.$refs.popup.open()
-			}
+				var curData = t.detailData.find(item=>item.id==id)
+				let isFill = curData.isFill
+				if(isFill){
+					uni.showToast({
+						title:'已填报过该专业',
+						icon:'none'
+					})
+				}else{
+					isFill = true
+					t.fillList.push({name:t.paramaDate.title})
+					uni.showToast({
+						title:'填报成功，已加入填报清单',
+						icon:'none'
+					})
+					t.detailData.forEach(item => {
+						if(item.id === id){
+							item.isFill = isFill
+						}
+					})
+				}
+			},			
 		}
 	}
 </script>
@@ -96,7 +116,5 @@
 	.sp-top-right button{border: 2rpx solid #e0e0e0; background-color: #fff;margin-bottom: 10rpx;padding: 0 16rpx;}
 	.sp-bottom{padding-top: 14rpx;border-top:2rpx solid #e0e0e0;margin-top: 26rpx;justify-content: space-between;}
 	.sp-b-sub{height: 110rpx;text-align: center;display: flex;justify-content: center;}
-	.col-line{width: 2rpx;height: 110rpx;background-color: #e0e0e0;}
-	.fixed{position: fixed;bottom: 100rpx;right: 36rpx;padding: 20rpx; width: 104rpx;height: 104rpx;text-align: center;justify-content: center;line-height: 40rpx;border-radius: 52rpx;background-color: #C4C4C4;}
-	.popup-box{height: 50%;}
+	.col-line{width: 2rpx;height: 110rpx;background-color: #e0e0e0;}	
 </style>

@@ -3,6 +3,7 @@
   "usingComponents": {
     "tabbar": "/pages/component/tabbar/tabbar",
     "filter": "/pages/component/filter/filter",
-    "school-cell": "/pages/component/schoolcell/schoolcell"
+    "school-cell": "/pages/component/schoolcell/schoolcell",
+    "volunteer-list": "/pages/component/volunteerList/volunteerList"
   }
 }

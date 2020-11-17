@@ -36,13 +36,13 @@
 					</view>
 					<view class="uni-list-cell">
 						<view class="uni-list-cell-left">高考总分</view>
-						<input class="uni-list-cell-db" type="number" name="score" />
-						<text class="mr20">分</text>
+						<input class="uni-list-cell-db" type="number" name="score" style="text-align: right;" />
+						<text class="i-label">分</text>
 					</view>
 					<view class="uni-list-cell">
 						<view class="uni-list-cell-left">全省排名</view>
-						<input class="uni-list-cell-db" type="number" name="ranking" />
-						<text class="mr20">名</text>
+						<input class="uni-list-cell-db" type="number" name="ranking" style="text-align: right;" />
+						<text class="i-label">名</text>
 					</view>
 					<view class="uni-form-item uni-column">
 						<view class="title">选择查询方式</view>
@@ -287,17 +287,17 @@
 			    var formData = e.detail.value;
 			    var checkRes = graceChecker.check(formData, rule);
 			    if(checkRes){
-			        uni.showToast({title:"验证通过!", icon:"none"});
+			        //uni.showToast({title:"验证通过!", icon:"none"});
 					console.log(formData.query);
 					switch (formData.query){						
 						case 'fschool':
 							uni.navigateTo({
-								url:t.schoolUrl
+								url:'../../school/schoolList'
 							});
 							break;
 						case 'fspecialities':
 							uni.navigateTo({
-								url:t.schoolUrl
+								url:'../../specialities/specialitiesList'
 							});
 							break;
 						case 'fexpert':
@@ -331,4 +331,5 @@
 	.fill-radio label{padding-top: 20rpx;}
 	.fill-radio radio{margin: 0 20rpx 0 30rpx;}
 	.fill-sub{width: 60%;}
+	.i-label{margin: 0 20rpx;}
 </style>

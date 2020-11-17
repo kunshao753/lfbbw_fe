@@ -132,7 +132,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabbar = function tabbar() {__webpack_require__.e(/*! require.ensure | pages/component/tabbar/tabbar */ "pages/component/tabbar/tabbar").then((function () {return resolve(__webpack_require__(/*! ../component/tabbar/tabbar.vue */ 1176));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var filter = function filter() {__webpack_require__.e(/*! require.ensure | pages/component/filter/filter */ "pages/component/filter/filter").then((function () {return resolve(__webpack_require__(/*! ../component/filter/filter.vue */ 1183));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var schoolCell = function schoolCell() {__webpack_require__.e(/*! require.ensure | pages/component/schoolcell/schoolcell */ "pages/component/schoolcell/schoolcell").then((function () {return resolve(__webpack_require__(/*! ../component/schoolcell/schoolcell.vue */ 1188));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tabbar = function tabbar() {__webpack_require__.e(/*! require.ensure | pages/component/tabbar/tabbar */ "pages/component/tabbar/tabbar").then((function () {return resolve(__webpack_require__(/*! ../component/tabbar/tabbar.vue */ 1178));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var filter = function filter() {__webpack_require__.e(/*! require.ensure | pages/component/filter/filter */ "pages/component/filter/filter").then((function () {return resolve(__webpack_require__(/*! ../component/filter/filter.vue */ 1185));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var schoolCell = function schoolCell() {__webpack_require__.e(/*! require.ensure | pages/component/schoolcell/schoolcell */ "pages/component/schoolcell/schoolcell").then((function () {return resolve(__webpack_require__(/*! ../component/schoolcell/schoolcell.vue */ 1190));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var volunteerList = function volunteerList() {__webpack_require__.e(/*! require.ensure | pages/component/volunteerList/volunteerList */ "pages/component/volunteerList/volunteerList").then((function () {return resolve(__webpack_require__(/*! ../component/volunteerList/volunteerList.vue */ 1197));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+
+
 
 
 
@@ -294,7 +296,8 @@ var newsData = {
   components: {
     tabbar: tabbar,
     filter: filter,
-    schoolCell: schoolCell },
+    schoolCell: schoolCell,
+    volunteerList: volunteerList },
 
   onLoad: function onLoad() {var _this = this;
     setTimeout(function () {

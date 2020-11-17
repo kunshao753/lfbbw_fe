@@ -14,13 +14,15 @@
 			<swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
 				<school-cell class="swiper-box" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail" @gomajor="goMajor"></school-cell>					
 			</swiper-item>
-		</swiper>		
+		</swiper>
+		<volunteer-list></volunteer-list>
 	</view>
 </template>
 <script>
 	import tabbar from '../component/tabbar/tabbar.vue'
 	import filter from '../component/filter/filter.vue'
 	import schoolCell from '../component/schoolcell/schoolcell.vue'
+	import volunteerList from '../component/volunteerList/volunteerList.vue'
     // 缓存每页最多
     const MAX_CACHE_DATA = 100;
     // 缓存页签数量
@@ -131,7 +133,8 @@
         components:{
         	tabbar,
 			filter,
-			schoolCell
+			schoolCell,
+			volunteerList
         },
 		onLoad() {
             setTimeout(()=>{

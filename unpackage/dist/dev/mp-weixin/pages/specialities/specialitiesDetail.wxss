@@ -46,7 +46,5 @@ swiper-item {
 .sp-top-right button{border: 2rpx solid #e0e0e0; background-color: #fff;margin-bottom: 10rpx;padding: 0 16rpx;}
 .sp-bottom{padding-top: 14rpx;border-top:2rpx solid #e0e0e0;margin-top: 26rpx;-webkit-box-pack: justify;-webkit-justify-content: space-between;justify-content: space-between;}
 .sp-b-sub{height: 110rpx;text-align: center;display: -webkit-box;display: -webkit-flex;display: flex;-webkit-box-pack: center;-webkit-justify-content: center;justify-content: center;}
-.col-line{width: 2rpx;height: 110rpx;background-color: #e0e0e0;}
-.fixed{position: fixed;bottom: 100rpx;right: 36rpx;padding: 20rpx; width: 104rpx;height: 104rpx;text-align: center;-webkit-box-pack: center;-webkit-justify-content: center;justify-content: center;line-height: 40rpx;-webkit-border-radius: 52rpx;border-radius: 52rpx;background-color: #C4C4C4;}
-.popup-box{height: 50%;}
+.col-line{width: 2rpx;height: 110rpx;background-color: #e0e0e0;}	
 

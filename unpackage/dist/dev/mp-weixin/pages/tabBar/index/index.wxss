@@ -147,4 +147,5 @@ page {
 .fill-radio label{padding-top: 20rpx;}
 .fill-radio radio{margin: 0 20rpx 0 30rpx;}
 .fill-sub{width: 60%;}
+.i-label{margin: 0 20rpx;}
 
