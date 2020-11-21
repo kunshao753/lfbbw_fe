@@ -10,6 +10,7 @@
 			<image class="index-img" src="../../../static/shuijiao.jpg"></image>
 		</view>
 		<!-- top img end -->
+		<view><button @tap="goStudentInfo()">录入成绩</button></view>
 		<view class="uni-flex i-links uni-common-mt">
 			<button class="top-btn" @tap="goSchool()">学校信息</button>
 			<button class="top-btn" @tap="goSpecialities()">专业信息</button>
@@ -235,7 +236,12 @@
 				uni.navigateTo({
 					url:'../../specialities/specialitiesList'
 				})
-			},				
+			},
+			goStudentInfo(){
+				uni.navigateTo({
+					url:'../../userinfo/studentinfo'
+				})
+			},
 			// examinationTime(stringTime){
 			// 	var timestamp2 = Date.parse(new Date(stringTime));
 			// 	timestamp2 = timestamp2 / 1000; 

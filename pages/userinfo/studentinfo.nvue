@@ -1,0 +1,176 @@
+<template>
+    <view class="page wrapper uni-bg-white">	
+		<view v-if="studentInfo.province==''">
+			<view class="uni-title">选择您的高考省份</view>
+			
+		</view>
+		<view class="intelligent-filling">			
+			<view class="uni-padding-wrap uni-common-mt">
+				<form @submit="formSubmit" @reset="formReset">
+					<view class="uni-list-cell">
+						<view class="uni-list-cell-left">
+							选择生源地
+						</view>
+						<view class="uni-list-cell-db">
+							<picker @change="bindPickerChange" :value="index" :range="array" range-key="name" name="location">
+								<view style="text-align: right;">{{array[index].name}}</view>
+							</picker>
+						</view>
+						<view class="mr20">
+							<uni-icons type="arrowright" size="18" />
+						</view>
+					</view>
+					<view class="uni-list-cell">
+						<view class="uni-list-cell-left">高考总分</view>
+						<input class="uni-list-cell-db" type="number" name="score" style="text-align: right;" />
+						<text class="i-label">分</text>
+					</view>
+					<view class="uni-list-cell">
+						<view class="uni-list-cell-left">全省排名(非必填)</view>
+						<input class="uni-list-cell-db" type="number" name="ranking" style="text-align: right;" />
+						<text class="i-label">名</text>
+					</view>
+					<view class="uni-row uni-jcenter subject mt20">
+						<button type="default">文科</button>
+						<button type="default">理科</button>
+					</view>
+					<view class="uni-form-item uni-column">
+						<view class="title">选择查询方式</view>
+						<radio-group name="query" class="uni-flex uni-column fill-radio">
+							<label class="uni-flex-item">
+								<radio value="fschool" /><text>院校优先填报</text>
+							</label>
+							<label class="uni-flex-item">
+								<radio value="fspecialities" /><text>专业优先填报</text>
+							</label>
+							<label class="uni-flex-item">
+								<radio value="fexpert" /><text>找专家填志愿</text>
+							</label>
+						</radio-group>
+					</view>
+					<view class="uni-btn-v uni-column uni-acenter">
+						<button class="fill-sub" form-type="submit">立即查询</button>
+					</view>
+				</form>
+			</view>			
+		</view>        
+    </view>
+</template>
+<script>
+    // TODO 修复Android v3 加载过慢问题
+    // #ifdef APP-PLUS
+    var domModule = weex.requireModule('dom');
+    domModule.addRule('fontFace', {
+        'fontFamily': "uniicons",
+        'src': "url('/static/uni.ttf')"
+    });
+    // #endif
+	var  graceChecker = require("../../common/graceChecker.js");
+    export default {
+        data() {
+            return {
+				schoolUrl:'../school/schoolList',
+				loginUrl:'../login/login',
+				studentInfo:{},
+				provinceList:[
+					{id:'beijing',name:'北京'},
+					{id:'tianjin',name:'天津'},
+					{id:'hebei',name:'河北'},
+					{id:'shanxi',name:'山西'},
+					{id:'neimenggu',name:'内蒙古'},
+					{id:'liangning',name:'辽宁'},
+					{id:'jilin',name:'吉林'},
+					{id:'heilongjiang',name:'黑龙江'},
+					{id:'shanghai',name:'上海'},
+					{id:'jiangsu',name:'江苏'},
+					{id:'zhejiang',name:'浙江'},
+					{id:'anhui',name:'安徽'},
+					{id:'fujian',name:'福建'},
+					{id:'jiangxi',name:'江西'},
+					{id:'shandong',name:'山东'},
+					{id:'henan',name:'河南'},
+					{id:'hubei',name:'湖北'},
+					{id:'hunan',name:'湖南'},
+					{id:'guangdong',name:'广东'},
+					{id:'guangxi',name:'广西'},
+					{id:'hainan',name:'海南'},
+					{id:'chongqing',name:'重庆'},
+					{id:'sichuan',name:'四川'},
+					{id:'guizhou',name:'贵州'},
+					{id:'yunnan',name:'云南'},
+					{id:'xizang',name:'西藏'},
+					{id:'shanxi',name:'陕西'},
+					{id:'gansu',name:'甘肃'},
+					{id:'qinghai',name:'青海'},
+					{id:'ningxia',name:'宁夏'},
+					{id:'xinjiang',name:'新疆'},
+				]
+            }
+        },
+		computed: {
+			studentInfo = {
+				province:'',
+				score:null,
+				ranking:null,
+				subject:''
+			}
+		},
+        methods: {			
+			formSubmit: function(e) {
+				var t = this;
+				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
+			    //定义表单规则
+			    var rule = [
+			        {name:"score", checkType : "between", checkRule:"0,750",  errorMsg:"请填写正确的分数"},			        
+			        {name:"query", checkType : "in", checkRule:"fschool,fspecialities,fexpert",  errorMsg:"请选择查询条件"}
+			    ];
+			    //进行表单检查
+			    var formData = e.detail.value;
+			    var checkRes = graceChecker.check(formData, rule);
+			    if(checkRes){
+			        //uni.showToast({title:"验证通过!", icon:"none"});
+					console.log(formData.query);
+					switch (formData.query){						
+						case 'fschool':
+							uni.navigateTo({
+								url:'../../school/schoolList'
+							});
+							break;
+						case 'fspecialities':
+							uni.navigateTo({
+								url:'../../specialities/specialitiesList'
+							});
+							break;
+						case 'fexpert':
+							uni.navigateTo({
+								url:t.schoolUrl
+							});
+							break;
+					}
+			    }else{
+			        uni.showToast({ title: graceChecker.error, icon: "none" });
+			    }
+			},
+			formReset: function(e) {
+				console.log('清空数据')
+			},
+			bindPickerChange: function(e) {
+				console.log('picker发送选择改变，携带值为：' + e.detail.value)
+				this.index = e.detail.value
+			},
+		}
+    }
+</script>
+
+<style>
+    @import '../../../common/uni-nvue.css';
+	.index-img{width: 100%;border-radius: 20rpx;}
+	.i-links{width: 100%;height: 100rpx;justify-content: space-between;}
+	.top-btn{width: 48%;margin: 0;border-width: 0;background-color: #c4c4c4;color: #fff;line-height: 100rpx;}
+	.top-btn::after{border-width: 0;}
+	.intelligent-filling{border-width: 2rpx;border-style: solid;border-color: #C4C4C4;border-radius: 8rpx;margin-top: 36rpx;}
+	.fill-radio label{padding-top: 20rpx;}
+	.fill-radio radio{margin: 0 20rpx 0 30rpx;}
+	.fill-sub{width: 60%;}
+	.i-label{margin: 0 20rpx;}
+</style>

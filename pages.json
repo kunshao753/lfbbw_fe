@@ -98,6 +98,12 @@
 			}
 		},
 		{
+			"path": "pages/userinfo/studentinfo",
+			"style": {
+				"navigationBarTitleText": "高考模拟志愿填报"
+			}
+		},
+		{
 			"path": "pages/component/view/view",
 			"style": {
 				"navigationBarTitleText": "view"
