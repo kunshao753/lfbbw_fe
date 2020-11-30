@@ -1,0 +1,442 @@
+<template>
+	<view class="page">
+		<view class="wrapper uni-bg-white">
+		
+			<tabbar id="tabBar"  class="cur-tab  uni-bg-white"  :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>
+			
+		
+			<swiper :current="tabIndex" class="swiper-box"  :duration="300" @change="ontabchange">
+				<swiper-item class="swiper-item" catchtouchmove='catchTouchMove'>
+					
+		   <view  class="cur-title uni-inline-item uni-jcenter"><text>北京大学</text></view>
+			 <view  class="uni-inline-item uni-jcenter ">
+				 <image class="sd-addressicon" src="../../static/location.png"></image>
+				 <text>北京市</text>
+				</view>
+				
+				<!-- 圆弧进度条 -->
+		   <view class="qiun-charts3">
+				 <canvas canvas-id="canvasArcbar3" id="canvasArcbar3" class="charts3"></canvas>
+				 <button @click="goDetail()">院校详情</button>
+			 </view>
+			 
+			 <!-- 折线数据 -->
+		   <view class="score-info">
+				 
+				 
+				 <scroll-view class="select-chart-info" scroll-x="true" enable-flex="true" show-scrollbar="false">
+							<text v-for="(item,index) in scoreInfoData"
+							:key="index" 
+							@click="scoreInfoClick(item.data,index)" 
+							:class="{'select':index==lineChartCurSelectIndex}">
+							{{item.name}}
+							</text>	
+				 </scroll-view>
+				 
+				 
+				 <!-- 折线图 start -->
+				  <view class="qiun-columns">
+				  		<view class="qiun-charts" >
+				  			<canvas canvas-id="canvasLineA" id="canvasLineA" class="chartsLine" disable-scroll=true @touchstart="touchLineA" @touchmove="moveLineA" @touchend="touchEndLineA"></canvas>
+				  		</view>
+				  	</view>
+						<!-- 折线图 end -->
+			 </view>
+			 
+			 </swiper-item>
+			  <swiper-item catchtouchmove='catchTouchMove'>
+			       专业录取概率内容<br/>
+						 专业录取概率内容<br/>
+						 专业录取概率内容<br/>
+						 专业录取概率内容<br/>
+			  </swiper-item>
+				
+			 </swiper>
+			 
+		  
+			 </view> 
+	</view>
+</template>
+
+<script>
+	import tabbar from '../component/tabbar/tabbar.vue'
+	import uCharts from '../../components/u-charts/u-charts.js'
+	var _self;
+	var canvasObj = {};
+	const arcbarData={
+    "series": [
+        {
+            "name": "录取概率",
+            "data": 0.85,
+            "color": "#1890ff"
+        }
+    ]
+}
+
+
+
+	export default {
+		data(){
+			return{
+				// 顶部tab索引
+				    tabIndex: 0,
+				    // 顶部tab数据
+				        tabBars: [{
+				            name: '学校录取概率',
+				            tag: 'schools'
+				        }, {
+				            name: '专业录取概率',
+				            tag: 'majors'
+				        }],
+					
+					
+					 cWidth3: '', //圆弧进度图
+					 cHeight3: '', //圆弧进度图
+					 arcbarWidth: '', //圆弧进度图，进度条宽度,此设置可使各端宽度一致
+					 gaugeWidth: '', //仪表盘宽度,此设置可使各端宽度一致
+					 tips: '',
+					 pixelRatio: 1,
+					 serverData: '',
+					 
+					 
+					 cWidth:'',// 折线图
+					 cHeight:'',// 折线图
+					 
+					
+					 //折线图数据当前选中索引
+					 lineChartCurSelectIndex:0,
+					 
+					 
+					 //圆形进度图数据
+					 arcbarData:{
+					     "series": [
+					         {
+					             "name": "录取概率",
+					             "data": 0.85,
+					             "color": "#1890ff"
+					         }
+					     ]
+					 },
+					 //折线图类型选择数据
+					 scoreInfoData:[
+						 {
+						     name: '历年录取分数',
+						     tag: 'score',
+								 data:{
+										categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
+										series: [{
+											name: '分数',
+											data: [35, 20, 25, 37, 4, 20],
+											color: '#1890ff'
+										}]
+									 }
+						 }, {
+						     name: '历年录取位次',
+						     tag: 'rank',
+								 data:{
+									categories: ['2015', '2018', '5017', '2045', '3016', '2018'],
+									series: [{
+										name: '位次',
+										data: [35, 20, 25, 37, 4, 20],
+										color: '#00ff00'
+									}]
+								 }
+						 }, {
+						     name: '历年录取人数',
+						     tag: 'count',
+								 data:{
+										categories: ['2020', '2023', '2028', '3015', '2816', '200927'],
+										series: [{
+											name: '人数',
+											data: [23, 6,39, 29,9, 40],
+											color: '#ff00ff'
+										}]
+									 }
+						 }],
+				
+				
+				
+			}
+		},
+		components:{
+			tabbar
+		},
+			onLoad(option) {
+				 console.log(option.showTab);
+				 if(option.showTab){
+				    this.tabIndex=this.tabBars.findIndex(item=>item.tag == option.showTab)
+				 }
+				
+					// uCharts
+					_self = this;
+					//#ifdef MP-ALIPAY
+					uni.getSystemInfo({
+						success: function(res) {
+							if (res.pixelRatio > 1) {
+								//正常这里给2就行，如果pixelRatio=3性能会降低一点
+								//_self.pixelRatio =res.pixelRatio;
+								_self.pixelRatio = 2;
+							}
+						}
+					});
+					//#endif
+					
+					this.cWidth3 = uni.upx2px(400);
+					this.cHeight3 = uni.upx2px(400);
+					this.arcbarWidth = uni.upx2px(24);
+					this.gaugeWidth = uni.upx2px(30);
+					
+					
+					this.cWidth = uni.upx2px(750);
+					this.cHeight = uni.upx2px(400);
+					
+					// //this.fillData(Data);
+					
+				},
+				onReady() {
+					this.getServerData();
+				},
+			
+			methods:{
+				     // tabbar点击切换
+				      ontabtap(index) {				
+				          //let index = e.target.dataset.current || e.currentTarget.dataset.current;
+				          this.switchTab(index);
+				      },
+				      ontabchange(e) {
+				          let index = e.target.current || e.detail.current;
+				          this.switchTab(index);
+				      },
+				      switchTab(index) {
+								console.log(index)
+								
+								if (this.tabIndex === index) {
+								    return;
+								}
+								
+								
+								
+								this.tabIndex = index;
+								uni.pageScrollTo({
+									scrollTop:0,
+									duration:0
+								})
+								
+							},
+							clearTabData(e) {
+							    
+							},
+							// 阻止swiper用户手动滑动
+							  catchTouchMove:function(res){
+							    return false
+							  },
+							//获取进度条数据
+							getServerData() {
+								uni.showLoading({
+									title: "正在加载数据..."
+								})
+								uni.request({
+									url: 'https://unidemo.dcloud.net.cn/hello-uniapp-ucharts-data.json',
+									data: {},
+									success: function(res) {
+										_self.fillData(res.data);
+									},
+									fail: () => {
+										_self.tips = "网络错误，小程序端请检查合法域名";
+									},
+									complete() {
+										uni.hideLoading();
+									}
+								});
+							},
+							
+							fillData(data) {
+								
+								this.serverData = data;
+								this.tips = data.tips;
+								
+								let Arcbar3 = {
+									series: []
+								};
+							
+								let LineA = {
+									categories: [],
+									series: []
+								};
+								
+								Arcbar3.series = this.arcbarData.series;
+								LineA.categories = this.scoreInfoData[0].data.categories;
+								LineA.series =  this.scoreInfoData[0].data.series;
+								
+								this.showArcbar3("canvasArcbar3", Arcbar3);
+								this.showLineA("canvasLineA", LineA);
+			      	},
+							//圆弧进度条
+							showArcbar3(canvasId, chartData) {
+								new uCharts({
+									$this: _self,
+									canvasId: canvasId,
+									type: 'arcbar',
+									fontSize: 11,
+									title: {
+										name: Math.round(chartData.series[0].data * 100) + '%',
+										color: '#333',
+										fontSize: 40 * _self.pixelRatio,
+										offsetY:-20* _self.pixelRatio,
+									},
+									subtitle: {
+										name: chartData.series[0].name,
+										color: '#ccc',
+										fontSize: 12 * _self.pixelRatio,
+										offsetY:-20* _self.pixelRatio,
+									},
+									extra: {
+										arcbar: {
+											type: 'circle', //整圆类型进度条图
+											width: _self.arcbarWidth * _self.pixelRatio,//圆弧的宽度
+											startAngle: 1 ,//整圆类型只需配置起始角度即可
+										}
+									},
+									background: '#FFFFFF',
+									pixelRatio: _self.pixelRatio,
+									series: chartData.series,
+									animation: true,
+									width: _self.cWidth3 * _self.pixelRatio,
+									height: _self.cHeight3 * _self.pixelRatio,
+									dataLabel: true,
+								});
+							
+							},
+							//显示折线图
+							showLineA(canvasId, chartData) {
+								canvasObj[canvasId] = new uCharts({
+									$this: _self,
+									canvasId: canvasId,
+									type: 'line',
+									fontSize: 11,
+									padding:[15,15,0,15],
+									legend:{
+										show:false,
+										padding:5,
+										lineHeight:11,
+										margin:5,
+									},
+									dataLabel: false,
+									dataPointShape: false,
+									pixelRatio: _self.pixelRatio,
+									categories: chartData.categories,
+									series: chartData.series,
+									animation: true,
+									duration:300,
+									enableScroll: true, //开启图表拖拽功能
+									xAxis: {
+										disableGrid: true,
+										type: 'grid',
+										gridType: 'dash',
+										itemCount: 5, 
+										//scrollShow: true, 
+										scrollAlign: 'left',
+										calibration:false,
+										
+										//scrollBackgroundColor:'#F7F7FF',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条背景颜色,默认为 #EFEBEF
+										//scrollColor:'#DEE7F7',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条颜色,默认为 #A6A6A6
+									},
+									yAxis: {
+										disabled:true,
+										disableGrid: true,
+										gridType: 'dash',
+										//splitNumber: 8,
+										//min: 10,
+										//max: 180,
+										// format: (val) => {
+										// 	return val.toFixed(0) + '元'
+										// } //如不写此方法，Y轴刻度默认保留两位小数
+									},
+									width: _self.cWidth * _self.pixelRatio,
+									height: _self.cHeight * _self.pixelRatio,
+									dataLabel: true,
+									dataPointShape: true,
+									extra: {
+										lineStyle: 'straight'
+									},
+								});
+							
+							},
+							touchLineA(e) {
+								canvasObj['canvasLineA'].scrollStart(e);
+							},
+							moveLineA(e) {
+								canvasObj['canvasLineA'].scroll(e);
+							},
+							touchEndLineA(e) {
+								canvasObj['canvasLineA'].scrollEnd(e);
+								//下面是toolTip事件，如果滚动后不需要显示，可不填写
+								canvasObj['canvasLineA'].showToolTip(e, {
+									format: function(item, category) {
+										return category + ' ' + item.name + ':' + item.data
+									}
+								});
+							},
+							// 跳转到院校详情
+							goDetail(data) {
+							          let detail = {
+							          	title: data.title,
+							          	id: data.id
+							          };
+							          uni.navigateTo({
+							              url: './schoolDetail?paramaDate=' + encodeURIComponent(JSON.stringify(detail))
+							          });
+							          
+							}, 
+							//折线图数据切换点击事件
+							scoreInfoClick(data,index){
+								console.log(data);
+								this.lineChartCurSelectIndex=index;
+								this.showLineA("canvasLineA", data);
+								
+							},
+			}
+		
+		
+	}
+</script>
+
+<style scoped>
+	 .cur-tab{position: fixed;left: 0;top: 0;right: 0; z-index:999;padding: 0 20rpx;  padding-bottom: 8rpx;}
+	 .cur-tab /deep/ .uni-tab-item {margin-left: 60rpx; margin-right: 60rpx;flex-grow:1;}
+	 .cur-title{font-size: 38rpx;margin-top: 20rpx;}
+	 .sd-addressicon{width: 60rpx;height: 60rpx;}
+	 /* 圆弧进度样式 */
+	 .qiun-charts3 {
+		position:relative;
+	 	height: 400rpx;
+	 	background-color: #FFFFFF;
+	  margin-top: 20rpx;
+	  margin-bottom: 60rpx;
+	 }
+	 .qiun-charts3 /deep/ button{position: absolute;
+	     left:50%;
+			 transform: translateX(-50%);
+			 bottom: 88rpx;
+	     height: 60rpx;
+	     line-height: 60rpx;
+	     font-size: 28rpx; 
+		}
+	 .charts3 {
+	 	margin: 0 auto;
+	 	width: 400rpx;
+	 	height: 400rpx;
+	 	background-color: #FFFFFF;
+	 }
+	 
+	 .qiun-charts{ margin-bottom: 100rpx;}
+	 .chartsLine{height: 400rpx;}
+	 
+	 .score-info{border-top:1px solid #ccc; }
+	 .select-chart-info /deep/{ height: 60rpx; margin-bottom: 48rpx; margin-top: 24rpx; flex-direction: row;}
+	 .select-chart-info text{ background: #eee;height: 60rpx;line-height: 60rpx;padding: 0 24rpx;margin-right: 24rpx;border-radius: 16rpx; text-align: center; flex: 1 0 auto;}
+	 .select-chart-info text:last-of-type{ margin-right: 0; }
+	 .select-chart-info text.select{color: #fff; background: #ccc;}
+	 
+	 .swiper-box{min-height: 100vh;margin-top: 58rpx;}
+</style>
