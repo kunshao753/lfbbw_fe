@@ -15,6 +15,10 @@
 			<button class="top-btn" @tap="goSchool()">学校信息</button>
 			<button class="top-btn" @tap="goSpecialities()">专业信息</button>
 		</view>
+		<view class="uni-flex i-links uni-common-mt">
+			<button class="top-btn" @tap="goProbability('schools')">院校录取概率</button>
+			<button class="top-btn" @tap="goProbability('majors')">专业录取概率</button>
+		</view>
 		<view class="intelligent-filling">
 			<view class="uni-row uni-jcenter subject mt20">
 				<button type="default">文科</button>
@@ -240,6 +244,12 @@
 			goStudentInfo(){
 				uni.navigateTo({
 					url:'../../userinfo/studentinfo'
+				})
+			},
+			goProbability(key){
+				console.log('被点击了')
+				uni.navigateTo({
+					url:'../../probability/probability?showTab='+key
 				})
 			},
 			// examinationTime(stringTime){

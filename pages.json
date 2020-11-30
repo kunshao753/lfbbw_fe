@@ -104,6 +104,13 @@
 			}
 		},
 		{
+			// 院校/专业录取概率
+			"path": "pages/probability/probability",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
 			"path": "pages/component/view/view",
 			"style": {
 				"navigationBarTitleText": "view"

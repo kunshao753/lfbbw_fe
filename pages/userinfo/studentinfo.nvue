@@ -65,7 +65,7 @@
         'src': "url('/static/uni.ttf')"
     });
     // #endif
-	var  graceChecker = require("../../common/graceChecker.js");
+	 var  graceChecker = require("../../common/graceChecker.js");
     export default {
         data() {
             return {
@@ -106,9 +106,9 @@
 					{id:'xinjiang',name:'新疆'},
 				]
             }
-        },
+       },
 		computed: {
-			studentInfo = {
+			studentInfo : {
 				province:'',
 				score:null,
 				ranking:null,
@@ -163,7 +163,7 @@
 </script>
 
 <style>
-    @import '../../../common/uni-nvue.css';
+    @import './../../common/uni-nvue.css';
 	.index-img{width: 100%;border-radius: 20rpx;}
 	.i-links{width: 100%;height: 100rpx;justify-content: space-between;}
 	.top-btn{width: 48%;margin: 0;border-width: 0;background-color: #c4c4c4;color: #fff;line-height: 100rpx;}
