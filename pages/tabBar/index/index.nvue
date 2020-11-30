@@ -19,57 +19,7 @@
 			<button class="top-btn" @tap="goProbability('schools')">院校录取概率</button>
 			<button class="top-btn" @tap="goProbability('majors')">专业录取概率</button>
 		</view>
-		<view class="intelligent-filling">
-			<view class="uni-row uni-jcenter subject mt20">
-				<button type="default">文科</button>
-				<button type="default">理科</button>
-			</view>
-			<view class="uni-padding-wrap uni-common-mt">
-				<form @submit="formSubmit" @reset="formReset">
-					<view class="uni-list-cell">
-						<view class="uni-list-cell-left">
-							选择生源地
-						</view>
-						<view class="uni-list-cell-db">
-							<picker @change="bindPickerChange" :value="index" :range="array" range-key="name" name="location">
-								<view style="text-align: right;">{{array[index].name}}</view>
-							</picker>
-						</view>
-						<view class="mr20">
-							<uni-icons type="arrowright" size="18" />
-						</view>
-					</view>
-					<view class="uni-list-cell">
-						<view class="uni-list-cell-left">高考总分</view>
-						<input class="uni-list-cell-db" type="number" name="score" style="text-align: right;" />
-						<text class="i-label">分</text>
-					</view>
-					<view class="uni-list-cell">
-						<view class="uni-list-cell-left">全省排名</view>
-						<input class="uni-list-cell-db" type="number" name="ranking" style="text-align: right;" />
-						<text class="i-label">名</text>
-					</view>
-					<view class="uni-form-item uni-column">
-						<view class="title">选择查询方式</view>
-						<radio-group name="query" class="uni-flex uni-column fill-radio">
-							<label class="uni-flex-item">
-								<radio value="fschool" /><text>院校优先填报</text>
-							</label>
-							<label class="uni-flex-item">
-								<radio value="fspecialities" /><text>专业优先填报</text>
-							</label>
-							<label class="uni-flex-item">
-								<radio value="fexpert" /><text>找专家填志愿</text>
-							</label>
-						</radio-group>
-					</view>
-					<view class="uni-btn-v uni-column uni-acenter">
-						<button class="fill-sub" form-type="submit">立即查询</button>
-					</view>
-				</form>
-			</view>			
-		</view>
-        <view class="uni-panel" v-for="(item, index) in list" :key="item.id">
+		<view class="uni-panel" v-for="(item, index) in list" :key="item.id">
             <view class="uni-panel-h" :class="item.open ? 'uni-panel-h-on' : ''" @click="triggerCollapse(index)">
                 <text class="uni-panel-text">{{item.name}}</text>
                 <text class="uni-panel-icon uni-icon" :class="item.open ? 'uni-panel-icon-on' : ''">{{item.pages ? '&#xe581;' : '&#xe470;'}}</text>
@@ -103,7 +53,6 @@
 				searchVal: '',
 				schoolUrl:'../../school/schoolList',
 				loginUrl:'../../login/login',
-				array: [{name:'北京'},{name: '河北'}, {name:'河南'}, {name:'天津'}],
 				index: 1,
                 list: [{
                         id: 'view',
@@ -289,50 +238,7 @@
                         url: e.url
                     })
                 }
-            },
-			formSubmit: function(e) {
-				var t = this;
-				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
-			    //定义表单规则
-			    var rule = [
-					{name:"location", checkType : "notnull", checkRule:"",  errorMsg:"请选择生源地"},
-			        {name:"score", checkType : "between", checkRule:"0,750",  errorMsg:"请填写正确的分数"},			        
-			        {name:"query", checkType : "in", checkRule:"fschool,fspecialities,fexpert",  errorMsg:"请选择查询条件"}
-			    ];
-			    //进行表单检查
-			    var formData = e.detail.value;
-			    var checkRes = graceChecker.check(formData, rule);
-			    if(checkRes){
-			        //uni.showToast({title:"验证通过!", icon:"none"});
-					console.log(formData.query);
-					switch (formData.query){						
-						case 'fschool':
-							uni.navigateTo({
-								url:'../../school/schoolList'
-							});
-							break;
-						case 'fspecialities':
-							uni.navigateTo({
-								url:'../../specialities/specialitiesList'
-							});
-							break;
-						case 'fexpert':
-							uni.navigateTo({
-								url:t.schoolUrl
-							});
-							break;
-					}
-			    }else{
-			        uni.showToast({ title: graceChecker.error, icon: "none" });
-			    }
-			},
-			formReset: function(e) {
-				console.log('清空数据')
-			},
-			bindPickerChange: function(e) {
-				console.log('picker发送选择改变，携带值为：' + e.detail.value)
-				this.index = e.detail.value
-			},
+            },			
 		}
     }
 </script>

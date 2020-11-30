@@ -904,7 +904,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"志愿瓶","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1936,9 +1936,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!***************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/store/index.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/store/index.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2021,9 +2021,9 @@ store;exports.default = _default;
 /***/ }),
 
 /***/ 1110:
-/*!**********************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/common/html-parser.js ***!
-  \**********************************************************************************/
+/*!****************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/html-parser.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2384,9 +2384,9 @@ parseHtml;exports.default = _default;
 /***/ }),
 
 /***/ 1183:
-/*!******************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/components/uni-icons/icons.js ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-icons/icons.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2537,9 +2537,9 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 13);
 /***/ }),
 
 /***/ 120:
-/*!********************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/components/u-charts/u-charts.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/u-charts/u-charts.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8211,9 +8211,9 @@ if ( true && typeof module.exports === "object") {
 /***/ }),
 
 /***/ 1248:
-/*!******************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/components/uni-popup/popup.js ***!
-  \******************************************************************************************/
+/*!************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-popup/popup.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8246,9 +8246,9 @@ var config = {
 /***/ }),
 
 /***/ 1249:
-/*!********************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/components/uni-popup/message.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-popup/message.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9057,9 +9057,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 1430:
-/*!******************************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/components/uni-swipe-action-item/mpwxs.js ***!
-  \******************************************************************************************************/
+/*!************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-swipe-action-item/mpwxs.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9183,9 +9183,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 1440:
-/*!********************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/components/uni-calendar/util.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-calendar/util.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9546,9 +9546,9 @@ Calendar;exports.default = _default;
 /***/ }),
 
 /***/ 1441:
-/*!************************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/components/uni-calendar/calendar.js ***!
-  \************************************************************************************************/
+/*!******************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/components/uni-calendar/calendar.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11216,9 +11216,9 @@ var index = {
 /***/ }),
 
 /***/ 1517:
-/*!**********************************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/pages/template/component-communication/bus.js ***!
-  \**********************************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages/template/component-communication/bus.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11980,13 +11980,11 @@ Dep.SharedObject.targetStack = [];
 function pushTarget (target) {
   Dep.SharedObject.targetStack.push(target);
   Dep.SharedObject.target = target;
-  Dep.target = target;
 }
 
 function popTarget () {
   Dep.SharedObject.targetStack.pop();
   Dep.SharedObject.target = Dep.SharedObject.targetStack[Dep.SharedObject.targetStack.length - 1];
-  Dep.target = Dep.SharedObject.target;
 }
 
 /*  */
@@ -16755,7 +16753,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"志愿瓶","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -16776,14 +16774,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"志愿瓶","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"志愿瓶","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -16827,14 +16825,13 @@ function cloneWithData(vm) {
   }, ret);
 
   // vue-composition-api
-  var compositionApiState = vm.__composition_api_state__ || vm.__secret_vfa_state__;
-  var rawBindings = compositionApiState && compositionApiState.rawBindings;
+  var rawBindings = vm.__secret_vfa_state__ && vm.__secret_vfa_state__.rawBindings;
   if (rawBindings) {
     Object.keys(rawBindings).forEach(function (key) {
       ret[key] = vm[key];
     });
   }
-
+  
   //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
   Object.assign(ret, vm.$mp.data || {});
   if (
@@ -16869,7 +16866,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"志愿瓶","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -17277,9 +17274,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 22:
-/*!***********************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/common/graceChecker.js ***!
-  \***********************************************************************************/
+/*!*****************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/graceChecker.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -17414,9 +17411,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!***********************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/pages.json ***!
-  \***********************************************************************/
+/*!*****************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/pages.json ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -17425,9 +17422,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 539:
-/*!*********************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/common/permission.js ***!
-  \*********************************************************************************/
+/*!***************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/permission.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17681,9 +17678,9 @@ module.exports = permission;
 /***/ }),
 
 /***/ 584:
-/*!***************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/common/util.js ***!
-  \***************************************************************************/
+/*!*********************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/util.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -17763,9 +17760,9 @@ module.exports = {
 /***/ }),
 
 /***/ 965:
-/*!******************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/common/airport.js ***!
-  \******************************************************************************/
+/*!************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/airport.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -18032,9 +18029,9 @@ module.exports = {
 /***/ }),
 
 /***/ 99:
-/*!************************************************************************************!*\
-  !*** /Users/ndx/Documents/yonglanProject/volunteer-bottle/common/volunteerBase.js ***!
-  \************************************************************************************/
+/*!******************************************************************!*\
+  !*** G:/1.工作/学习/wechat/volunteer-bottle/common/volunteerBase.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
