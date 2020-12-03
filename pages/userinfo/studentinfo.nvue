@@ -70,6 +70,8 @@
 	</view>
 </template>
 <script>
+	 import commonApiPaths from'../../util/api/common.js'
+	
     // TODO 修复Android v3 加载过慢问题
     // #ifdef APP-PLUS
     var domModule = weex.requireModule('dom');
@@ -82,50 +84,32 @@
     export default {
         data() {
             return {
-				schoolUrl:'../school/schoolList',
-				loginUrl:'../login/login',
-				studentInfo:{},
-				provinceList:[
-					{id:'beijing',name:'北京'},
-					{id:'tianjin',name:'天津'},
-					{id:'hebei',name:'河北'},
-					{id:'shanxi',name:'山西'},
-					{id:'neimenggu',name:'内蒙古'},
-					{id:'liangning',name:'辽宁'},
-					{id:'jilin',name:'吉林'},
-					{id:'heilongjiang',name:'黑龙江'},
-					{id:'shanghai',name:'上海'},
-					{id:'jiangsu',name:'江苏'},
-					{id:'zhejiang',name:'浙江'},
-					{id:'anhui',name:'安徽'},
-					{id:'fujian',name:'福建'},
-					{id:'jiangxi',name:'江西'},
-					{id:'shandong',name:'山东'},
-					{id:'henan',name:'河南'},
-					{id:'hubei',name:'湖北'},
-					{id:'hunan',name:'湖南'},
-					{id:'guangdong',name:'广东'},
-					{id:'guangxi',name:'广西'},
-					{id:'hainan',name:'海南'},
-					{id:'chongqing',name:'重庆'},
-					{id:'sichuan',name:'四川'},
-					{id:'guizhou',name:'贵州'},
-					{id:'yunnan',name:'云南'},
-					{id:'xizang',name:'西藏'},
-					{id:'shanxi',name:'陕西'},
-					{id:'gansu',name:'甘肃'},
-					{id:'qinghai',name:'青海'},
-					{id:'ningxia',name:'宁夏'},
-					{id:'xinjiang',name:'新疆'},
-				],
-				showFormInfo:false
+								schoolUrl:'../school/schoolList',
+								loginUrl:'../login/login',
+								studentInfo:{},
+								provinceList:[],
+								showFormInfo:false
             }
        },
 	   onLoad() {
-	   	this.getStudentInfo();
+			 this.getProvinceList();
+	   	 this.getStudentInfo();
 	   },
-        methods: {	
-			//接口获取数据
+     methods: {	
+			//接口获取省份信息
+			async getProvinceList(){
+				const res = await this.$myRequest({
+								url: commonApiPaths.getAreaList
+							})
+							
+							res.data.map(item=>{
+								 this.provinceList.push({
+								          id: item.province_id,
+								          name: item.province_desc
+								        });
+							})							
+			},
+			//接口获取学生信息
 			getStudentInfo:function(){
 				var t = this;
 				t.studentInfo = {

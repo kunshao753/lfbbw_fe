@@ -1,9 +1,12 @@
 {
   "navigationBarTitleText": "院校优先填报",
   "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "uni-icons": "/components/uni-icons/uni-icons",
     "tabbar": "/pages/component/tabbar/tabbar",
     "filter": "/pages/component/filter/filter",
     "school-cell": "/pages/component/schoolcell/schoolcell",
-    "volunteer-list": "/pages/component/volunteerList/volunteerList"
+    "volunteer-list": "/pages/component/volunteerList/volunteerList",
+    "uni-popup-school-list": "/components/uni-popup/uni-popup-school-list"
   }
 }

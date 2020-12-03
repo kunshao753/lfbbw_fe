@@ -150,13 +150,15 @@ form {
 	        align-items: center;
 }
 .filter-box {
-	padding: 28rpx 0 14rpx;
+	 margin: 28rpx 0 14rpx;
+	height: 60rpx;
 }
 .sub-filter {
 	border: 2rpx solid #e0e0e0;
 	-webkit-border-radius: 26rpx;
 	        border-radius: 26rpx;
 	text-align: center;
+	height: 50rpx; 
 	line-height: 50rpx;
 	padding: 0 20rpx;
 	margin-right: 20rpx;
@@ -1806,6 +1808,7 @@ checkbox-group label {
 	-webkit-transform: translateY(50%);
 	        transform: translateY(50%);
 }
+.uni-popup-box{max-height: 90vh;-webkit-border-radius: 20rpx 20rpx 0 0;border-radius: 20rpx 20rpx 0 0;padding: 40rpx 40rpx 0 40rpx;}
 /* 以下样式用于 hello uni-app 演示所需 */
 page {
     background-color: #F4F5F6;

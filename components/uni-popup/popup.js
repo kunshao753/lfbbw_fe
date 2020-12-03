@@ -13,6 +13,8 @@ const config = {
 	dialog:'center',
 	// 分享
 	share:'bottom',
+	//学校优先填报弹层
+	schoolList:'bottom',
 }
 
 export default {
@@ -21,5 +23,5 @@ export default {
 			config:config
 		}
 	},
-	mixins: [message]
+	mixins: [message],
 }

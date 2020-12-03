@@ -104,4 +104,9 @@
 .matching{padding-top: 20rpx;border-top: 2rpx solid #e0e0e0;margin-top: 20rpx;color: #4f4f4f;}
 .matching text{color: #000;font-weight: bold;margin-right: 30rpx;margin-left: 10rpx;}
 .sd-addressicon{width: 40rpx;height: 40rpx;}
+.uni-flex.uni-acenter{ -webkit-flex-wrap: wrap; flex-wrap: wrap;-webkit-box-orient: horizontal;-webkit-box-direction: normal;-webkit-flex-direction: row;flex-direction: row;}
+.schoolitem{-webkit-flex-basis: 44%;flex-basis: 44%;-webkit-box-orient: horizontal;-webkit-box-direction: normal;-webkit-flex-direction: row;flex-direction: row; -webkit-box-pack:left; -webkit-justify-content:left; justify-content:left; padding-right: 2%;}
+.schoolitem:nth-of-type(2n){-webkit-flex-basis: 56%;flex-basis: 56%;}
+.schoolitem .tag{ color: #ccc;padding-right: 10rpx;}
+.schoolitem:nth-of-type(2n) .tag{-webkit-flex-basis: 67%;flex-basis: 67%;}
 

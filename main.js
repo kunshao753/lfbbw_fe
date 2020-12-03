@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App'
 
 import store from './store'
+import { myRequest } from './util/myRequest.js'
+
+
 
 Vue.config.productionTip = false
 
@@ -13,6 +16,10 @@ Vue.prototype.$backgroundAudioData = {
 }
 Vue.prototype.$adpid = "1111111111"
 
+Vue.prototype.$myRequest = myRequest
+
+
+
 App.mpType = 'app'
 
 const app = new Vue({
@@ -20,3 +27,4 @@ const app = new Vue({
 	...App
 })
 app.$mount()
+

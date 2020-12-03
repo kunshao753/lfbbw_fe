@@ -15,19 +15,25 @@
 					<view class="school-r uni-flex-item">
 						<view class="uni-flex uni-space-between">
 							<text class="uni-title" v-text="newsitem.title"></text>
-							<text class="uni-title">{{newsitem.score}}分</text>
+							
+							<view class="uni-flex uni-acenter mt10">
+								<image class="sd-addressicon" src="../../../static/location.png"></image>
+								<text>{{newsitem.location}}市</text>
+							</view>
+							<!-- <text class="uni-title">{{newsitem.score}}分</text> -->
 						</view>
 						<view class="uni-flex uni-space-between">
 							<view class="uni-flex uni-row">
 								<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag"></text>
 							</view>
-							<text>{{newsitem.percent}}</text>
+						<!-- 	<text>{{newsitem.percent}}</text> -->
 						</view>
-						<view class="uni-flex uni-acenter mt10">
+						<!-- <view class="uni-flex uni-acenter mt10">
 							<image class="sd-addressicon" src="../../../static/location.png"></image>
 							<text>{{newsitem.location}}</text>
-						</view>
-					</view>					
+						</view> -->
+							<view class="uni-flex uni-acenter mt10">	
+					    </view>					
 				</view>
 				<view class="uni-inline-item uni-jcenter matching">匹配专业<text>10</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
 			</view>
@@ -46,18 +52,42 @@
 				<view class="school-r uni-flex-item">
 					<view class="uni-flex uni-space-between title-box">
 						<text class="uni-title" v-text="newsitem.title"></text>
-						<text class="uni-title">{{newsitem.score}}分</text>
+						<view class="uni-flex uni-acenter mt10">
+							<image class="sd-addressicon" src="../../../static/location.png"></image>
+							<text>{{newsitem.location}}市</text>
+						</view>
+						<!-- <text class="uni-title">{{newsitem.score}}分</text> -->
 					</view>
 					<view class="uni-flex uni-space-between">
 						<view class="uni-flex uni-row">
 							<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag"></text>
 						</view>
-						<text>{{newsitem.percent}}</text>
+					<!-- 	<text>{{newsitem.percent}}</text> -->
 					</view>
-					<view class="uni-flex uni-acenter mt10">
+					<!-- <view class="uni-flex uni-acenter mt10">
 						<image class="sd-addressicon" src="../../../static/location.png"></image>
 						<text>{{newsitem.location}}</text>
-					</view>
+					</view> -->
+					  <view class="uni-flex uni-acenter mt10">
+							<view class="schoolitem">
+																<text class="tag">录取概率</text>
+																<text>{{newsitem.percent}}</text>
+							</view>
+							<view class="schoolitem">
+																<text class="tag">{{thisYear}}年最低次位</text>
+																<text>{{newsitem.lowestRank}}</text>
+							</view>
+							<view class="schoolitem">
+																<text class="tag">录取批次</text>
+																<text>{{newsitem.batch}}</text>
+							</view>
+							  <view class="schoolitem">
+							  									<text class="tag">{{thisYear}}年最低分</text>
+							  									<text>{{newsitem.score}}分</text>
+							  </view>
+						
+							
+						</view>
 				</view>
 				
 			</view>
@@ -85,8 +115,12 @@
 		},
 		data(){
 			return{
+				thisYear:'',
 				
 			}
+		},
+		created(){
+			 this.thisYear=new Date().getFullYear();
 		},
 		methods:{
 			loadMore(){
@@ -191,4 +225,9 @@
 	.matching{padding-top: 20rpx;border-top: 2rpx solid #e0e0e0;margin-top: 20rpx;color: #4f4f4f;}
 	.matching text{color: #000;font-weight: bold;margin-right: 30rpx;margin-left: 10rpx;}
 	.sd-addressicon{width: 40rpx;height: 40rpx;}
+	.uni-flex.uni-acenter{ flex-wrap: wrap;flex-direction: row;} 
+	.schoolitem{flex-basis: 44%;flex-direction: row; justify-content:left; padding-right: 2%;}
+	.schoolitem:nth-of-type(2n){flex-basis: 56%;}
+	.schoolitem .tag{ color: #ccc;padding-right: 10rpx;}
+	.schoolitem:nth-of-type(2n) .tag{flex-basis: 67%;}
 </style>
