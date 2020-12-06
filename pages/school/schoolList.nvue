@@ -40,11 +40,7 @@
 	import filter from '../component/filter/filter.vue'
 	import schoolCell from '../component/schoolcell/schoolcell.vue'
 	import volunteerList from '../component/volunteerList/volunteerList.vue'
-	
-	
-	import uniPopup from '@/components/uni-popup/uni-popup.vue'
-	import uniPopupSchoolList from '@/components/uni-popup/uni-popup-school-list.vue'
-	
+		
 	import commonApiPaths from'../../util/api/common.js'
 	
 	
@@ -198,9 +194,7 @@ batch:"本科一批",
         	tabbar,
 					filter,
 					schoolCell,
-					volunteerList,
-					uniPopup,
-					uniPopupSchoolList,
+					volunteerList
         },
 		onLoad() {
 			

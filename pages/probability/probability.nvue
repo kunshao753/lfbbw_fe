@@ -7,7 +7,7 @@
 		
 			<swiper :current="tabIndex" class="swiper-box"  :duration="300" @change="ontabchange">
 				<swiper-item class="swiper-item" catchtouchmove='catchTouchMove'>
-					
+			<scroll-view scroll-y="true" class="scroll">		
 		   <view  class="cur-title uni-inline-item uni-jcenter"><text>北京大学</text></view>
 			 <view  class="uni-inline-item uni-jcenter ">
 				 <image class="sd-addressicon" src="../../static/location.png"></image>
@@ -42,19 +42,56 @@
 				  	</view>
 						<!-- 折线图 end -->
 			 </view>
-			 
+			 </scroll-view>
 			 </swiper-item>
 			  <swiper-item catchtouchmove='catchTouchMove'>
-			       专业录取概率内容<br/>
-						 专业录取概率内容<br/>
-						 专业录取概率内容<br/>
-						 专业录取概率内容<br/>
+					  <scroll-view scroll-y="true" class="scroll">	
+			       <view class="majors-outers">
+							    <view class="item gray"><text>专业10</text><text>录取概率</text></view>
+							    <view class="item" v-for="(item,index) in majorsData" @click="openPopup(item)"><text>{{item.name}}</text><text>{{item.probability}}%</text></view>													
+						 </view>
+						 </scroll-view>	
 			  </swiper-item>
 				
 			 </swiper>
 			 
 		  
-			 </view> 
+			 </view>
+				
+				
+		
+		<!-- majorsPopup start -->
+		<uni-popup ref="majorsPopup" type="bottom" :animation="true">
+			<view class="uni-popup-box  uni-bg-white">
+					 <uni-icons type="closeempty"  class="close" @click="closePopup"></uni-icons>
+					 <view class="majors-popup-title"><text class="uni-share-title-text">{{curSelectedMajorsData.name}}</text></view>
+					<view class="majors-popup-sub-title"><text class="dot">·</text><text>专业招生历年统计</text></view>
+					<scroll-view class="majors-popup-content"  scroll-y="true" enable-flex="true" show-scrollbar="false">
+						   <view v-if="curSelectedMajorsData.statistics" class="infos">
+								 <view class="item gray">
+									 <text>年份</text>
+									 <text>录取人数</text>
+									 <text>最低分</text>
+									 <text>最低次位</text>
+								</view>
+							    <view class="item" v-for="(item,index) in curSelectedMajorsData.statistics">
+										 <text>{{item.year}}</text>
+										 <text>{{item.count}}</text>
+										 <text>{{item.lowest_score}}</text>
+										 <text>{{item.lowest_order}}</text>
+									</view>
+									 
+							 </view>
+					</scroll-view>
+					 <view class="majors-popup-button-box">
+							<view class="button-item-box left"><button class="uni-share-button reset" @click="checkDetails()">查看专业详情</button></view>
+							<view class="button-item-box right"><button class="uni-share-button" @click="addVolunteer()">加为备选志愿</button></view>
+					 </view>
+				</view>
+		</uni-popup>
+		<!-- majorsPopup end-->		
+				
+				
 	</view>
 </template>
 
@@ -153,10 +190,58 @@
 										}]
 									 }
 						 }],
-				
-				
+				//专业录取概率
+				majorsData:[
+					{
+						majorsId:1,
+						name:'财政学',
+						probability:98,
+						statistics:[{
+							year:2020,
+							count:2,
+							lowest_score:679,
+							lowest_order:1220
+						},{
+							year:2020,
+							count:2,
+							lowest_score:679,
+							lowest_order:1220
+						},{
+							year:2020,
+							count:2,
+							lowest_score:679,
+							lowest_order:1220
+						}]		
+					},
+					{
+						majorsId:2,
+						name:'xx学',
+						probability:68,
+						statistics:[{
+							year:2020,
+							count:2,
+							lowest_score:679,
+							lowest_order:1220
+						}]	
+					},
+					{
+						majorsId:3,
+						name:'财政学',
+						probability:98,
+						statistics:[]
+					},
+					{
+						majorsId:4,
+						name:'xx学',
+						probability:68,
+						statistics:[]
+					}
+				],
+				//当前选中的专业数据
+				curSelectedMajorsData:{},
 				
 			}
+				
 		},
 		components:{
 			tabbar
@@ -395,6 +480,30 @@
 								this.showLineA("canvasLineA", data);
 								
 							},
+							//popup相关事件
+							openPopup(obj){
+								 this.$refs.majorsPopup.open()
+								 this.curSelectedMajorsData=obj
+							},
+							closePopup(){
+								this.$refs.majorsPopup.close()
+							},
+							//查看专业详情
+							checkDetails(){
+								uni.showToast({
+									title:'查看专业详情',
+									icon:'none'
+								})
+								
+							},
+							//加为备选志愿
+							addVolunteer(){
+								uni.showToast({
+									title:'添加成功',
+									icon:'none'
+								})
+								
+							},
 			}
 		
 		
@@ -438,5 +547,27 @@
 	 .select-chart-info text:last-of-type{ margin-right: 0; }
 	 .select-chart-info text.select{color: #fff; background: #ccc;}
 	 
-	 .swiper-box{min-height: 100vh;margin-top: 58rpx;}
+	 .swiper-box{min-height: 100vh;}
+	 .scroll{
+	         height: 100%;margin-top: 58rpx;
+	 }
+	 
+	 .majors-outers >  .item{ flex-direction: row; justify-content: space-between; height: 100rpx; line-height: 100rpx; border-bottom:1px solid #ccc;}
+	  .majors-outers {margin-bottom: 200rpx;}
+	  .majors-outers >  .item.gray{color: #828282; border-bottom:none; line-height: 50rpx; height: 50rpx; margin-top: 34rpx;}
+		
+		
+		.majors-popup-title{font-size: 36rpx;text-align: center; margin-bottom: 30rpx;}
+		.majors-popup-content{ max-height:60vh; }
+		.infos{margin-bottom: 20rpx;}
+		.infos > .item{ flex-direction: row; justify-content: space-between; height: 80rpx; line-height: 80rpx; }
+		.infos > .item.gray{color: #828282;}
+		.majors-popup-button-box{border-top: 1px solid #ccc;justify-content: space-between; flex-flow: row;height: 148rpx;
+        align-items: center;}
+		.majors-popup-button-box .uni-share-button{font-size: 30rpx; color: #fff; background-color: #c4c4c4;    height: 80rpx;
+		  line-height: 80rpx;
+		  width: 320rpx;}
+		.majors-popup-button-box .uni-share-button.reset{ background: #fff;color: #000; border:1rpx solid #BDBDBD ;}
+		.majors-popup-sub-title{flex-direction: row;justify-content: flex-start;align-items: center;line-height: 40rpx;}
+		.dot{ font-size: 44rpx; color: #c4c4c4; padding-right: 10rpx;}
 </style>
