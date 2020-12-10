@@ -6,7 +6,6 @@
     "tabbar": "/pages/component/tabbar/tabbar",
     "filter": "/pages/component/filter/filter",
     "school-cell": "/pages/component/schoolcell/schoolcell",
-    "volunteer-list": "/pages/component/volunteerList/volunteerList",
-    "uni-popup-school-list": "/components/uni-popup/uni-popup-school-list"
+    "volunteer-list": "/pages/component/volunteerList/volunteerList"
   }
 }
