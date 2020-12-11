@@ -10,10 +10,14 @@
 			<image class="index-img" src="../../../static/shuijiao.jpg"></image>
 		</view>
 		<!-- top img end -->
-		<view><button @tap="goStudentInfo()">录入成绩</button></view>
+		
 		<view class="uni-flex i-links uni-common-mt">
-			<button class="top-btn" @tap="goSchool()">学校信息</button>
-			<button class="top-btn" @tap="goSpecialities()">专业信息</button>
+			<button class="top-btn" @tap="goStudentInfo()">录入成绩</button>
+			<button class="top-btn" @tap="goSpecialities()">专业选择</button>
+		</view>
+		<view class="uni-flex i-links uni-common-mt">
+			<button class="top-btn" @tap="goSchool('schools')">学校优先填报</button>
+			<button class="top-btn" @tap="goSchool('specialities')">专业优先填报</button>
 		</view>
 		<view class="uni-flex i-links uni-common-mt">
 			<button class="top-btn" @tap="goProbability('schools')">院校录取概率</button>
@@ -153,7 +157,7 @@
 		computed: {
 			...mapState(['hasLogin'])
 		},
-        onShareAppMessage() {
+		    onShareAppMessage() {
             return {
                 title: '99%的家长不知道的高考志愿填报的坑',
                 path: '/pages/tabBar/index/index'
@@ -171,7 +175,7 @@
 					icon: 'none'
 				})
 			},
-			goSchool(){
+			goSchool(key){
 				// if(this.hasLogin){
 				// 	uni.navigateTo({
 				// 		url:this.schoolUrl
@@ -182,7 +186,7 @@
 				// 	})
 				// }
 				uni.navigateTo({
-			 		url:this.schoolUrl
+			 		url:this.schoolUrl+'?showType='+key
 			 	})
 			},
 			goSpecialities(){

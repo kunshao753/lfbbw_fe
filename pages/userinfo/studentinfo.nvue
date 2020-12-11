@@ -13,8 +13,8 @@
 				</text>
 			</view>
 			<view class="links">
-				<button @click="goInfo">下一步</button>
-				<button @click="goIndex">跳过</button>
+				<button class="uni-button-gray" @click="goInfo">下一步</button>
+				<button class="uni-button-withe" @click="goIndex">跳过</button>
 			</view>
 		</view>
 		<!-- 选择省份 e -->
@@ -349,8 +349,11 @@
 	.i-label{margin: 0 20rpx;}
 	.info-tit{margin-top: 100rpx;margin-bottom: 120rpx;}
 	.choose-p{flex: 1;flex-wrap: wrap;}
-	.province{height: 68rpx;line-height: 68rpx;min-width: 155rpx;white-space:nowrap; text-align: center;border:  2rpx solid #BDBDBD;color: #777;margin: 11rpx;border-radius: 16rpx;}
-	.cur{color: #000;border-color: #000;}
+
+	.province{height: 68rpx;line-height: 68rpx;width: 155rpx;text-align: center;border:  2rpx solid #BDBDBD;color: #828282;margin: 11rpx;border-radius: 16rpx;}
+	.cur{color: #FFF;background: #bdbdbd;}
 	.radioStyle{width: 0;height: 0;opacity: 0;}
 	radio-group label,checkbox-group label{padding-right: 0;}
+	.links > .uni-button-gray{ margin-bottom: 40rpx; margin-top: 60rpx;}
+	.links > .uni-button-withe{ margin-bottom: 40rpx; }
 </style>

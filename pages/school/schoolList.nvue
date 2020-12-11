@@ -4,13 +4,13 @@
 			<tabbar :tabbars="tabBars" :tabIndex="tabIndex" @click="ontabtap"></tabbar>
 			
 				<scroll-view class="filter-box uni-flex" scroll-x="true" enable-flex="true" show-scrollbar="false">
-						<view class="sub-filter" :class="{'filter-active':item.cur_data_select_index!=-1}" @click="openPopup(item)"  v-for="(item,index) in filterTitlesDate" :key="index">{{item.name}}</view>	
+						<view class="sub-filter" :class="{'filter-active':item.cur_data_select_index!=-1}" @click="openPopup(item)"  v-for="(item,index) in filterTitlesData" :key="index">{{item.name}}</view>	
 			  </scroll-view>
 				
 		</view>		
 		<swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
 			<swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
-				<school-cell class="swiper-box" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail" @gomajor="goMajor"></school-cell>					
+				<school-cell class="swiper-box" :cellType="curListShowType" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail" @gomajor="goMajor"></school-cell>					
 			</swiper-item>
 		</swiper>
 		<volunteer-list></volunteer-list>
@@ -22,11 +22,11 @@
 					 <uni-icons type="closeempty"  class="close" @click="closePopup"></uni-icons>
 					 <view class="filter-popup-title"><text class="uni-share-title-text">{{curPopupData.title}}</text></view>
 					<scroll-view class="filter-popup-content"  scroll-y="true" enable-flex="true" show-scrollbar="false">
-						   <text v-for="(item,index) in curPopupData.dataList" @click="selectFilterItemInfo(item)">{{item.name}}</text>
+						   <text v-for="(item,index) in curPopupData.dataList" @click="selectFilterItemInfo(item,index)" :class="{'selected':curPopupData.cur_data_select_index==index}">{{item.name}}</text>
 					</scroll-view>
 					 <view class="filter-popup-button-box">
 							<view class="button-item-box left"><button class="uni-share-button reset" @click="resetPopup">重置</button></view>
-							<view class="button-item-box right"><button class="uni-share-button" @click="closePopup">取消</button></view>
+							<view class="button-item-box right"><button class="uni-share-button" @click="savePopup">保存</button></view>
 					 </view>
 				</view>
 		</uni-popup>
@@ -117,8 +117,71 @@ batch:"本科一批",
             return {
                 newsList: [],
                 cacheTab: [],
-							//地区信息	
-						provinceList:[],		
+				//地区筛选-数据信息	
+				filterProvinceList:[],
+				//院校层次-数据信息
+				filterLevelList:[{
+                    name: '双一流',
+                    id: 1
+                }, {
+                    name: '985',
+                    id: 2
+                }, {
+                    name: '211',
+                    id: 3
+                }, {
+                    name: '公办',
+                    id: 4
+                },{
+                    name: '民办',
+                    id: 5
+                }],
+				//院校类型-数据信息
+				filterTypeList:[{
+                    name: '综合',
+                    id: 1
+                }, {
+                    name: '理工',
+                    id: 2
+                }, {
+                    name: '医药',
+                    id: 3
+                }, {
+                    name: '政法',
+                    id: 4
+                },{
+                    name: '师范',
+                    id: 5
+                },{
+                    name: '农林',
+                    id: 6
+                },{
+                    name: '体育',
+                    id: 7
+                },{
+                    name: '民族',
+                    id: 8
+                },{
+                    name: '艺术',
+                    id: 9
+                },{
+                    name: '语言',
+                    id: 10
+                },{
+                    name: '财经',
+                    id: 11
+                }],
+					//批次-数据信息
+					filterBatchList:[{
+                    name: '本科一批',
+                    id: 1
+                }, {
+                    name: '本科二批',
+                    id: 2
+                }, {
+                    name: '专科',
+                    id: 3
+                }],	
 				//热门城市数据
 				hotCity:[
 					{id:0,name:'热门城市'},
@@ -142,41 +205,57 @@ batch:"本科一批",
 				// 顶部tab数据
                 tabBars: [{
                     name: '冲刺',
-                    id: 'sprint'
+                    id: 'sprint',
+										count:45
                 }, {
                     name: '稳妥',
-                    id: 'safe'
+                    id: 'safe',
+										count:56
                 }, {
                     name: '保底',
-                    id: 'minimum'
+                    id: 'minimum',
+										count:23
                 }],
-				 filterTitlesDate:[{
-					   name:'地区',
+				 filterTitlesData:[{
+					   name:'选择地区',
 						 type:'location',
 						 type_id:1,
 						 //当前选中数据索索引,-1 为默认值,即未选中
-						 cur_data_select_index:0
+						 cur_data_select_index:-1,
+						 //当前选中的值
+						 cur_data_select_name:''
 				 },{
 					   name:'院校类型',
 						 type:'type',
 						 type_id:2,
-						 cur_data_select_index:-1
+						 cur_data_select_index:-1,
+						  cur_data_select_name:''
 				 },{
 					   name:'院校层次',
 						 type:'level',
 						 type_id:3,
-						 cur_data_select_index:-1
+						 cur_data_select_index:-1,
+						 cur_data_select_name:''
 				 },{
 					   name:'批次',
 						 type:'batch',
 						 type_id:4,
-						 cur_data_select_index:-1
+						 cur_data_select_index:-1,
+						 cur_data_select_name:''
 				 }],
 				 //当前popup面板相关值
-				curPopupData:{
+			  curPopupData:{},
+				//popup面板默认值
+				curPopupDataDefault:{
 					title:'',
+					type:'',
+					type_id:-1,
+					cur_data_select_index:-1,
+					cur_data_select_name:'',
 					dataList:[]
 				},
+				//当前列表展示类别,默认学校schools,专业优先specialities
+				curListShowType:'schools',
 				// 筛选本省
 				islocation:false,
 				// 筛选985
@@ -196,8 +275,25 @@ batch:"本科一批",
 					schoolCell,
 					volunteerList
         },
-		onLoad() {
+		
+		onLoad(option) {
+			     
+					 console.log(option.showType);
+					 //展示专业优先填报
+					 if(option.showType=='specialities'){
+					   this.curListShowType='specialities';
+						 uni.setNavigationBarTitle({
+						 	   title:'专业优先填报'
+						 })
+					 }else{
+						 uni.setNavigationBarTitle({
+						 	   title:'院校优先填报'
+						 })
+					 }
+					 
+					console.log(this.$store.state)
 			
+			    this.curPopupData=this.curPopupDataDefault
 			    this.getProvinceList();
            
 					 setTimeout(()=>{
@@ -220,7 +316,7 @@ batch:"本科一批",
 									})
 									
 									res.data.map(item=>{
-										 this.provinceList.push({
+										 this.filterProvinceList.push({
 										          id: item.province_id,
 										          name: item.province_desc
 										        });
@@ -294,6 +390,14 @@ batch:"本科一批",
             ontabtap(index) {				
                 //let index = e.target.dataset.current || e.currentTarget.dataset.current;
                 this.switchTab(index);
+								
+								//筛选条件恢复默认未选中状态
+								this.curPopupData=this.curPopupDataDefault
+								this.filterTitlesData.map((item,index)=>{											
+													item.cur_data_select_index=-1
+													item.cur_data_select_name=''										
+								})
+								
             },
             ontabchange(e) {
                 let index = e.target.current || e.detail.current;
@@ -373,16 +477,35 @@ batch:"本科一批",
 						//popup相关事件
 						openPopup(obj){
 							 this.$refs.fliterPopup.open()
-							  
+							 
+							 this.curPopupData.title=obj.name
+							 this.curPopupData.type=obj.type
+							 this.curPopupData.type_id=obj.type_id
+							 this.curPopupData.cur_data_select_index=obj.cur_data_select_index
+							 this.curPopupData.cur_data_select_name=obj.cur_data_select_name
+							 
 								switch(obj.type_id){
 										//地区
 										case 1:{
-											this.curPopupData.title="选择"+obj.name
-											this.curPopupData.dataList=this.provinceList;
+											this.curPopupData.dataList=this.filterProvinceList
+											break;
+										}
+										//院校类型
+										case 2:{
+											this.curPopupData.dataList=this.filterTypeList
+											break;
+										}
+										//院校层次
+										case 3:{
+											this.curPopupData.dataList=this.filterLevelList
+											break;
+										}
+										//批次
+										case 4:{
+											this.curPopupData.dataList=this.filterBatchList
 											break;
 										}
 										default:{
-											this.curPopupData.title=obj.name
 											this.curPopupData.dataList=[]
 											break;
 										}	
@@ -392,15 +515,46 @@ batch:"本科一批",
 						closePopup(){
 							this.$refs.fliterPopup.close()
 						},
-						//重置按钮
+						//重置按钮  重置当前筛选条件
 						resetPopup(){
+							  this.curPopupData.cur_data_select_index=-1;
+							  this.curPopupData.cur_data_select_name='';
 							
-						},
+								this.filterTitlesData.map((item,index)=>{
+											if(item.type_id==this.curPopupData.type_id){
+													item.cur_data_select_index=-1
+													item.cur_data_select_name=''
+											}
+								})
+								this.closePopup()
+						 },
 						//选中当前筛选条件项
-						selectFilterItemInfo(obj){
+						selectFilterItemInfo(curObj,curIndex){
+							  this.curPopupData.cur_data_select_index=curIndex;
+							  this.curPopupData.cur_data_select_name=curObj.name;
+							 	
+						},
+						//保存按钮
+						savePopup(){
 							
+							if(this.curPopupData.cur_data_select_index==-1){
+								uni.showToast({
+									title:'请选择筛选条件',
+									icon:'none'
+								})
+								return
+							}
+							
+							//存储当前选中筛选值, 改变filterTitlesData相关选中信息
+							this.filterTitlesData.map((item,index)=>{
+										if(item.type_id==this.curPopupData.type_id){
+												item.cur_data_select_index=this.curPopupData.cur_data_select_index
+												item.cur_data_select_name=this.curPopupData.cur_data_select_name
+										}
+							})	
+							
+						   this.closePopup();
 						}
-						
 						
         }
     }
@@ -432,10 +586,11 @@ batch:"本科一批",
 		padding: 0;
 	}
 	.filter-popup-title{font-size: 36rpx;text-align: center; margin-bottom: 30rpx;}
-	.filter-popup-content{ flex-direction: row; flex-wrap: wrap; max-height:60vh; flex: 1;justify-content: flex-start;}
-	.filter-popup-content text{ color: #bdbdbd; border: 1rpx solid #bdbdbd; border-radius: 16rpx;  height: 68rpx;  line-height: 68rpx; padding: 0 20rpx;margin-right: 3%;ext-align: center; margin-bottom: 20rpx;flex-basis: 22%;  text-align: center;}
+	.filter-popup-content{ flex-direction: row; flex-wrap: wrap; max-height:60vh; flex: 1;justify-content: flex-start; padding-bottom: 25rpx;}
+	.filter-popup-content text{ color: #bdbdbd; border: 2rpx solid #bdbdbd; border-radius: 16rpx;  height: 68rpx;  line-height: 68rpx; padding: 0 20rpx;margin-right: 3%;ext-align: center; margin-bottom: 20rpx;flex-basis: 22%;  text-align: center;}
 	.filter-popup-content text:nth-of-type(4n){ margin-right: 0;}
-	.filter-popup-button-box{border-top: 1px solid #ccc;justify-content: space-between; flex-flow: row;height: 128rpx;  padding-top: 20rpx;}
+	.filter-popup-content text.selected{border-color: #000000;color: #000000;}
+	.filter-popup-button-box{border-top: 2rpx solid #ccc;justify-content: space-between; flex-flow: row;height: 128rpx;  padding-top: 20rpx;}
 	.filter-popup-button-box .uni-share-button{font-size: 30rpx; color: #fff; background-color: #c4c4c4;    height: 80rpx;
     line-height: 80rpx;
     width: 140rpx;}

@@ -5,6 +5,7 @@
 		 	<uni-search-bar bgColor="#fff" placeholder="搜索专业" @confirm="search" @input="input" @cancel="cancel" clearButton="none" />
 		 </view>	
 		 <!-- top search end -->
+		 
 		<view class="wrapper uni-flex uni-jcenter diploma-box">
 			<view v-for="(item,index) in tabBars" :key="item.id" class="uni-inline-item diploma" :class="{'cur':tabIndex==index&&isOpen}" @click="switchTab(index,item.id)">
 				<text>{{item.name}}</text><uni-icons type="arrowdown"></uni-icons>
@@ -23,7 +24,7 @@
 		</view>	
 		<scroll-view class="scroll-v wrapper" enableBackToTop="true" scroll-y v-if="isOpen">
 			<view v-show="!isSub">
-				<view class="uni-bold mt20">选择专业大类</view>
+				<!-- <view class="uni-bold mt20">选择专业大类</view> -->
 				<view v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.sid">						
 					<view class="uni-bold mt20">{{newsitem.sname}}</view>
 					<view class="uni-inline-item major-list">
@@ -35,7 +36,7 @@
 				</view>
 			</view>
 			<view v-show="isSub">
-				<view class="uni-bold mt20">选择专业</view>
+				<!-- <view class="uni-bold mt20">选择专业</view> -->
 				<view v-for="(item,index) in majorSubList" :key="item.cid">						
 					<view class="uni-bold mt20">{{item.cname}}</view>
 					<view class="uni-inline-item major-list">
@@ -107,7 +108,10 @@
         data() {
             return {
 				searchVal: '',
-                newsList: [],
+                newsList: [{
+                        data: [],
+					              PopularMajor:[]
+                  }],
 				PopularMajor:[
 					{id:'zhexue',title:'哲学'},
 					{id:'jisuanji',title:'计算机'},
@@ -129,7 +133,7 @@
                     id: '5'
                 }],
 				//专业下拉框是否打开
-				isOpen:false,
+				isOpen:true,
 				//专业子类是否打开
 				isSub:false,
 				//已选择的专业id
@@ -142,11 +146,13 @@
         },        
 		onLoad() {
             setTimeout(()=>{
-              this.tabBars.forEach((tabBar) => {
+              this.tabBars.forEach((tabBar,index) => {
+								if(index!=0){
                   this.newsList.push({
                         data: [],
-					    PopularMajor:[]
+					              PopularMajor:[]
                   });
+							}		
 				  // this.curMajor.push({
 					 //    data:[]
 				  // });
@@ -154,7 +160,8 @@
 						// data:[]
 				  // });
               });
-              //this.getList(0);
+              this.getList(0,7);
+							console.log(this.newsList)
             },0)
         },
         methods: {
@@ -176,11 +183,11 @@
 			// 获取院校列表
             getList(index,id) {
                 let activeTab = this.newsList[index];
-				if(id==7){
-					activeTab.data = activeTab.data.concat(undergraduate1);
-				}else if(id==5){
-					activeTab.data = activeTab.data.concat(undergraduate2);
-				}	
+								if(id==7){
+									activeTab.data = activeTab.data.concat(undergraduate1);
+								}else if(id==5){
+									activeTab.data = activeTab.data.concat(undergraduate2);
+								}	
             },
 			// 跳转到院校详情
             goDetail(e) {
@@ -197,13 +204,16 @@
                 if (this.newsList[index].data.length === 0) {
                     this.getList(index,id);
                 }
-                if (this.tabIndex === index) {
-                    this.isOpen = !this.isOpen;
-					//return
-                }else{
-					this.isOpen = true;
-				}
-				this.isSub = false;
+            //     if (this.tabIndex === index) {
+            //         this.isOpen = !this.isOpen;
+					       //    //return
+            //     }else{
+				       	// this.isOpen = true;
+			        	// }
+				        this.isSub = false;
+								uni.setNavigationBarTitle({
+									   title:'选择专业大类'
+								})
                 this.tabIndex = index;				
                 this.clearInfo()
             },			
@@ -256,7 +266,10 @@
 								]
 							}
 						]
-						t.isSub = true	
+						t.isSub = true
+						uni.setNavigationBarTitle({
+							   title:'选择专业'
+						})
 						t.curMajor = []
 					}					
 				}else{
@@ -270,6 +283,9 @@
 			clearInfo(){
 				var t = this;
 				t.isSub = false;
+				uni.setNavigationBarTitle({
+					   title:'选择专业大类'
+				})
 				t.curMajor = [];
 				//t.curMajorSub = [];
 			}
@@ -306,10 +322,10 @@
 	.cur{border-color: #C4C4C4;background: #C4C4C4;}
 	.scroll-v{background: #F2F2F2;flex: 1;}
 	.major-list{flex-wrap: wrap;}
-	.major-list text{height: 56rpx;line-height: 56rpx;padding: 0 24rpx;margin-right: 8rpx;margin-top: 30rpx;border-radius: 16rpx;background: #C4C4C4;}
+	.major-list text{height: 56rpx;line-height: 56rpx;padding: 0 24rpx;margin-right: 8rpx;margin-top: 30rpx;border-radius: 16rpx;border: 2rpx solid #bdbdbd;color: #828282;}
 	.bottom-btn{position: fixed;bottom: 0;left: 0;right: 0;background: #F2F2F2;padding: 28rpx;border-top:2rpx solid #e0e0e0;}
-	.major-btn{width: 100%;}
-	.major-list text.select{background: #828282;}
+	.major-btn{width: 100%; background-color: #c4c4c4;}
+	.major-list text.select{background: #bdbdbd; color: #fff;}
 	.go-search-chool{justify-content: space-between;}
 	.go-search-chool .major-btn{width: 46%;}
 </style>

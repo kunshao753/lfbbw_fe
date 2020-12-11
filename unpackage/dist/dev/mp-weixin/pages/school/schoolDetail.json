@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "院校详情",
-  "usingComponents": {
-    "tabbar": "/pages/component/tabbar/tabbar",
-    "school-infomation": "/pages/school/component/introduction"
-  }
-}

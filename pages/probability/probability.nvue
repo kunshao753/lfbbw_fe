@@ -96,6 +96,10 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex'
+	
 	import tabbar from '../component/tabbar/tabbar.vue'
 	import uCharts from '../../components/u-charts/u-charts.js'
 	var _self;
@@ -126,7 +130,7 @@
 				            tag: 'majors'
 				        }],
 					
-					
+					 
 					 cWidth3: '', //圆弧进度图
 					 cHeight3: '', //圆弧进度图
 					 arcbarWidth: '', //圆弧进度图，进度条宽度,此设置可使各端宽度一致
@@ -160,10 +164,10 @@
 						     name: '历年录取分数',
 						     tag: 'score',
 								 data:{
-										categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
+										categories: ['2012', '2013', '2014', '2015', '2016'],
 										series: [{
 											name: '分数',
-											data: [35, 20, 25, 37, 4, 20],
+											data: [35, 20, 25, 37, 4],
 											color: '#1890ff'
 										}]
 									 }
@@ -239,12 +243,14 @@
 				],
 				//当前选中的专业数据
 				curSelectedMajorsData:{},
-				
 			}
 				
 		},
 		components:{
 			tabbar
+		},
+		computed: {
+			...mapState(['systemInfo'])
 		},
 			onLoad(option) {
 				 console.log(option.showTab);
@@ -271,8 +277,10 @@
 					this.arcbarWidth = uni.upx2px(24);
 					this.gaugeWidth = uni.upx2px(30);
 					
-					
-					this.cWidth = uni.upx2px(750);
+					const info=uni.getSystemInfoSync();
+					console.log(info.windowWidth)
+					this.cWidth = info.windowWidth;
+					console.log(this.cWidth)
 					this.cHeight = uni.upx2px(400);
 					
 					// //this.fillData(Data);
@@ -317,28 +325,29 @@
 							  },
 							//获取进度条数据
 							getServerData() {
-								uni.showLoading({
-									title: "正在加载数据..."
-								})
-								uni.request({
-									url: 'https://unidemo.dcloud.net.cn/hello-uniapp-ucharts-data.json',
-									data: {},
-									success: function(res) {
-										_self.fillData(res.data);
-									},
-									fail: () => {
-										_self.tips = "网络错误，小程序端请检查合法域名";
-									},
-									complete() {
-										uni.hideLoading();
-									}
-								});
+								// uni.showLoading({
+								// 	title: "正在加载数据..."
+								// })
+								// uni.request({
+								// 	url: 'https://unidemo.dcloud.net.cn/hello-uniapp-ucharts-data.json',
+								// 	data: {},
+								// 	success: function(res) {
+								// 		_self.fillData(res.data);
+								// 	},
+								// 	fail: () => {
+								// 		_self.tips = "网络错误，小程序端请检查合法域名";
+								// 	},
+								// 	complete() {
+								// 		uni.hideLoading();
+								// 	}
+								// });
+								this.fillData()
 							},
 							
 							fillData(data) {
 								
-								this.serverData = data;
-								this.tips = data.tips;
+								//this.serverData = data;
+								//this.tips = data.tips;
 								
 								let Arcbar3 = {
 									series: []
@@ -539,7 +548,7 @@
 	 }
 	 
 	 .qiun-charts{ margin-bottom: 100rpx;}
-	 .chartsLine{height: 400rpx;}
+	 .chartsLine{height: 400rpx; width: 100%;}
 	 
 	 .score-info{border-top:1px solid #ccc; }
 	 .select-chart-info /deep/{ height: 60rpx; margin-bottom: 48rpx; margin-top: 24rpx; flex-direction: row;}
@@ -562,7 +571,7 @@
 		.infos{margin-bottom: 20rpx;}
 		.infos > .item{ flex-direction: row; justify-content: space-between; height: 80rpx; line-height: 80rpx; }
 		.infos > .item.gray{color: #828282;}
-		.majors-popup-button-box{border-top: 1px solid #ccc;justify-content: space-between; flex-flow: row;height: 148rpx;
+		.majors-popup-button-box{border-top: 1rpx solid #ccc;justify-content: space-between; flex-flow: row;height: 148rpx;
         align-items: center;}
 		.majors-popup-button-box .uni-share-button{font-size: 30rpx; color: #fff; background-color: #c4c4c4;    height: 80rpx;
 		  line-height: 80rpx;

@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "填报专业详情",
-  "usingComponents": {
-    "volunteer-list": "/pages/component/volunteerList/volunteerList"
-  }
-}

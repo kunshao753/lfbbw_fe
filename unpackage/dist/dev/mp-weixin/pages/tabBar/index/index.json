@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "志愿瓶",
-  "usingComponents": {
-    "uni-search-bar": "/components/uni-search-bar/uni-search-bar"
-  }
-}

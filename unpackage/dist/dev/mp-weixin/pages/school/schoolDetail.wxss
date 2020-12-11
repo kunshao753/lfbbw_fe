@@ -1,6 +1,0 @@
-
-.school-top{padding-bottom: 40rpx;}
-.sub-box{width: 45%;}
-.sd-add{vertical-align: middle;margin-left: 20rpx;background: #C4C4C4;-webkit-border-radius: 25rpx;border-radius: 25rpx;}
-.sd-addressicon{width: 40rpx; height: 40rpx;margin-right: 30rpx;}
-

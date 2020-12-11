@@ -1829,5 +1829,9 @@ checkbox-group label {
 	transform: translateY(50%);
 }
 
-.uni-popup-box{max-height: 90vh;border-radius: 20rpx 20rpx 0 0;padding: 40rpx 40rpx 0 40rpx;}
+.uni-popup-box{max-height: 90vh;border-radius: 20rpx 20rpx 0 0;padding: 40rpx 40rpx 0 40rpx; bottom: 0;}
+
+.uni-button-gray{width: 100%; height: 100rpx; line-height: 100rpx; border-radius: 50rpx;color: #fff; background-color: #c4c4c4;}
+.uni-button-withe{width: 100%; height: 100rpx; line-height: 100rpx; border-radius: 50rpx; color: #777; border:2rpx solid #c4c4c4 ; background: #fff;}
+
 

@@ -1,5 +1,0 @@
-
-.intro-box{padding-top: 20rpx;border-bottom:2rpx solid #E0E0E0;}
-.intro-txt-box{height: 120rpx;line-height: 40rpx;overflow: hidden;}
-.active{height: auto;overflow: visible;}
-
