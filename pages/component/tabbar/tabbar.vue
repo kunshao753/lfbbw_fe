@@ -3,6 +3,7 @@
 		<view id="tab-bar" class="scroll-h">
 			<view v-for="(tab,index) in tabbars" :key="tab.id" class="uni-tab-item" :class="tabIndex==index ? 'uni-tab-item-active' : ''" :id="tab.id" :data-current="index" @click="ontabtap">
 				<text class="uni-tab-item-title">{{tab.name}}</text>
+				<text class="uni-tab-item-title count-info" v-if="tab.count">{{tab.count}}</text>
 			</view>		
 		</view>
 		<view class="line-h"></view>
@@ -79,5 +80,5 @@
 	    /* #endif */		
 	}
 	
-	
+	.count-info{ margin-left: 10rpx;}
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="fixed uni-column" @click="showVlist">志愿预览</view>
+		<view class="fixed uni-column" @click="showVlist"><text class="outer">志愿预览<text v-if="fillList.length>0" class="inner">{{fillList.length}}</text></text></view>
 		<uni-popup ref="popup" type="bottom" :animation="true">
 			<view v-if="isShow" class="uni-bg-white popup-box">
 				<view class="uni-title mt20">预览志愿</view>
@@ -70,6 +70,9 @@
 </script>
 <style>
 	.fixed{position: fixed;bottom: 100rpx;right: 36rpx;padding: 20rpx; width: 104rpx;height: 104rpx;text-align: center;justify-content: center;line-height: 40rpx;border-radius: 52rpx;background-color: #C4C4C4;}
+	.fixed .outer{position: relative;}
+	.fixed .inner{position: absolute; top:-24rpx;right: -24rpx;   background: #FF0000; color: #FFFFFF; height: 38rpx; min-width: 38rpx; border-radius: 20rpx; line-height: 38rpx;  text-align: center; padding: 0 8rpx;}
+	
 	.popup-box{border-radius: 20rpx 20rpx 0 0;padding: 40rpx;position: fixed;bottom: 0;width: 100%;z-index: 200;}
 	.tips text{color: #828282;line-height: 40rpx;}
 	.to-volunteering{margin-top: 60rpx;border-radius: 50rpx;width: 100%;}

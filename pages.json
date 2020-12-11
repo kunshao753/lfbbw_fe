@@ -76,7 +76,7 @@
 		{
 			"path": "pages/school/schoolList",
 			"style": {
-				"navigationBarTitleText": "院校优先填报"
+				"navigationBarTitleText": ""
 			}
 		},
 		{
@@ -88,7 +88,7 @@
 		{
 			"path": "pages/specialities/specialitiesList",
 			"style": {
-				"navigationBarTitleText": "选择专业类别"
+				"navigationBarTitleText": "选择专业大类"
 			}
 		},
 		{

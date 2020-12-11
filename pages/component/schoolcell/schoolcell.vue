@@ -20,20 +20,32 @@
 								<image class="sd-addressicon" src="../../../static/location.png"></image>
 								<text>{{newsitem.location}}市</text>
 							</view>
-							<!-- <text class="uni-title">{{newsitem.score}}分</text> -->
 						</view>
 						<view class="uni-flex uni-space-between">
 							<view class="uni-flex uni-row">
 								<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag"></text>
 							</view>
-						<!-- 	<text>{{newsitem.percent}}</text> -->
 						</view>
-						<!-- <view class="uni-flex uni-acenter mt10">
-							<image class="sd-addressicon" src="../../../static/location.png"></image>
-							<text>{{newsitem.location}}</text>
-						</view> -->
-							<view class="uni-flex uni-acenter mt10">	
-					    </view>					
+						<view class="uni-flex uni-acenter mt10">
+							<view class="schoolitem">
+																<text class="tag">录取概率</text>
+																<text>{{newsitem.percent}}</text>
+							</view>
+							<view class="schoolitem">
+																<text class="tag">{{thisYear}}年最低次位</text>
+																<text>{{newsitem.lowestRank}}</text>
+							</view>
+							<view class="schoolitem">
+																<text class="tag">录取批次</text>
+																<text>{{newsitem.batch}}</text>
+							</view>
+							  <view class="schoolitem">
+							  									<text class="tag">{{thisYear}}年最低分</text>
+							  									<text>{{newsitem.score}}分</text>
+							  </view>
+						
+							
+						</view>			
 				</view>
 				<view class="uni-inline-item uni-jcenter matching">匹配专业<text>10</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
 			</view>
@@ -56,19 +68,14 @@
 							<image class="sd-addressicon" src="../../../static/location.png"></image>
 							<text>{{newsitem.location}}市</text>
 						</view>
-						<!-- <text class="uni-title">{{newsitem.score}}分</text> -->
 					</view>
 					<view class="uni-flex uni-space-between">
 						<view class="uni-flex uni-row">
 							<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag"></text>
 						</view>
-					<!-- 	<text>{{newsitem.percent}}</text> -->
 					</view>
-					<!-- <view class="uni-flex uni-acenter mt10">
-						<image class="sd-addressicon" src="../../../static/location.png"></image>
-						<text>{{newsitem.location}}</text>
-					</view> -->
-					  <view class="uni-flex uni-acenter mt10">
+					  <!-- 院校优先填报 -->
+					  <view class="uni-flex uni-acenter mt10" v-if="cellType=='schools'">
 							<view class="schoolitem">
 																<text class="tag">录取概率</text>
 																<text>{{newsitem.percent}}</text>
@@ -88,10 +95,40 @@
 						
 							
 						</view>
+						<!-- 专业优先填报 -->
+						<view class="uni-flex uni-acenter mt10" v-if="cellType=='specialities'">
+							<view class="major-item">
+																<view class="left" @click="addToMajor()">
+																	 <uni-icons type="plus"  class="plus" color="#e5e5e5" size="20"></uni-icons>
+																   <text>采购管理</text>
+																</view>
+																<view class="right">
+																	<text class="info2">录取概率</text>
+																	<text class="probability">33%</text>
+																	<uni-icons type="arrowright"  class="close"  size="20"></uni-icons>
+																</view>
+							</view>
+							<view class="major-item">
+																<view class="left">
+																	 <uni-icons type="plus"  class="plus" size="20" @click=""></uni-icons>
+																   <text>采购管理</text>
+																</view>
+																<view class="right">
+																	<text class="info2">录取概率</text>
+																	<text class="probability">33%</text>
+																	<uni-icons type="arrowright"  class="close" @click="" size="20"></uni-icons>
+																</view>
+							</view>
+							
+							
+														
+						</view>
+					
 				</view>
 				
+				
 			</view>
-			<view class="uni-inline-item uni-jcenter matching" @click="goMajor(newsitem)">匹配专业<text>{{newsitem.matchingMajor}}</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
+			<view class="uni-inline-item uni-jcenter matching"  v-if="cellType=='schools'" @click="goMajor(newsitem)">匹配专业<text>{{newsitem.matchingMajor}}</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
 		</view>
 		
 		<view class="loading-more" v-if="cellData.isLoading || cellData.data.length > 4">
@@ -111,6 +148,10 @@
 			index1:{
 				type:String,
 				default:0
+			},
+			cellType:{
+				type:String,
+				default:'schools'
 			}
 		},
 		data(){
@@ -138,6 +179,12 @@
 			goMajor(data){
 				this.$emit('gomajor',data)
 			},
+			addToMajor(){
+				 uni.showToast({
+				 	title:'已添加到备选志愿',
+				 	icon:'none'
+				 })
+			}
 		}
 	}
 </script>
@@ -228,6 +275,12 @@
 	.uni-flex.uni-acenter{ flex-wrap: wrap;flex-direction: row;} 
 	.schoolitem{flex-basis: 44%;flex-direction: row; justify-content:left; padding-right: 2%;}
 	.schoolitem:nth-of-type(2n){flex-basis: 56%;}
-	.schoolitem .tag{ color: #ccc;padding-right: 10rpx;}
-	.schoolitem:nth-of-type(2n) .tag{flex-basis: 67%;}
+	.schoolitem .tag{ color: #ccc;flex-basis: 50%;}
+	.schoolitem:nth-of-type(2n) .tag{flex-basis: 72%;}
+	
+	.major-item{flex-direction: row; justify-content: space-between; flex: 1 auto;}
+	.major-item .plus{padding-right: 10rpx;}
+	.major-item .left{flex-direction: row; align-items: center;}
+	.major-item .right{flex-direction: row; align-items: center;}
+	.major-item .info2{color: #c4c4c4;padding: 0 10rpx;}
 </style>

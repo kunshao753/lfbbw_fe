@@ -1,9 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import commonInfo from './modules/commonInfo.js'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
+	
+	modules:{
+		commonInfo,
+	},
+	
 	state: {
 		hasLogin: false,
 		loginProvider: "",
