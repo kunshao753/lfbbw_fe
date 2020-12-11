@@ -356,4 +356,5 @@
 	radio-group label,checkbox-group label{padding-right: 0;}
 	.links > .uni-button-gray{ margin-bottom: 40rpx; margin-top: 60rpx;}
 	.links > .uni-button-withe{ margin-bottom: 40rpx; }
+
 </style>
