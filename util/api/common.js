@@ -3,7 +3,8 @@
 
 const commonApiPaths={
 	// 获取省份列表信息
-	getAreaList:'/App/Area_Area.getAreaList'
+	getAreaList:'/App/Area_Area.getAreaList',
+	getSubjectType:'/App/CommonConfig_ProvinceRegister.getProvinceRigsterConfig'
 }
 
 export default commonApiPaths

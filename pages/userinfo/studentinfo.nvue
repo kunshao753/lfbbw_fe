@@ -4,7 +4,13 @@
 		<view v-if="!showFormInfo">
 			<view class="uni-title info-tit">选择您的高考省份</view>
 			<view class="uni-flex choose-p">
-				<text class="province" :class="{'cur':studentInfo.province==item.name}" v-for="(item,index) in provinceList" v-text="item.name" :key="item.id" @click="chooseProvince(item.name)"></text>
+				<text class="province" 
+				:class="{'cur':studentInfo.province_id==item.id}" 
+				v-for="(item,index) in provinceList" 
+				v-text="item.name" 
+				:key="item.id" 
+				@click="chooseProvince(item.id)">
+				</text>
 			</view>
 			<view class="links">
 				<button @click="goInfo">下一步</button>
@@ -17,35 +23,81 @@
 			<view class="uni-title info-tit">输入成绩信息</view>
 			<view class="uni-common-mt">
 				<form @submit="formSubmit" @reset="formReset">
-					<!-- <view class="uni-list-cell">
-						<view class="uni-list-cell-left">
-							选择生源地
-						</view>
-						<view class="uni-list-cell-db">
-							<picker @change="bindPickerChange" :value="index" :range="array" range-key="name" name="location">
-								<view style="text-align: right;">{{array[index].name}}</view>
-							</picker>
-						</view>
-						<view class="mr20">
-							<uni-icons type="arrowright" size="18" />
-						</view>
-					</view> -->
 					<view class="uni-list-cell">
 						<view class="uni-list-cell-left">高考总分</view>
-						<input class="uni-list-cell-db" type="number" name="score" style="text-align: right;" />
+						<input class="uni-list-cell-db" v-model="studentInfo.score" type="number" name="score" style="text-align: right;" />
 						<text class="i-label">分</text>
 					</view>
 					<view class="uni-list-cell">
 						<view class="uni-list-cell-left">全省排名(非必填)</view>
-						<input class="uni-list-cell-db" type="number" name="ranking" style="text-align: right;" />
+						<input class="uni-list-cell-db" v-model="studentInfo.rank" type="number" name="rank" style="text-align: right;" />
 						<text class="i-label">名</text>
 					</view>
-					<!-- 这里根据选择的省份展示文理科或新高考（史地政理化生） -->
-					<view class="uni-row uni-jcenter subject mt20">
-						<button type="default">文科</button>
-						<button type="default">理科</button>
+					<!-- 这里根据选择的省份展示文理科或新高考（史地政理化生） s-->
+					<!-- 3+3 -->
+					<view v-if="subjectType==0" class="subject mt20">
+						<view>选择科目</view>
+						<checkbox-group name="courseList" class="uni-flex choose-p">
+							<label class="province"							
+							v-for="(item,index) in subjectInfo.course_info.course_list"
+							:class="{'cur':curSubject.includes(item.course_id)}"
+							:key="item.course_id"
+							@click="chooseCourseList(item.course_id,subjectInfo.course_info.course_num)">
+								<checkbox class="radioStyle" :disabled="true" :value="item.course_id" :checked="curSubject.includes(item.course_id)" />
+								<text v-text="item.course_id_desc"></text>
+							</label>
+						</checkbox-group>
 					</view>
-					<!-- 这里根据选择的省份展示文理科或新高考（史地政理化生） -->
+					<!-- 3+1+2 -->
+					<view v-if="subjectType==1" class="subject mt20">
+						<view>2选1</view>
+						<!-- <view class="uni-flex">
+							<text class="province" 
+							:class="{'cur':studentInfo.subject==item.id}" 
+							v-for="(item,index) in subjectInfo.firstCourse" 
+							v-text="item.name" :key="item.id" @click="chooseRadio(studentInfo.subject,item.id)"></text>
+						</view> -->
+						<radio-group name="firstCourse" class="uni-flex">
+							<label class="province"
+							v-for="(item,index) in subjectInfo.firstCourse"
+							:class="{'cur':studentInfo.firstCourse==item.id}" 
+							:key="item.id"
+							@click="chooseFirstCourse(item.id)">
+								<radio class="radioStyle" :checked="studentInfo.firstCourse==item.id" :value="item.id" />
+								<text v-text="item.name"></text>
+							</label>
+						</radio-group>
+						<view>4选2</view>
+						<!-- <view class="uni-flex">
+							<text class="province" 
+							v-for="(item,index) in subjectInfo.secondCourse" 
+							v-text="item.name" :key="item.id"></text>
+						</view> -->
+						<checkbox-group name="secondCourse" class="uni-flex choose-p">
+							<label class="province"							
+							v-for="(item,index) in subjectInfo.secondCourse"
+							:class="{'cur':curSubject.includes(item.id)}"
+							:key="item.id"
+							@click="chooseCourseList(item.id,subjectInfo.secondCourseNum)">
+								<checkbox class="radioStyle" :disabled="true" :value="item.id" :checked="curSubject.includes(item.id)" />
+								<text v-text="item.name"></text>
+							</label>
+						</checkbox-group>
+					</view>
+					<!-- 文理科 -->
+					<view v-if="subjectType==2" class="uni-row subject mt20">						
+						<radio-group name="wenli" class="uni-flex">
+							<label class="province"
+							v-for="(item,index) in wenli"
+							:class="{'cur':studentInfo.wenli==item.id}" 
+							:key="item.id"
+							@click="chooseWenli(item.id)">
+								<radio class="radioStyle" :checked="studentInfo.wenli==item.id" :value="item.id" />
+								<text v-text="item.name"></text>
+							</label>
+						</radio-group>
+					</view>
+					<!-- 这里根据选择的省份展示文理科或新高考（史地政理化生） e-->
 					<view class="uni-form-item uni-column">
 						<view class="title">选择查询方式</view>
 						<radio-group name="query" class="uni-flex uni-column fill-radio">
@@ -84,55 +136,119 @@
     export default {
         data() {
             return {
-								schoolUrl:'../school/schoolList',
-								loginUrl:'../login/login',
-								studentInfo:{},
-								provinceList:[],
-								showFormInfo:false
+				schoolUrl:'../school/schoolList',
+				loginUrl:'../login/login',
+				//学生分数排名等信息
+				studentInfo:{},
+				//省份列表
+				provinceList:[],
+				//显示省份列表还是录入成绩表单
+				showFormInfo:false,
+				//选科信息
+				subjectInfo:{},
+				//科目类型0代表3+3;1代表3+1+2,2代表文理科
+				subjectType:null,
+				subjectRuleParame:'',
+				curSubject:[],
+				//文理科数据
+				wenli:[
+					{id:1,name:'理科'},
+					{id:2,name:'文科'}
+				],
+				checkboxDisable:false,
             }
        },
 	   onLoad() {
-			 this.getProvinceList();
-	   	 this.getStudentInfo();
+			this.getProvinceList();
+	   	    this.getStudentInfo();
+			if(this.showFormInfo){
+				this.getSubjectType();
+			}			
 	   },
      methods: {	
 			//接口获取省份信息
 			async getProvinceList(){
 				const res = await this.$myRequest({
-								url: commonApiPaths.getAreaList
-							})
-							
-							res.data.map(item=>{
-								 this.provinceList.push({
-								          id: item.province_id,
-								          name: item.province_desc
-								        });
-							})							
+					url: commonApiPaths.getAreaList
+				})
+				
+				res.data.map(item=>{
+					this.provinceList.push({
+					    id: item.province_id,
+					    name: item.province_desc
+					});
+				})							
 			},
 			//接口获取学生信息
 			getStudentInfo:function(){
 				var t = this;
 				t.studentInfo = {
-					province:'',
-					score:null,
-					ranking:null,
-					subject:''
+					province_id:'',
+					score:350,
+					rank:5622,
+					wenli:null,
+					course_list:[],
+					firstCourse:null,
+					secondCourse:[]
 				}
-				if(t.studentInfo.province!=''){
+				if(t.studentInfo.province_id!=''){
 					t.showFormInfo = true;
 				}
 			},
+			//按省份获取报考类型
+			async getSubjectType(){
+				var t = this
+				const res = await t.$myRequest({
+					url: commonApiPaths.getSubjectType,
+					data:{
+						province_id:t.studentInfo.province_id
+					}
+				})
+				t.subjectInfo=res.data
+				//console.log(t.subjectInfo)
+				if(t.subjectInfo.course_info!=''){
+					t.subjectType = 0
+					t.curSubject = t.studentInfo.course_list
+				}else if(t.subjectInfo.is_3_1_2==1){
+					t.subjectType = 1
+					t.curSubject = t.studentInfo.secondCourse
+				}else{
+					t.subjectType = 2
+				}
+				console.log(t.subjectType)
+			},
 			formSubmit: function(e) {
 				var t = this;
+				let flag = false;
 				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
+				var subjectRule = {}
+				switch(t.subjectType){
+					case 0:
+						t.subjectRuleParame = "courseList"
+						subjectRule={name:"courseList",checkType:'inlength',checkRule:t.subjectInfo.course_info.course_num,errorMsg:"请选择3个科目"}
+						break;
+					case 1:
+						t.subjectRuleParame = "firstCourse"
+						subjectRule={name:"secondCourse",checkType:'inlength',checkRule:t.subjectInfo.secondCourseNum,errorMsg:"请选择2个科目"}
+						break;
+					case 2:
+						t.subjectRuleParame = "wenli"
+						break;
+				}
 			    //定义表单规则
 			    var rule = [
-			        {name:"score", checkType : "between", checkRule:"0,750",  errorMsg:"请填写正确的分数"},			        
-			        {name:"query", checkType : "in", checkRule:"fschool,fspecialities,fexpert",  errorMsg:"请选择查询条件"}
+			        {name:"score", checkType : "between", checkRule:"0,"+t.subjectInfo.max_score,  errorMsg:"请填写正确的分数"},
+					{name:t.subjectRuleParame,checkType : "notnull",errorMsg:"请选择科目"},
+			        {name:"query", checkType : "in", checkRule:"fschool,fspecialities,fexpert",  errorMsg:"请选择查询条件"},
+					
 			    ];
+				if(subjectRule){
+					rule.push(subjectRule)
+				}
 			    //进行表单检查
 			    var formData = e.detail.value;
 			    var checkRes = graceChecker.check(formData, rule);
+				
 			    if(checkRes){
 			        //uni.showToast({title:"验证通过!", icon:"none"});
 					console.log(formData.query);
@@ -160,17 +276,16 @@
 			formReset: function(e) {
 				console.log('清空数据')
 			},
-			// bindPickerChange: function(e) {
-			// 	console.log('picker发送选择改变，携带值为：' + e.detail.value)
-			// 	this.index = e.detail.value
-			// },
+			//选择省份
 			chooseProvince:function(cur){
-				var t = this;
-				t.studentInfo.province = cur;
+				var t = this;				
+				t.studentInfo.province_id = cur;
 			},
+			//选择完省份下一步跳转到录入成绩页面
 			goInfo:function(){
 				var t = this;
-				if(t.studentInfo.province!=''){
+				if(t.studentInfo.province_id!=''){
+					t.getSubjectType();
 					t.showFormInfo = true;
 				}else{
 					uni.showToast({
@@ -179,11 +294,45 @@
 					})
 				}
 			},
+			//跳过
 			goIndex:function(){
 				uni.switchTab({
 					url:'../tabBar/index/index'
 				})
-			}
+			},
+			//选择文理
+			chooseWenli:function(cur){
+				var t = this;				
+				t.studentInfo.wenli = cur;
+			},
+			//选择3+1+2中的1
+			chooseFirstCourse:function(id){
+				var t = this;
+				t.studentInfo.firstCourse = id
+			},
+			//多选科目
+			chooseCourseList(id,count){
+				var t = this				
+				if(t.curSubject.includes(id)){
+					t.curSubject=t.curSubject.filter(function (ele){return ele != id;});
+					//t.checkboxDisable = false
+				}else{
+					if(t.curSubject.length>=count){
+						uni.showToast({
+							title:'科目只能选择'+count+'个',
+							icon:'none'
+						})
+						//t.checkboxDisable = true
+					}else{
+						t.curSubject.push(id);
+					}
+					
+				}
+				
+				
+				
+				
+			},
 		}
     }
 </script>
@@ -200,6 +349,8 @@
 	.i-label{margin: 0 20rpx;}
 	.info-tit{margin-top: 100rpx;margin-bottom: 120rpx;}
 	.choose-p{flex: 1;flex-wrap: wrap;}
-	.province{height: 68rpx;line-height: 68rpx;width: 155rpx;text-align: center;border:  2rpx solid #BDBDBD;color: #777;margin: 11rpx;border-radius: 16rpx;}
+	.province{height: 68rpx;line-height: 68rpx;min-width: 155rpx;white-space:nowrap; text-align: center;border:  2rpx solid #BDBDBD;color: #777;margin: 11rpx;border-radius: 16rpx;}
 	.cur{color: #000;border-color: #000;}
+	.radioStyle{width: 0;height: 0;opacity: 0;}
+	radio-group label,checkbox-group label{padding-right: 0;}
 </style>
