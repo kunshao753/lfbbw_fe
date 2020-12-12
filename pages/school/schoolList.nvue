@@ -22,7 +22,7 @@
 					 <uni-icons type="closeempty"  class="close" @click="closePopup"></uni-icons>
 					 <view class="filter-popup-title"><text class="uni-share-title-text">{{curPopupData.title}}</text></view>
 					<scroll-view class="filter-popup-content"  scroll-y="true" enable-flex="true" show-scrollbar="false">
-						   <text v-for="(item,index) in curPopupData.dataList" @click="selectFilterItemInfo(item,index)" :class="{'selected':curPopupData.cur_data_select_index==index}">{{item.name}}</text>
+						   <text v-for="(item,index) in curPopupData.dataList" @click="selectFilterItemInfo(item,index)" :class="{'selected':curPopupData.cur_data_select_index==index}" :key="index">{{item.name}}</text>
 					</scroll-view>
 					 <view class="filter-popup-button-box">
 							<view class="button-item-box left"><button class="uni-share-button reset" @click="resetPopup">重置</button></view>
@@ -42,6 +42,12 @@
 	import volunteerList from '../component/volunteerList/volunteerList.vue'
 		
 	import commonApiPaths from'../../util/api/common.js'
+	import schoolApiPaths from'../../util/api/school.js'
+	
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	
 	
     // 缓存每页最多
@@ -275,9 +281,13 @@ batch:"本科一批",
 					schoolCell,
 					volunteerList
         },
-		
+		computed:{
+			...mapState([
+				  'studentBaseInfo'
+			])
+		},
 		onLoad(option) {
-			     
+			     console.log(this.studentBaseInfo)
 					 console.log(option.showType);
 					 //展示专业优先填报
 					 if(option.showType=='specialities'){
@@ -291,10 +301,20 @@ batch:"本科一批",
 						 })
 					 }
 					 
-					console.log(this.$store.state)
-			
+				
 			    this.curPopupData=this.curPopupDataDefault
 			    this.getProvinceList();
+					const curData={
+						   "user_id": "zmy",
+						     "year": 2020,
+						     "province_id": "130000000000",
+						     "score": 436,
+						     "rank": 112058,
+						     "sceneId": 123,
+						     "wenli": 1
+					}
+					this.getSchoolList(curData)
+					
            
 					 setTimeout(()=>{
               this.tabBars.forEach((tabBar) => {
@@ -307,6 +327,8 @@ batch:"本科一批",
               });
               this.getList(0);
             },350)
+					
+						
         },
         methods: {
 					//接口获取省份信息
@@ -321,6 +343,23 @@ batch:"本科一批",
 										          name: item.province_desc
 										        });
 									})							
+					},
+					//接口获取推荐学校信息
+					async getSchoolList(dataInfo){
+						
+						const res = await this.$myRequest({
+										url: schoolApiPaths.getRecSchool,
+										method:'POST',
+										data:JSON.stringify(dataInfo)		
+									})
+									
+									console.log(res)
+									// res.data.map(item=>{
+									// 	 this.filterProvinceList.push({
+									// 	          id: item.province_id,
+									// 	          name: item.province_desc
+									// 	        });
+									// })							
 					},
 			// 选择985,211,本省
 			toggleFilter(type){

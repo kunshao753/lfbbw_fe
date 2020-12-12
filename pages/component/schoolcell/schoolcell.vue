@@ -23,7 +23,7 @@
 						</view>
 						<view class="uni-flex uni-space-between">
 							<view class="uni-flex uni-row">
-								<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag"></text>
+								<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag" :key="tindex"></text>
 							</view>
 						</view>
 						<view class="uni-flex uni-acenter mt10">
@@ -71,7 +71,7 @@
 					</view>
 					<view class="uni-flex uni-space-between">
 						<view class="uni-flex uni-row">
-							<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag"></text>
+							<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag" :key="tindex"></text>
 						</view>
 					</view>
 					  <!-- 院校优先填报 -->

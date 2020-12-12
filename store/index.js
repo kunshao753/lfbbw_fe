@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import commonInfo from './modules/commonInfo.js'
+import commonInfo from './modules/commonInfo'
+import studentBaseInfo from './modules/studentBaseInfo'
 
 Vue.use(Vuex)
 
@@ -8,6 +9,7 @@ const store = new Vuex.Store({
 	
 	modules:{
 		commonInfo,
+		studentBaseInfo
 	},
 	
 	state: {

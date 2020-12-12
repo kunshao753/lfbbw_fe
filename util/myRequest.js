@@ -26,9 +26,11 @@ export const myRequest = (options)=>{
 				}
 				// data.ret 返回状态码 非200 均为失败
 				if(res.data.ret !== 200){
+					console.log(res.data.msg)
 					return uni.showModal({
 						content: '接口返回数据失败!'
 					})
+					
 				}
 				resolve(res.data)
 			},

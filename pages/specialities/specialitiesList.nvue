@@ -24,7 +24,6 @@
 		</view>	
 		<scroll-view class="scroll-v wrapper" enableBackToTop="true" scroll-y v-if="isOpen">
 			<view v-show="!isSub">
-				<!-- <view class="uni-bold mt20">选择专业大类</view> -->
 				<view v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.sid">						
 					<view class="uni-bold mt20">{{newsitem.sname}}</view>
 					<view class="uni-inline-item major-list">
@@ -32,11 +31,10 @@
 					</view>				
 				</view>
 				<view class="bottom-btn">
-					<button class="major-btn" type="default" @click="clickBtn(isSub)">下一步</button>
+					<button class="major-btn" @click="clickBtn(isSub)">下一步</button>
 				</view>
 			</view>
 			<view v-show="isSub">
-				<!-- <view class="uni-bold mt20">选择专业</view> -->
 				<view v-for="(item,index) in majorSubList" :key="item.cid">						
 					<view class="uni-bold mt20">{{item.cname}}</view>
 					<view class="uni-inline-item major-list">
@@ -52,58 +50,9 @@
 	</view>
 </template>
 <script>
-	const undergraduate1=[
-		{
-			"sid": 1,
-			"sname": "哲学",
-			"cinfo": [
-				{
-					"cid": 101,
-					"cname": "哲学类"
-				}
-			]
-		},
-		{
-			"sid": 2,
-			"sname": "经济学",
-			"cinfo": [
-				{
-					"cid": 201,
-					"cname": "经济与贸易类"
-				},
-				{
-					"cid": 202,
-					"cname": "金融学类"
-				}
-			]
-		}
-	]
-	const undergraduate2=[
-		{
-			"sid": 1,
-			"sname": "法学",
-			"cinfo": [
-				{
-					"cid": 101,
-					"cname": "法学类"
-				}
-			]
-		},
-		{
-			"sid": 2,
-			"sname": "经济学",
-			"cinfo": [
-				{
-					"cid": 201,
-					"cname": "经济与贸易类"
-				},
-				{
-					"cid": 202,
-					"cname": "金融学类"
-				}
-			]
-		}
-	]
+	
+	import majorApiPaths from'../../util/api/major.js'
+	
     export default {		
         data() {
             return {
@@ -122,6 +71,11 @@
 					{id:'xiguan',title:'信息管理'},
 					{id:'jingguan',title:'经济管理'},
 				],
+				//本科数据
+				undergraduate1:[],
+				//专科数据
+				undergraduate2:[],
+				
 				// 顶部tab索引
                 tabIndex: 0,
 				// 顶部tab数据
@@ -145,26 +99,55 @@
             }
         },        
 		onLoad() {
-            setTimeout(()=>{
-              this.tabBars.forEach((tabBar,index) => {
+			    
+					this.tabBars.forEach((tabBar,index) => {
 								if(index!=0){
-                  this.newsList.push({
-                        data: [],
-					              PopularMajor:[]
-                  });
-							}		
-				  // this.curMajor.push({
-					 //    data:[]
-				  // });
-				  // this.curMajorSub.push({
-						// data:[]
-				  // });
-              });
-              this.getList(0,7);
-							console.log(this.newsList)
-            },0)
+									this.newsList.push({
+												data: [],
+												PopularMajor:[]
+									});
+								}	
+					});
+					//获取本科专业数据
+					this.getMajorCatList(7);
+					//获取专科专业数据
+					this.getMajorCatList(5);
+				
+				
+				
         },
         methods: {
+					//获取专业一二级分类
+					async getMajorCatList(type){
+						const res = await this.$myRequest({
+							url: majorApiPaths.getMajorCatList,
+							data:{
+								diploma:type
+							}
+						});
+						
+						//本科
+						if(type==7){
+							 console.log(res)
+							 this.undergraduate1=res.data
+							 //默认选中
+							 this.getList(0,7);
+						}else{//专科
+						   this.undergraduate2=res.data
+							 
+						}					
+					},
+					// 根据id获取专业
+					async getMajorList(cids){
+						const res = await this.$myRequest({
+							url: majorApiPaths.getMajorList,
+							data:{
+								cid:cids
+							}
+						});
+						this.majorSubList=res.data
+					},
+					
 			search(res) {
 				uni.showToast({
 					title: '搜索：' + res.value,
@@ -184,9 +167,9 @@
             getList(index,id) {
                 let activeTab = this.newsList[index];
 								if(id==7){
-									activeTab.data = activeTab.data.concat(undergraduate1);
+									activeTab.data = activeTab.data.concat(this.undergraduate1);
 								}else if(id==5){
-									activeTab.data = activeTab.data.concat(undergraduate2);
+									activeTab.data = activeTab.data.concat(this.undergraduate2);
 								}	
             },
 			// 跳转到院校详情
@@ -240,32 +223,7 @@
 						})
 					}else{
 						//下一步
-						t.majorSubList=[
-							{
-								"cid": 201,
-								"cname": "经济与贸易类",
-								"minfo": [
-									{
-										"mid": "52aedf5b747aec1cfc84158f",
-										"mname": "国际经济与贸易"
-									}
-								]
-							},
-							{
-								"cid": 202,
-								"cname": "金融学类",
-								"minfo": [
-									{
-										"mid": "52aedf5b747aec1cfc841588",
-										"mname": "金融学"
-									},
-									{
-										"mid": "52aedf5b747aec1cfc841589",
-										"mname": "金融工程"
-									}
-								]
-							}
-						]
+						this.getMajorList(id)
 						t.isSub = true
 						uni.setNavigationBarTitle({
 							   title:'选择专业'
@@ -320,10 +278,10 @@
 	.diploma{margin: 0 22rpx;padding: 0 30rpx;border: 2rpx solid #000;border-radius: 28rpx;height: 56rpx;}
 	.diploma text{padding-right: 10rpx;}
 	.cur{border-color: #C4C4C4;background: #C4C4C4;}
-	.scroll-v{background: #F2F2F2;flex: 1;}
+	.scroll-v{background: #F2F2F2;flex: 1; padding-bottom:150rpx;}
 	.major-list{flex-wrap: wrap;}
-	.major-list text{height: 56rpx;line-height: 56rpx;padding: 0 24rpx;margin-right: 8rpx;margin-top: 30rpx;border-radius: 16rpx;border: 2rpx solid #bdbdbd;color: #828282;}
-	.bottom-btn{position: fixed;bottom: 0;left: 0;right: 0;background: #F2F2F2;padding: 28rpx;border-top:2rpx solid #e0e0e0;}
+	.major-list text{height: 56rpx;line-height: 56rpx;padding: 0 24rpx;  margin-right: 16rpx;margin-bottom: 24rpx;border-radius: 16rpx;border: 2rpx solid #bdbdbd;color: #828282;}
+	.bottom-btn{position: fixed;bottom: 0;left: 0;right: 0;background: #c4c4cc4;padding: 28rpx;border-top:2rpx solid #e0e0e0;}
 	.major-btn{width: 100%; background-color: #c4c4c4;}
 	.major-list text.select{background: #bdbdbd; color: #fff;}
 	.go-search-chool{justify-content: space-between;}

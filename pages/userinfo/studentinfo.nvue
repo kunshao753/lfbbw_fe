@@ -113,7 +113,7 @@
 						</radio-group>
 					</view>
 					<view class="uni-btn-v uni-column uni-acenter">
-						<button class="fill-sub" form-type="submit">立即查询</button>
+						<button class="uni-button-gray" form-type="submit">立即查询</button>
 					</view>
 				</form>
 			</view>			
@@ -184,8 +184,8 @@
 				var t = this;
 				t.studentInfo = {
 					province_id:'',
-					score:350,
-					rank:5622,
+					score:'',
+					rank:'',
 					wenli:null,
 					course_list:[],
 					firstCourse:null,
@@ -252,15 +252,26 @@
 			    if(checkRes){
 			        //uni.showToast({title:"验证通过!", icon:"none"});
 					console.log(formData.query);
+					
+					//存储基本学生信息
+					this.$store.commit({
+					      type:'studentBaseInfo/updateState',
+								province_id:t.studentInfo.province_id,	
+								score:t.studentInfo.score,
+								rank:t.studentInfo.rank,
+								wenli:t.studentInfo.wenli							
+					})
+					
+					//跳转
 					switch (formData.query){						
 						case 'fschool':
 							uni.navigateTo({
-								url:'../school/schoolList'
+								url:'../school/schoolList?showType=schools'
 							});
 							break;
 						case 'fspecialities':
 							uni.navigateTo({
-								url:'../specialities/specialitiesList'
+								url:'../school/schoolList?showType=majors'
 							});
 							break;
 						case 'fexpert':
