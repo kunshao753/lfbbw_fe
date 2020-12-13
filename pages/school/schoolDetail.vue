@@ -2,20 +2,20 @@
 	<view class="wrapper uni-bg-white">
 		<!-- 顶部学校信息 start -->
 		<view class="uni-flex uni-row school-top">
-			<view><image class="image-list" src="../../static/shuijiao.jpg"></image></view>
+			<view><image class="image-list" :src="schoolInfoData.logo"></image></view>
 			<view class="uni-flex-item">
 				<view class="mt10 uni-inline-item">
-					<text class="uni-title">{{detailDate.title}}</text>
+					<text class="uni-title">{{schoolInfoData.name}}</text>
 					<button class="sd-add" type="default" size="mini">+关注</button>
 				</view>
 				<view class="uni-inline-item mt20">
-					<text class="school-tag">985</text>
-					<text class="school-tag">211</text>
-					<text class="school-tag">综合</text>
+					<text class="school-tag"  v-for="(item,index) in schoolInfoData.tag" :key="index">{{item}}</text>
+					<text class="school-tag" v-if="schoolInfoData.type" >{{schoolInfoData.type}}</text>
+					<text class="school-tag" v-if="schoolInfoData.grad" >{{schoolInfoData.grad}}</text>
 				</view>
 				<view class="uni-inline-item mt10">
 					<view class="sub-box uni-inline-item">
-						<image class="sd-addressicon" src="../../static/location.png"></image><text>北京</text>
+						<image class="sd-addressicon" src="../../static/location.png"></image><text>{{schoolInfoData.location}}</text>
 					</view>
 					<view class="sub-box uni-inline-item">
 						<image class="sd-addressicon" src="../../static/location.png"></image>
@@ -32,10 +32,14 @@
 <script>
 	import tabbar from '../component/tabbar/tabbar.vue'
 	import schoolInfomation from './component/introduction.nvue'
+	import schoolApiPaths from './../../util/api/school.js'
+	
 	export default{
 		data(){
 			return{
 				paramaDate:{},
+				//接口获取的学校全部信息
+				schoolInfoData:{},
 				tabBars: [{
 				    name: '学校',
 				    id: '1'
@@ -65,11 +69,41 @@
 			} catch (error) {
 				this.paramaDate = JSON.parse(payload);
 			}
-			uni.setNavigationBarTitle({
-				title: this.paramaDate.title
-			});
+			
+			
+			
+				if(event.school_id){
+						this.getProvinceList(school_id)
+				}else{
+					 this.getProvinceList('52ac2e99747aec013fcf4e6f')
+				};
+			
+				
+			
 		},
 		methods:{
+			//接口获取学校详情
+			async getProvinceList(id){
+				const res = await this.$myRequest({
+					url: schoolApiPaths.getSchoolDetailInfo,
+					data:{
+						sch_id:id
+					}
+				})
+				
+				console.log(res)
+					if(res.data[id]){
+							this.schoolInfoData=res.data[id];
+							this.schoolInfoData.tag=res.data[id].tag.split(',');
+							
+							uni.setNavigationBarTitle({
+								title: this.schoolInfoData.name
+							});
+					}	
+							
+							
+			},
+			
 			ontabtap:function(index){
 				this.tabIndex = index
 			}

@@ -250,7 +250,7 @@
 			tabbar
 		},
 		computed: {
-			...mapState(['systemInfo'])
+			...mapState(['volunteerInfo'])
 		},
 			onLoad(option) {
 				 console.log(option.showTab);
@@ -507,6 +507,16 @@
 							},
 							//加为备选志愿
 							addVolunteer(){
+								
+								 let volunteerInfoArr=this.volunteerInfo.volunteerIds;
+								 volunteerInfoArr.push('2')
+								 this.$store.commit({
+								 	      type:'volunteerInfo/updateState',
+								 				volunteerIds:volunteerInfoArr,														
+								 	})
+								 console.log("volunteerIds:"+this.volunteerInfo.volunteerIds,this.volunteerInfo.volunteerIds.length)
+								 
+								 
 								uni.showToast({
 									title:'添加成功',
 									icon:'none'

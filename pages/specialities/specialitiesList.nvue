@@ -216,8 +216,18 @@
 					let id = ''
 					id = t.curMajor.join(',')
 					console.log(id)
+					
+					const cur_diploma_id=t.tabBars[t.tabIndex].id
+					
+					
 					//搜索院校
 					if(isSub){
+						
+						this.$store.commit({
+						      type:'studentBaseInfo/updateState',
+									diploma_id:cur_diploma_id										
+						})
+						
 						uni.navigateTo({
 							url:'../school/schoolList'
 						})

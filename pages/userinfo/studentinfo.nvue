@@ -271,7 +271,7 @@
 							break;
 						case 'fspecialities':
 							uni.navigateTo({
-								url:'../school/schoolList?showType=majors'
+								url:'../school/schoolList?showType=specialities'
 							});
 							break;
 						case 'fexpert':

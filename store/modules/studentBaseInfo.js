@@ -5,7 +5,10 @@ const state={
 			score:0,
 			rank:0,
 			sceneId:0,
-			wenli:0
+			wenli:0,
+			
+			//专科5 本科7
+			diploma_id:7
 }
 
 const getters={
@@ -30,6 +33,9 @@ const mutations={
 			 
 			 if(payload.wenli)
 			 state.wenli= payload.wenli
+			 
+			 if(payload.diploma_id)
+			 state.diploma_id= payload.diploma_id
 			 
 			 console.log('studentInfo updateState 执行了')		   
 		 }

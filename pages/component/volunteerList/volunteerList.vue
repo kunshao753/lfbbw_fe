@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="fixed uni-column" @click="showVlist"><text class="outer">志愿预览<text v-if="fillList.length>0" class="inner">{{fillList.length}}</text></text></view>
+		<view class="fixed uni-column" @click="showVlist"><text class="outer">志愿预览<text v-if="volunteerInfo.volunteerIds.length>0" class="inner">{{volunteerInfo.volunteerIds.length}}</text></text></view>
 		<uni-popup ref="popup" type="bottom" :animation="true">
 			<view v-if="isShow" class="uni-bg-white popup-box">
 				<view class="uni-title mt20">预览志愿</view>
@@ -21,7 +21,7 @@
 					<button class="to-volunteering">生成志愿</button>
 				</view>
 				<view v-else>
-					<text>还没有意向志愿</text>
+					<text>还没有意向志愿     志愿id信息是： {{volunteerInfo.volunteerIds.join(',')}}</text>
 				</view>
 			</view>			
 		</uni-popup>
@@ -30,6 +30,13 @@
 <script>
 	// import dragSorts from '@/components/HM-dragSorts/HM-dragSorts.vue'
 	import dragSort from '@/components/drag-sort/index.vue'
+	
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
+	
+	
 	export default{
 		name:'volunteerList',
 		props:{
@@ -38,18 +45,25 @@
 				default:[]
 			}
 		},
+		computed:{
+			...mapState([
+				  'volunteerInfo'
+			]),
+		},
 		data(){
 			return{	
 				isShow:false,
 				props: {
 				        label: 'name'
 				      },
+				curVolunteerInfo:[]
 			}
 		},
 		components: {
 			// 'HM-dragSorts':dragSorts,
 			'drag-sort':dragSort,
 		},
+		
 		methods:{
 			//志愿预览
 			showVlist(){

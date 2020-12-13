@@ -98,7 +98,7 @@
 						<!-- 专业优先填报 -->
 						<view class="uni-flex uni-acenter mt10" v-if="cellType=='specialities'">
 							<view class="major-item">
-																<view class="left" @click="addToMajor()">
+																<view class="left" @click.stop="addToMajor()">
 																	 <uni-icons type="plus"  class="plus" color="#e5e5e5" size="20"></uni-icons>
 																   <text>采购管理</text>
 																</view>
@@ -109,14 +109,14 @@
 																</view>
 							</view>
 							<view class="major-item">
-																<view class="left">
-																	 <uni-icons type="plus"  class="plus" size="20" @click=""></uni-icons>
+																<view class="left" @click.stop="addToMajor()">
+																	 <uni-icons type="plus"  class="plus" size="20"></uni-icons>
 																   <text>采购管理</text>
 																</view>
 																<view class="right">
 																	<text class="info2">录取概率</text>
 																	<text class="probability">33%</text>
-																	<uni-icons type="arrowright"  class="close" @click="" size="20"></uni-icons>
+																	<uni-icons type="arrowright"  class="close"  size="20"></uni-icons>
 																</view>
 							</view>
 							
@@ -138,6 +138,12 @@
 	<!-- #endif -->
 </template>
 <script>
+	
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
+	
 	export default{
 		name:'school-cell',
 		props:{
@@ -153,6 +159,11 @@
 				type:String,
 				default:'schools'
 			}
+		},
+		computed:{
+			...mapState([
+				  'volunteerInfo'
+			])
 		},
 		data(){
 			return{
@@ -179,7 +190,16 @@
 			goMajor(data){
 				this.$emit('gomajor',data)
 			},
-			addToMajor(){
+			
+			addToMajor(e){
+				
+				let volunteerInfoArr=this.volunteerInfo.volunteerIds;
+				volunteerInfoArr.push('1')
+				this.$store.commit({
+					      type:'volunteerInfo/updateState',
+								volunteerIds:volunteerInfoArr,														
+					})
+					console.log("volunteerIds:"+this.volunteerInfo.volunteerIds,this.volunteerInfo.volunteerIds.length)
 				 uni.showToast({
 				 	title:'已添加到备选志愿',
 				 	icon:'none'
