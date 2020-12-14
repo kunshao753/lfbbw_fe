@@ -17,7 +17,7 @@
 				<!-- 圆弧进度条 -->
 		   <view class="qiun-charts3">
 				 <canvas canvas-id="canvasArcbar3" id="canvasArcbar3" class="charts3"></canvas>
-				 <button @click="goDetail()">院校详情</button>
+				 <button @click="goDetail(curschoolInfo.sch_id)">院校详情</button>
 			 </view>
 			 
 			 <!-- 折线数据 -->
@@ -48,7 +48,7 @@
 					  <scroll-view scroll-y="true" class="scroll">	
 			       <view class="majors-outers">
 							    <view class="item gray"><text>专业10</text><text>录取概率</text></view>
-							    <view class="item" v-for="(item,index) in majorsData" @click="openPopup(item)"><text>{{item.name}}</text><text>{{item.probability}}%</text></view>													
+							    <view class="item" v-for="(item,index) in majorsData" @click="openPopup(item)" :key="index"><text>{{item.name}}</text><text>{{item.probability}}%</text></view>													
 						 </view>
 						 </scroll-view>	
 			  </swiper-item>
@@ -74,7 +74,7 @@
 									 <text>最低分</text>
 									 <text>最低次位</text>
 								</view>
-							    <view class="item" v-for="(item,index) in curSelectedMajorsData.statistics">
+							    <view class="item" v-for="(item,index) in curSelectedMajorsData.statistics" :key="index">
 										 <text>{{item.year}}</text>
 										 <text>{{item.count}}</text>
 										 <text>{{item.lowest_score}}</text>
@@ -102,6 +102,8 @@
 	
 	import tabbar from '../component/tabbar/tabbar.vue'
 	import uCharts from '../../components/u-charts/u-charts.js'
+	import schoolApiPaths from './../../util/api/school.js'
+	
 	var _self;
 	var canvasObj = {};
 	const arcbarData={
@@ -130,7 +132,9 @@
 				            tag: 'majors'
 				        }],
 					
-					 
+				   curschoolInfo:{
+						 sch_id:''
+					 },
 					 cWidth3: '', //圆弧进度图
 					 cHeight3: '', //圆弧进度图
 					 arcbarWidth: '', //圆弧进度图，进度条宽度,此设置可使各端宽度一致
@@ -164,10 +168,10 @@
 						     name: '历年录取分数',
 						     tag: 'score',
 								 data:{
-										categories: ['2012', '2013', '2014', '2015', '2016'],
+										categories: [],
 										series: [{
 											name: '分数',
-											data: [35, 20, 25, 37, 4],
+											data: [],
 											color: '#1890ff'
 										}]
 									 }
@@ -175,10 +179,10 @@
 						     name: '历年录取位次',
 						     tag: 'rank',
 								 data:{
-									categories: ['2015', '2018', '5017', '2045', '3016', '2018'],
+									categories: [],
 									series: [{
 										name: '位次',
-										data: [35, 20, 25, 37, 4, 20],
+										data: [],
 										color: '#00ff00'
 									}]
 								 }
@@ -186,10 +190,10 @@
 						     name: '历年录取人数',
 						     tag: 'count',
 								 data:{
-										categories: ['2020', '2023', '2028', '3015', '2816', '200927'],
+										categories: [],
 										series: [{
 											name: '人数',
-											data: [23, 6,39, 29,9, 40],
+											data: [],
 											color: '#ff00ff'
 										}]
 									 }
@@ -250,9 +254,33 @@
 			tabbar
 		},
 		computed: {
-			...mapState(['volunteerInfo'])
+			...mapState(['studentBaseInfo','volunteerInfo'])
 		},
 			onLoad(option) {
+				
+				const data={
+					sch_id:'52ac2e98747aec013fcf4cca',
+					enroll_unit_id:'52ac2e98747aec013fcf4cca',
+					province_id:'130000000000',
+					wenli:1,
+					batch:1,
+					diploma_id:7,
+					
+					// sch_id:'52ac2e98747aec013fcf4cca',
+					// enroll_unit_id:'52ac2e98747aec013fcf4cca',
+					// province_id:this.studentBaseInfo.province_id,
+					// wenli:this.studentBaseInfo.wenli,
+					// batch:1,
+					// diploma_id:this.studentBaseInfo.diploma_id
+				}
+				
+				this.curschoolInfo.sch_id=data.sch_id;
+				
+				
+				this.getSchEnrollData(data)
+				
+				
+				
 				 console.log(option.showTab);
 				 if(option.showTab){
 				    this.tabIndex=this.tabBars.findIndex(item=>item.tag == option.showTab)
@@ -291,9 +319,54 @@
 				},
 			
 			methods:{
+				   //接口获取学校详情
+				   async getSchEnrollData(dataObj){
+				   	const res = await this.$myRequest({
+				   		url: schoolApiPaths.getSchEnrollData,
+				   		data:dataObj
+				   	})
+				   	
+				   	console.log(res)
+						
+					  const formatRes={
+							 score:[],
+							 rank:[],
+							 count:[],
+							 years:[]
+						};
+						res.data.forEach((item,index)=>{
+									 formatRes.years.push(item.academic_year)
+									 formatRes.score.push(item.avg_score)
+									 formatRes.rank.push(item.avg_score_rank)
+									 formatRes.count.push(item.admission_count) 
+						})
+	
+						this.scoreInfoData.map((item,index)=>{
+							 switch(item.tag){
+								 case 'score':{
+									 item.data.categories=formatRes.years
+									 item.data.series[0].data=formatRes.score
+									 break;
+								 }
+								 case 'rank':{
+								 			item.data.categories=formatRes.years
+								 			item.data.series[0].data=formatRes.rank
+								 			break;
+								 }
+								 case 'count':{
+								 			item.data.categories=formatRes.years
+								 			item.data.series[0].data=formatRes.count
+								 			break;
+								 }
+							 }
+						})
+						this.fillLineData(this.scoreInfoData)
+										
+				   },
+				
+				
 				     // tabbar点击切换
 				      ontabtap(index) {				
-				          //let index = e.target.dataset.current || e.currentTarget.dataset.current;
 				          this.switchTab(index);
 				      },
 				      ontabchange(e) {
@@ -306,7 +379,6 @@
 								if (this.tabIndex === index) {
 								    return;
 								}
-								
 								
 								
 								this.tabIndex = index;
@@ -325,44 +397,26 @@
 							  },
 							//获取进度条数据
 							getServerData() {
-								// uni.showLoading({
-								// 	title: "正在加载数据..."
-								// })
-								// uni.request({
-								// 	url: 'https://unidemo.dcloud.net.cn/hello-uniapp-ucharts-data.json',
-								// 	data: {},
-								// 	success: function(res) {
-								// 		_self.fillData(res.data);
-								// 	},
-								// 	fail: () => {
-								// 		_self.tips = "网络错误，小程序端请检查合法域名";
-								// 	},
-								// 	complete() {
-								// 		uni.hideLoading();
-								// 	}
-								// });
-								this.fillData()
+								this.fillArcbarData();
 							},
 							
-							fillData(data) {
-								
-								//this.serverData = data;
-								//this.tips = data.tips;
-								
+							fillArcbarData(data){
 								let Arcbar3 = {
 									series: []
 								};
+								Arcbar3.series = this.arcbarData.series;
+								this.showArcbar3("canvasArcbar3", Arcbar3);
+							},
 							
+							fillLineData(curScoreInfoData) {
 								let LineA = {
 									categories: [],
 									series: []
 								};
-								
-								Arcbar3.series = this.arcbarData.series;
-								LineA.categories = this.scoreInfoData[0].data.categories;
-								LineA.series =  this.scoreInfoData[0].data.series;
-								
-								this.showArcbar3("canvasArcbar3", Arcbar3);
+												
+								LineA.categories = curScoreInfoData[0].data.categories;
+								LineA.series =  curScoreInfoData[0].data.series;
+													
 								this.showLineA("canvasLineA", LineA);
 			      	},
 							//圆弧进度条
@@ -472,13 +526,10 @@
 								});
 							},
 							// 跳转到院校详情
-							goDetail(data) {
-							          let detail = {
-							          	title: data.title,
-							          	id: data.id
-							          };
+							goDetail(id) {
+								
 							          uni.navigateTo({
-							              url: './schoolDetail?paramaDate=' + encodeURIComponent(JSON.stringify(detail))
+							              url: './../school/schoolDetail?school_id='+id
 							          });
 							          
 							}, 

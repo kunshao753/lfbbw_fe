@@ -354,12 +354,7 @@ batch:"本科一批",
 									})
 									
 									console.log(res)
-									// res.data.map(item=>{
-									// 	 this.filterProvinceList.push({
-									// 	          id: item.province_id,
-									// 	          name: item.province_desc
-									// 	        });
-									// })							
+														
 					},
 			// 选择985,211,本省
 			toggleFilter(type){

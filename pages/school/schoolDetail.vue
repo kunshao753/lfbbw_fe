@@ -61,21 +61,22 @@
 			schoolInfomation
 		},
 		onLoad(event) {
-			// TODO 后面把参数名替换成 payload
-			const payload = event.paramaDate || event.payload;
-			// 目前在某些平台参数会被主动 decode，暂时这样处理。
-			try {
-				this.paramaDate = JSON.parse(decodeURIComponent(payload));
-			} catch (error) {
-				this.paramaDate = JSON.parse(payload);
-			}
-			
 			
 			
 				if(event.school_id){
-						this.getProvinceList(school_id)
+						this.getSchoolInfo(event.school_id)
 				}else{
-					 this.getProvinceList('52ac2e99747aec013fcf4e6f')
+					 this.getSchoolInfo('52ac2e99747aec013fcf4e6f')
+					 
+					 // TODO 后面把参数名替换成 payload
+					 const payload = event.paramaDate || event.payload;
+					 // 目前在某些平台参数会被主动 decode，暂时这样处理。
+					 try {
+					 	this.paramaDate = JSON.parse(decodeURIComponent(payload));
+					 } catch (error) {
+					 	this.paramaDate = JSON.parse(payload);
+					 }
+					 
 				};
 			
 				
@@ -83,7 +84,7 @@
 		},
 		methods:{
 			//接口获取学校详情
-			async getProvinceList(id){
+			async getSchoolInfo(id){
 				const res = await this.$myRequest({
 					url: schoolApiPaths.getSchoolDetailInfo,
 					data:{
@@ -94,7 +95,7 @@
 				console.log(res)
 					if(res.data[id]){
 							this.schoolInfoData=res.data[id];
-							this.schoolInfoData.tag=res.data[id].tag.split(',');
+							this.schoolInfoData.tag=res.data[id].tag.split(',').filter(item=>item && item.trim());
 							
 							uni.setNavigationBarTitle({
 								title: this.schoolInfoData.name
