@@ -20,8 +20,8 @@
 var config = {
   yAxisWidth: 15,
   yAxisSplit: 5,
-  xAxisHeight: 15,
-  xAxisLineHeight: 15,
+  xAxisHeight: 35,
+  xAxisLineHeight: 35,
   legendHeight: 15,
   yAxisTitleWidth: 15,
   padding: [10, 10, 10, 10],

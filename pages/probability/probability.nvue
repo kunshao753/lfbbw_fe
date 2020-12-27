@@ -103,6 +103,7 @@
 	import tabbar from '../component/tabbar/tabbar.vue'
 	import uCharts from '../../components/u-charts/u-charts.js'
 	import schoolApiPaths from './../../util/api/school.js'
+	import majorApiPaths from './../../util/api/major.js'
 	
 	var _self;
 	var canvasObj = {};
@@ -138,7 +139,6 @@
 					 cWidth3: '', //圆弧进度图
 					 cHeight3: '', //圆弧进度图
 					 arcbarWidth: '', //圆弧进度图，进度条宽度,此设置可使各端宽度一致
-					 gaugeWidth: '', //仪表盘宽度,此设置可使各端宽度一致
 					 tips: '',
 					 pixelRatio: 1,
 					 serverData: '',
@@ -201,28 +201,22 @@
 				//专业录取概率
 				majorsData:[
 					{
-						majorsId:1,
+						majorsId:"52aedf5b747aec1cfc841591",
+						major_enroll_id:"58c7d802f1d8e63428de491d",
 						name:'财政学',
 						probability:98,
-						statistics:[{
-							year:2020,
-							count:2,
-							lowest_score:679,
-							lowest_order:1220
-						},{
-							year:2020,
-							count:2,
-							lowest_score:679,
-							lowest_order:1220
-						},{
-							year:2020,
-							count:2,
-							lowest_score:679,
-							lowest_order:1220
-						}]		
+						statistics:[
+						// 	{
+						// 	year:2020,
+						// 	count:2,
+						// 	lowest_score:679,
+						// 	lowest_order:1220
+						// }
+						]
 					},
 					{
 						majorsId:2,
+						major_enroll_id:'',
 						name:'xx学',
 						probability:68,
 						statistics:[{
@@ -234,19 +228,23 @@
 					},
 					{
 						majorsId:3,
+						major_enroll_id:'',
 						name:'财政学',
 						probability:98,
 						statistics:[]
 					},
 					{
 						majorsId:4,
+						major_enroll_id:'',
 						name:'xx学',
 						probability:68,
 						statistics:[]
 					}
 				],
 				//当前选中的专业数据
-				curSelectedMajorsData:{},
+				curSelectedMajorsData:null,
+				//当前页面学校基本公用信息
+				schoolData:null,
 			}
 				
 		},
@@ -258,7 +256,7 @@
 		},
 			onLoad(option) {
 				
-				const data={
+				this.schoolData={
 					sch_id:'52ac2e98747aec013fcf4cca',
 					enroll_unit_id:'52ac2e98747aec013fcf4cca',
 					province_id:'130000000000',
@@ -274,11 +272,9 @@
 					// diploma_id:this.studentBaseInfo.diploma_id
 				}
 				
-				this.curschoolInfo.sch_id=data.sch_id;
-				
-				
-				this.getSchEnrollData(data)
-				
+				this.curschoolInfo.sch_id=this.schoolData.sch_id;
+			
+				this.getSchEnrollData(this.schoolData)
 				
 				
 				 console.log(option.showTab);
@@ -303,7 +299,7 @@
 					this.cWidth3 = uni.upx2px(400);
 					this.cHeight3 = uni.upx2px(400);
 					this.arcbarWidth = uni.upx2px(24);
-					this.gaugeWidth = uni.upx2px(30);
+					
 					
 					const info=uni.getSystemInfoSync();
 					console.log(info.windowWidth)
@@ -311,7 +307,6 @@
 					console.log(this.cWidth)
 					this.cHeight = uni.upx2px(400);
 					
-					// //this.fillData(Data);
 					
 				},
 				onReady() {
@@ -319,6 +314,10 @@
 				},
 			
 			methods:{
+				 //解决uchart vue报toJSON错bug
+				  toJSON(){
+						return this
+					},
 				   //接口获取学校详情
 				   async getSchEnrollData(dataObj){
 				   	const res = await this.$myRequest({
@@ -336,8 +335,8 @@
 						};
 						res.data.forEach((item,index)=>{
 									 formatRes.years.push(item.academic_year)
-									 formatRes.score.push(item.avg_score)
-									 formatRes.rank.push(item.avg_score_rank)
+									 formatRes.score.push(item.min_score)
+									 formatRes.rank.push(item.min_score_rank)
 									 formatRes.count.push(item.admission_count) 
 						})
 	
@@ -363,7 +362,17 @@
 						this.fillLineData(this.scoreInfoData)
 										
 				   },
-				
+				  //接口获取专业历年录取信息
+				  async getMajorEnrollData(dataObj){
+				  	const res = await this.$myRequest({
+				  		url: majorApiPaths.getMajorEnrollData,
+				  		data:dataObj
+				  	})
+				  	
+				  	console.log(res)
+						return res;
+				  										
+				  },
 				
 				     // tabbar点击切换
 				      ontabtap(index) {				
@@ -375,7 +384,7 @@
 				      },
 				      switchTab(index) {
 								console.log(index)
-								
+								this.$refs.majorsPopup.close()
 								if (this.tabIndex === index) {
 								    return;
 								}
@@ -542,8 +551,35 @@
 							},
 							//popup相关事件
 							openPopup(obj){
-								 this.$refs.majorsPopup.open()
-								 this.curSelectedMajorsData=obj
+								 let curdata=obj;
+								 let curMajorData=this.schoolData;
+								 curMajorData.major_enroll_id=obj.major_enroll_id
+								 curMajorData.major_id=obj.majorsId
+							
+								
+								this.getMajorEnrollData(curMajorData).then((res)=>{
+									 if(res.data.length>0){
+										   obj.statistics=[];
+										   res.data.map((item,index)=>{				 
+										   					 obj.statistics.push({
+										   										year:item.academic_year,
+										   										count:item.admission_count,
+										   										lowest_score:item.min_score,
+										   										lowest_order:item.min_score_rank
+										   								})
+										   })
+											 this.$refs.majorsPopup.open()
+											 this.curSelectedMajorsData=obj
+									 }else{
+										  uni.showToast({
+										  	title:'此专业暂无相关数据',
+										  	icon:'none'
+										  })
+									 }
+								 })
+								 
+								 
+								 
 							},
 							closePopup(){
 								this.$refs.majorsPopup.close()

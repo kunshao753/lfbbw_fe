@@ -1,0 +1,313 @@
+<template>
+	<view class="employment-info">	
+		<view class="uni-bold-tit"><text>毕业去向</text></view>
+		
+		<view class="qiun-charts3">
+			<canvas canvas-id="canvasArcbar1" id="canvasArcbar1" class="charts3"></canvas>
+			<canvas canvas-id="canvasArcbar2" id="canvasArcbar2" class="charts3" style="margin-left: 250rpx;"></canvas>
+			<canvas canvas-id="canvasArcbar3" id="canvasArcbar3" class="charts3" style="margin-left: 500rpx;"></canvas>		
+		</view>
+		
+		<view class="uni-bold-tit"><text>薪酬情况</text></view>
+		<view class="qiun-charts">
+			<canvas canvas-id="canvasLineA" id="canvasLineA" class="chartsLine" disable-scroll=true @touchstart="touchLineA" @touchmove="moveLineA" @touchend="touchEndLineA"></canvas>	
+		</view>
+	</view>
+</template>
+<script>
+	import uCharts from '../../../components/u-charts/u-charts.js';
+	var _self;
+	var canvasObj = {};
+	
+	export default{
+		name:'employment-Infomation',
+		props:{
+			employInfo:{
+				type:Object,
+				default:{}
+			}
+		},
+		data(){
+			return{
+				cWidth: '',
+				cHeight: '',
+				cWidth3: '', //圆弧进度图
+				cHeight3: '', //圆弧进度图
+				arcbarWidth: '', //圆弧进度图，进度条宽度,此设置可使各端宽度一致
+				
+				tips: '',
+				pixelRatio: 1,
+				serverData: '',
+				itemCount: 30, //x轴单屏数据密度
+				sliderMax: 50
+			}
+		},
+		onLoad() {
+			
+		},
+		onReady() {
+			_self = this;
+			//#ifdef MP-ALIPAY
+			uni.getSystemInfo({
+				success: function(res) {
+					if (res.pixelRatio > 1) {
+						//正常这里给2就行，如果pixelRatio=3性能会降低一点
+						//_self.pixelRatio =res.pixelRatio;
+						_self.pixelRatio = 2;
+					}
+				}
+			});
+			//#endif
+			
+			const info=uni.getSystemInfoSync();
+			this.cWidth = info.windowWidth;
+			this.cHeight = uni.upx2px(400);
+			
+			const acbarWidth=this.cWidth/4
+			this.cWidth3 = acbarWidth;
+			this.cHeight3 = acbarWidth;
+			this.arcbarWidth = uni.upx2px(12);
+			
+					
+			this.getServerData();
+		},
+		components:{
+		},
+		methods:{
+			 
+		    getServerData() {
+					
+		       this.fillData();
+		    	
+		    },
+				
+				
+		    fillData() {
+		    	// this.serverData = data;
+		    	// this.tips = data.tips;
+		    	// this.sliderMax = data.Candle.categories.length;
+		    	
+		    	let LineA = {
+		    		categories: [],
+		    		series: []
+		    	};
+		    
+		    	let Arcbar1 = {
+		    		series: []
+		    	};
+		    	let Arcbar2 = {
+		    		series: []
+		    	};
+		    	let Arcbar3 = {
+		    		series: []
+		    	};
+		    	
+		    	
+		    	LineA.categories = this.employInfo.lineInfo.categories;
+		      LineA.series = this.employInfo.lineInfo.series;
+		    	
+		    	Arcbar1.series = this.employInfo.acbarsInfo[0].series;
+		    	Arcbar2.series = this.employInfo.acbarsInfo[1].series;
+		    	Arcbar3.series = this.employInfo.acbarsInfo[2].series;
+		    	
+		    	this.showLineA("canvasLineA", LineA);		    	
+		    	this.showArcbar("canvasArcbar1", Arcbar1);
+		    	this.showArcbar2("canvasArcbar2", Arcbar2);
+		    	this.showArcbar3("canvasArcbar3", Arcbar3);
+		    	
+		    },
+				showLineA(canvasId, chartData) {
+					 let _this=this
+					canvasObj[canvasId] = new uCharts({
+						$this: _self,
+						canvasId: canvasId,
+						type: 'line',
+						fontSize: 12,
+						padding:[15,15,0,15],
+						legend:{
+							show:false,
+							padding:5,
+							lineHeight:11,
+							margin:5,
+						},
+						dataLabel: true,
+						dataPointShape: true,
+						background: '#FFFFFF',
+						pixelRatio: _self.pixelRatio,
+						categories: chartData.categories,
+						series: chartData.series,
+						animation: false,
+						duration:300,
+						enableScroll: true, //开启图表拖拽功能
+						xAxis: {
+							disableGrid: true,
+							type: 'grid',
+							gridType: 'dash',
+							fontColor:'#777',
+							axisLineColor:'#e0e0e0',
+							itemCount: 4, 
+							scrollShow: false, 
+							scrollAlign: 'left',
+							//scrollBackgroundColor:'#F7F7FF',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条背景颜色,默认为 #EFEBEF
+							//scrollColor:'#DEE7F7',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条颜色,默认为 #A6A6A6
+						},
+						yAxis: {
+							//disabled:true,
+							gridType: 'solid',
+							gridColor:'#e0e0e0',
+							data:[{
+								fontColor:'#777',
+								axisLine:false,
+								//calibration:true,
+								axisLineColor:'#e0e0e0',	
+								format: (val) => {
+									return val.toFixed(0) + 'k'
+								} //如不写此方法，Y轴刻度默认保留两位小数
+							}],	
+							
+						},
+						width: _self.cWidth * _self.pixelRatio,
+						height: _self.cHeight * _self.pixelRatio,
+						extra: {
+							lineStyle: 'straight'
+						},
+					});
+				
+				},
+				showArcbar(canvasId, chartData) {
+					new uCharts({
+						$this: _self,
+						canvasId: canvasId,
+						type: 'arcbar',
+						fontSize: 11,
+						title: {
+							name: Math.round(chartData.series[0].data * 100) + '%',
+							color: '#333',
+							fontSize: 25 * _self.pixelRatio
+						},
+						subtitle: {
+							name: chartData.series[0].name,
+							color: '#ccc',
+							fontSize: 12 * _self.pixelRatio
+						},
+						extra: {
+							arcbar: {
+								type: 'circle',
+								width: _self.arcbarWidth * _self.pixelRatio, //圆弧的宽度
+								startAngle: 2 
+							}
+						},
+						background: '#FFFFFF',
+						pixelRatio: _self.pixelRatio,
+						series: chartData.series,
+						animation: false,
+						width: _self.cWidth3 * _self.pixelRatio,
+						height: _self.cHeight3 * _self.pixelRatio,
+						dataLabel: true,
+					});
+				
+				},
+				showArcbar2(canvasId, chartData) {
+					new uCharts({
+						$this: _self,
+						canvasId: canvasId,
+						type: 'arcbar',
+						fontSize: 11,
+						title: {
+							name: Math.round(chartData.series[0].data * 100) + '%',
+						  color: '#333',
+							fontSize: 25 * _self.pixelRatio
+						},
+						subtitle: {
+							name: chartData.series[0].name,
+							color: '#ccc',
+							fontSize: 12 * _self.pixelRatio
+						},
+						extra: {
+							arcbar: {
+								type: 'circle',
+								width: _self.arcbarWidth * _self.pixelRatio, //圆弧的宽度
+								startAngle: 2
+	
+							}
+						},
+						background: '#FFFFFF',
+						pixelRatio: _self.pixelRatio,
+						series: chartData.series,
+						animation: false,
+						width: _self.cWidth3 * _self.pixelRatio,
+						height: _self.cHeight3 * _self.pixelRatio,
+						dataLabel: true,
+					});
+				
+				},
+				showArcbar3(canvasId, chartData) {
+					new uCharts({
+						$this: _self,
+						canvasId: canvasId,
+						type: 'arcbar',
+						fontSize: 11,
+						title: {
+							name: Math.round(chartData.series[0].data * 100) + '%',
+							color: '#333',
+							fontSize: 25 * _self.pixelRatio
+						},
+						subtitle: {
+							name: chartData.series[0].name,
+							color: '#ccc',
+							fontSize: 12 * _self.pixelRatio
+						},
+						extra: {
+							arcbar: {
+								type: 'circle', //整圆类型进度条图
+								width: _self.arcbarWidth * _self.pixelRatio, //圆弧的宽度
+								startAngle: 2 //整圆类型只需配置起始角度即可
+							}
+						},
+						background: '#FFFFFF',
+						pixelRatio: _self.pixelRatio,
+						series: chartData.series,
+						animation: false,
+						width: _self.cWidth3 * _self.pixelRatio,
+						height: _self.cHeight3 * _self.pixelRatio,
+						dataLabel: true,
+					});
+				
+				},
+				touchLineA(e) {
+					canvasObj['canvasLineA'].scrollStart(e);
+				},
+				moveLineA(e) {
+					canvasObj['canvasLineA'].scroll(e);
+				},
+				touchEndLineA(e) {
+					canvasObj['canvasLineA'].scrollEnd(e);
+					//下面是toolTip事件，如果滚动后不需要显示，可不填写
+					canvasObj['canvasLineA'].showToolTip(e, {
+						format: function(item, category) {
+							return category + ': ' + item.data+item.name
+						}
+					});
+				},
+		     
+		}
+	}
+</script>
+<style>
+	.uni-bold-tit{ margin-bottom: 20rpx;}
+	.employment-info{padding-bottom: 100rpx; padding-top: 20rpx;} 
+	.qiun-charts3 {
+		width: 750rpx;
+		height: 250rpx;
+		background-color: #FFFFFF;
+		position: relative;
+	}
+	.charts3 {
+		position: absolute;
+		width: 250rpx;
+		height: 250rpx;
+		background-color: #FFFFFF;
+	}
+	.qiun-charts{ margin-bottom: 100rpx;}
+	.chartsLine{height: 400rpx; width: 100%;}
+</style>

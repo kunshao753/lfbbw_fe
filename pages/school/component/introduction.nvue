@@ -13,14 +13,14 @@
 			<uni-table stripe>
 				<uni-tr>
 					<uni-th align="center"></uni-th>
-					<uni-th align="center">专业名称</uni-th>
+					<uni-th align="left">专业名称</uni-th>
 					<uni-th align="center">平均分</uni-th>
 					<uni-th align="center">最低分/位次</uni-th>
-					<uni-th align="center">百分比</uni-th>
+					<uni-th align="center">录取概率</uni-th>
 				</uni-tr>
 				<uni-tr v-for="(item,index) in tableData" :key="index">
-					<uni-td align="center"><uni-icons type="heart" size="25" :color="item.isFavorite?'#ff0000':'#000'" @click="addtoFavorite(item.id,tableData)"></uni-icons></uni-td>
-					<uni-td align="center">{{item.name}}</uni-td>
+					<uni-td align="center"><uni-icons type="smallcircle-filled" size="18" :color="item.isFavorite?'#ff0000':'#c4c4c4'" @click="addtoFavorite(item.id,tableData)"></uni-icons></uni-td>
+					<uni-td align="left">{{item.name}}</uni-td>
 					<uni-td align="center">{{item.average}}</uni-td>
 					<uni-td align="center">{{item.lowestScore}}/{{item.rank}}</uni-td>
 					<uni-td align="center">{{item.percent}}</uni-td>
@@ -98,5 +98,6 @@
 	}
 </script>
 <style>
+	.school-info { padding-bottom: 100rpx;}
 	.school-info .sub-filter-box{width: 30%;}
 </style>

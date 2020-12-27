@@ -4,7 +4,9 @@ const majorApiPaths={
 			//根据id获取专业列表  {cid  逗号分隔} 
 			getMajorList:'/App/Major_Major.getMajorList',
 			//获取专业详细信息   {mid 专业id}
-			getMajorDetailInfo:'/App/Major_Major.getMajorDetailInfo'
+			getMajorDetailInfo:'/App/Major_Major.getMajorDetailInfo',
+			//专业历年录取信息
+			getMajorEnrollData:'/App/Major_Major.getMajorEnrollData',
 	}
 
 export default majorApiPaths
