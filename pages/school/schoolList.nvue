@@ -10,10 +10,10 @@
 		</view>		
 		<swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
 			<swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
-				<school-cell class="swiper-box" :cellType="curListShowType" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail" @gomajor="goMajor"></school-cell>					
+				<school-cell class="swiper-box" :cellType="curListShowType" :cellData="tab" :index1="index1" @loadmore="loadMore(index1)" @refresh="onrefresh(index1)" @pullingdown="onpullingdown" @godetail="goDetail" @gomajor="goMajor" @goprobability="goProbability"></school-cell>					
 			</swiper-item>
 		</swiper>
-		<volunteer-list></volunteer-list>
+		<volunteer-list :fillList="fillListData"></volunteer-list>
 		
 		
 		<!-- fliterPopup start -->
@@ -262,6 +262,18 @@ batch:"本科一批",
 				},
 				//当前列表展示类别,默认学校schools,专业优先specialities
 				curListShowType:'schools',
+				
+				fillListData:[{
+					schoolName:'北京大学',
+					majorsCount:1,
+				},{
+					schoolName:'复旦大学',
+					majorsCount:6,
+				},{
+					schoolName:'黑龙江大学',
+					majorsCount:2,
+				}],
+				
 				// 筛选本省
 				islocation:false,
 				// 筛选985
@@ -414,6 +426,13 @@ batch:"本科一批",
                 uni.navigateTo({
                     url: '../specialities/specialitiesDetail?paramaDate=' + encodeURIComponent(JSON.stringify(detail))
                 });
+			},
+			//跳转到院校录取概率
+			goProbability(sch_id,type){
+				sch_id='52ac2e98747aec013fcf4cca'
+				uni.navigateTo({
+				    url: '../probability/probability?showTab=' + type+"&sch_id="+sch_id
+				});
 			},
             loadMore(e) {
                 setTimeout(() => {

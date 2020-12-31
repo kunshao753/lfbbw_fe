@@ -2,7 +2,7 @@
 	<view class="wrapper uni-bg-white">
 		<!-- 顶部学校信息 start -->
 		<view class="uni-flex uni-row school-top">
-			<view><image class="image-list" :src="schoolInfoData.logo"></image></view>
+			<view><image class="image-list" :src="schoolInfoData.logo" mode="aspectFill"></image></view>
 			<view class="uni-flex-item">
 				<view class="mt10 uni-inline-item">
 					<text class="uni-title">{{schoolInfoData.name}}</text>
@@ -15,10 +15,10 @@
 				</view>
 				<view class="uni-inline-item mt10">
 					<view class="sub-box uni-inline-item">
-						<image class="sd-addressicon" src="../../static/location.png"></image><text>{{schoolInfoData.location}}</text>
+						<uni-icons type="location-filled" size="22" color="#c4c4c4" class="location-filled"></uni-icons><text>{{schoolInfoData.location}}</text>
 					</view>
 					<view class="sub-box uni-inline-item">
-						<image class="sd-addressicon" src="../../static/location.png"></image>
+						<uni-icons type="location-filled" size="22" color="#c4c4c4" class="location-filled"></uni-icons>
 						<text>综合排名：#1</text>
 					</view>
 				</view>				

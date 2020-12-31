@@ -4,8 +4,8 @@
 		
 		<view class="qiun-charts3">
 			<canvas canvas-id="canvasArcbar1" id="canvasArcbar1" class="charts3"></canvas>
-			<canvas canvas-id="canvasArcbar2" id="canvasArcbar2" class="charts3" style="margin-left: 250rpx;"></canvas>
-			<canvas canvas-id="canvasArcbar3" id="canvasArcbar3" class="charts3" style="margin-left: 500rpx;"></canvas>		
+			<canvas canvas-id="canvasArcbar2" id="canvasArcbar2" class="charts3" style="margin-left: 33.3%"></canvas>
+			<canvas canvas-id="canvasArcbar3" id="canvasArcbar3" class="charts3" style="margin-left: 66.6%"></canvas>		
 		</view>
 		
 		<view class="uni-bold-tit"><text>薪酬情况</text></view>

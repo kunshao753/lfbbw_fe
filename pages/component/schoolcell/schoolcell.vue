@@ -3,21 +3,21 @@
 	<list class="scroll-v list" enableBackToTop="true" scroll-y loadmoreoffset="15" @loadmore="loadMore">
 		<refresh class="refresh" @refresh="onrefresh" @pullingdown="onpullingdown" :display="cellData.refreshing ? 'show' : 'hide'">
 			<div class="refresh-view">
-				<image class="refresh-icon" :src="refreshIcon" :style="{width: (cellData.refreshing || pulling) ? 0: '30px'}" :class="{'refresh-icon-active': cellData.refreshFlag}"></image>
+				<image class="refresh-icon" :src="refreshIcon" :style="{width: (cellData.refreshing || pulling) ? 0: '30px'}" :class="{'refresh-icon-active': cellData.refreshFlag}"  mode="aspectFill"></image>
 				<loading-indicator class="loading-icon" animating="true" v-if="cellData.refreshing"></loading-indicator>
 				<text class="loading-text">{{cellData.refreshText}}</text>
 			</div>
 		</refresh>
 		<cell v-for="(newsitem,index2) in cellData.data" :key="newsitem.id">
 			<view class="school-cell">
-				<view class="media-item uni-flex" @click="goDetail(newsitem)">
+				<view class="media-item uni-flex" @click="goProbability(newsitem.id,'schools')">
 					<image class="image-list" :src="newsitem.image_url"></image>
 					<view class="school-r uni-flex-item">
 						<view class="uni-flex uni-space-between">
 							<text class="uni-title" v-text="newsitem.title"></text>
 							
 							<view class="uni-flex uni-acenter mt10">
-								<image class="sd-addressicon" src="../../../static/location.png"></image>
+								<uni-icons type="location-filled" size="22" color="#000" class="location-filled"></uni-icons>
 								<text>{{newsitem.location}}市</text>
 							</view>
 						</view>
@@ -59,13 +59,13 @@
 	<!-- #ifndef APP-NVUE -->
 	<scroll-view class="scroll-v list" enableBackToTop="true" scroll-y @scrolltolower="loadMore">
 		<view class="school-cell" v-for="(newsitem,index2) in cellData.data" :key="newsitem.id">
-			<view class="media-item uni-flex" @click="goDetail(newsitem)">
+			<view class="media-item uni-flex" @click="goProbability(newsitem.id,'schools')">
 				<image class="image-list" :src="newsitem.image_url"></image>
 				<view class="school-r uni-flex-item">
 					<view class="uni-flex uni-space-between title-box">
 						<text class="uni-title" v-text="newsitem.title"></text>
 						<view class="uni-flex uni-acenter mt10">
-							<image class="sd-addressicon" src="../../../static/location.png"></image>
+							<uni-icons type="location-filled" size="22" color="#000" class="location-filled"></uni-icons>
 							<text>{{newsitem.location}}市</text>
 						</view>
 					</view>
@@ -128,7 +128,7 @@
 				
 				
 			</view>
-			<view class="uni-inline-item uni-jcenter matching"  v-if="cellType=='schools'" @click="goMajor(newsitem)">匹配专业<text>{{newsitem.matchingMajor}}</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
+			<view class="uni-inline-item uni-jcenter matching"  v-if="cellType=='schools'" @click="goProbability(newsitem.id,'schools')">匹配专业<text>{{newsitem.matchingMajor}}</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
 		</view>
 		
 		<view class="loading-more" v-if="cellData.isLoading || cellData.data.length > 4">
@@ -189,6 +189,9 @@
 			},
 			goMajor(data){
 				this.$emit('gomajor',data)
+			},
+			goProbability(sch_id,type){
+				this.$emit('goprobability',sch_id,type)
 			},
 			
 			addToMajor(e){

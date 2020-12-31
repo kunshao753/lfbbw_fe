@@ -18,11 +18,10 @@
 						
 					</view> -->
 					<drag-sort :list="fillList" :props="props" @change="onDragSortChange"></drag-sort>
-					<button class="to-volunteering">生成志愿</button>
+					<text> 志愿id信息是： {{volunteerInfo.volunteerIds.join(',')}}</text>
+					<button class="to-volunteering" @click="volunteerBtnClick">生成志愿</button>
 				</view>
-				<view v-else>
-					<text>还没有意向志愿     志愿id信息是： {{volunteerInfo.volunteerIds.join(',')}}</text>
-				</view>
+				
 			</view>			
 		</uni-popup>
 	</view>
@@ -78,6 +77,9 @@
 			  console.log(e)
 			  // frontData 插到谁后面
 			  // data 操作的数据
+			},
+			volunteerBtnClick(){
+				 this.closeHandle()
 			}
 		}
 	}
@@ -89,7 +91,7 @@
 	
 	.popup-box{border-radius: 20rpx 20rpx 0 0;padding: 40rpx;position: fixed;bottom: 0;width: 100%;z-index: 200;}
 	.tips text{color: #828282;line-height: 40rpx;}
-	.to-volunteering{margin-top: 60rpx;border-radius: 50rpx;width: 100%;}
+	.to-volunteering{margin-top: 60rpx;border-radius: 50rpx;width: 100%; color: #FFF; background: #c4c4c4;height: 100rpx; line-height: 100rpx; font-size: 36rpx;}
 	.close{position: absolute;top: 40rpx;right: 40rpx;}
 	.scroll{max-height: 600rpx;flex: 1;margin-top: 20rpx;}
 </style>

@@ -15,9 +15,11 @@
 	<uni-swipe-action style="width: 100%;">
 		<uni-swipe-action-item>
 			<view class="uni-flex">
-				  <view class="item">{{item[props.label]}}</view>
+				  <view class="item-index"><text>{{item.index+1}}</text></view>
+				  <view class="item">{{item.schoolName}}</view>
+					<view class="item-major"><text>{{item.majorsCount}}个专业</text></view>
 				  <view class="touch-tight">
-					<view class="ico_drag"></view>
+						<uni-icons type="smallcircle-filled" size="18" :color="'#c4c4c4'"></uni-icons>
 				  </view>
 			</view>		  
 		  <template v-slot:right>
@@ -187,7 +189,7 @@ export default {
 }
 </script>
 
-<style lang='less' scoped>
+<style lang='less'>
 /* @import "~./1px.less"; */
 .drag-sort {
   width: 100%;
@@ -200,7 +202,7 @@ export default {
   padding: 0;
   margin: 0;
   background: #fff;
-  padding: 0 15px;
+  padding: 0 20rpx 0 10rpx;
   border-bottom: 1px solid #e0e0e0;
   box-sizing: border-box;
   .item {
@@ -214,7 +216,7 @@ export default {
 }
 .touch {
   height: 100%;
-  width: 50px;
+  width: 100%;
 }
 .ico_drag {
   display: inline-block;
@@ -228,4 +230,7 @@ export default {
   z-index: 99;
 }
 .delete{padding: 0 10px;color: #fff;background-color: #CE3C39;margin-left: 5px;}
+.item-index{ background:#c4c4c4; height:50rpx; width: 50rpx; line-height: 50rpx; color:#000; text-align: center;  margin-right: 20rpx; border-radius: 16rpx;}
+.item-major{margin-right: 5%;}
+.uni-flex{align-content: center;align-items: center;}
 </style>

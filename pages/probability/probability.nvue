@@ -10,7 +10,7 @@
 			<scroll-view scroll-y="true" class="scroll">		
 		   <view  class="cur-title uni-inline-item uni-jcenter"><text>北京大学</text></view>
 			 <view  class="uni-inline-item uni-jcenter ">
-				 <image class="sd-addressicon" src="../../static/location.png"></image>
+				 <uni-icons type="location-filled" size="28" color="#000" class="location-filled"></uni-icons>
 				 <text>北京市</text>
 				</view>
 				
@@ -271,7 +271,9 @@
 					// batch:1,
 					// diploma_id:this.studentBaseInfo.diploma_id
 				}
-				
+				if(option.sch_id){
+					
+				}
 				this.curschoolInfo.sch_id=this.schoolData.sch_id;
 			
 				this.getSchEnrollData(this.schoolData)
@@ -616,7 +618,7 @@
 	}
 </script>
 
-<style scoped>
+<style>
 	 .cur-tab{position: fixed;left: 0;top: 0;right: 0; z-index:999;padding: 0 20rpx;  padding-bottom: 8rpx;}
 	 .cur-tab /deep/ .uni-tab-item {margin-left: 60rpx; margin-right: 60rpx;flex-grow:1;}
 	 .cur-title{font-size: 38rpx;margin-top: 20rpx;}
