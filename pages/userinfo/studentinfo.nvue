@@ -36,9 +36,9 @@
 					<!-- 这里根据选择的省份展示文理科或新高考（史地政理化生） s-->
 					<!-- 3+3 -->
 					<view v-if="subjectType==0" class="subject mt20">
-						<view>选择科目</view>
+						<view>高考科目</view>
 						<checkbox-group name="courseList" class="uni-flex choose-p">
-							<label class="province"							
+							<label class="course"							
 							v-for="(item,index) in subjectInfo.course_info.course_list"
 							:class="{'cur':curSubject.includes(item.course_id)}"
 							:key="item.course_id"
@@ -50,15 +50,16 @@
 					</view>
 					<!-- 3+1+2 -->
 					<view v-if="subjectType==1" class="subject mt20">
-						<view>2选1</view>
+						<view>高考科目</view>
+						<view class="choose-subject">2选1</view>
 						<!-- <view class="uni-flex">
-							<text class="province" 
+							<text class="course" 
 							:class="{'cur':studentInfo.subject==item.id}" 
 							v-for="(item,index) in subjectInfo.firstCourse" 
 							v-text="item.name" :key="item.id" @click="chooseRadio(studentInfo.subject,item.id)"></text>
 						</view> -->
 						<radio-group name="firstCourse" class="uni-flex">
-							<label class="province"
+							<label class="course"
 							v-for="(item,index) in subjectInfo.firstCourse"
 							:class="{'cur':studentInfo.firstCourse==item.id}" 
 							:key="item.id"
@@ -67,14 +68,14 @@
 								<text v-text="item.name"></text>
 							</label>
 						</radio-group>
-						<view>4选2</view>
+						<view class="choose-subject">4选2</view>
 						<!-- <view class="uni-flex">
-							<text class="province" 
+							<text class="course" 
 							v-for="(item,index) in subjectInfo.secondCourse" 
 							v-text="item.name" :key="item.id"></text>
 						</view> -->
 						<checkbox-group name="secondCourse" class="uni-flex choose-p">
-							<label class="province"							
+							<label class="course"							
 							v-for="(item,index) in subjectInfo.secondCourse"
 							:class="{'cur':curSubject.includes(item.id)}"
 							:key="item.id"
@@ -85,30 +86,42 @@
 						</checkbox-group>
 					</view>
 					<!-- 文理科 -->
-					<view v-if="subjectType==2" class="uni-row subject mt20">						
-						<radio-group name="wenli" class="uni-flex">
-							<label class="province"
-							v-for="(item,index) in wenli"
-							:class="{'cur':studentInfo.wenli==item.id}" 
-							:key="item.id"
-							@click="chooseWenli(item.id)">
-								<radio class="radioStyle" :checked="studentInfo.wenli==item.id" :value="item.id" />
-								<text v-text="item.name"></text>
-							</label>
-						</radio-group>
+					<view v-if="subjectType==2" class="wenli mt20">
+						<view class="uni-list-cell">
+							<view class="uni-list-cell-left">高考科类</view>
+							
+							<radio-group name="wenli" class="uni-flex">
+								<label class="course-wenli"
+								v-for="(item,index) in wenli"
+								:class="{'cur':studentInfo.wenli==item.id}" 
+								:key="item.id"
+								@click="chooseWenli(item.id)">
+									<radio class="radioStyle" :checked="studentInfo.wenli==item.id" :value="item.id" />
+									<text v-text="item.name"></text>
+								</label>
+							</radio-group>
+							
+						</view>
+						
 					</view>
 					<!-- 这里根据选择的省份展示文理科或新高考（史地政理化生） e-->
 					<view class="uni-form-item uni-column">
 						<view class="title">选择查询方式</view>
 						<radio-group name="query" class="uni-flex uni-column fill-radio">
 							<label class="uni-flex-item">
-								<radio value="fschool" /><text>院校优先填报</text>
+								<radio value="fschool" />
+								<view class="icon"><uni-icons type="checkmarkempty"  class="checkmark" size="12" color="#FFFFFF"></uni-icons></view>
+								<text>院校优先填报</text>
 							</label>
 							<label class="uni-flex-item">
-								<radio value="fspecialities" /><text>专业优先填报</text>
+								<radio value="fspecialities" />
+								<view class="icon"><uni-icons type="checkmarkempty"  class="checkmark" size="12" color="#FFFFFF"></uni-icons></view>
+								<text>专业优先填报</text>
 							</label>
 							<label class="uni-flex-item">
-								<radio value="fexpert" /><text>找专家填志愿</text>
+								<radio value="fexpert" />
+								<view class="icon"><uni-icons type="checkmarkempty"  class="checkmark" size="12" color="#FFFFFF"></uni-icons></view>
+								<text>找专家填志愿</text>
 							</label>
 						</radio-group>
 					</view>
@@ -354,18 +367,37 @@
 	.i-links{width: 100%;height: 100rpx;justify-content: space-between;}
 	.top-btn{width: 48%;margin: 0;border-width: 0;background-color: #c4c4c4;color: #fff;line-height: 100rpx;}
 	.top-btn::after{border-width: 0;}
-	.fill-radio label{padding-top: 20rpx;}
-	.fill-radio radio{margin: 0 20rpx 0 30rpx;}
+	.fill-radio label{padding-top: 20rpx;display: flex;align-items: center;}
+	.fill-radio radio{margin: 0 20rpx 0 0;width: 0;height: 0;opacity: 0;}
 	.fill-sub{width: 60%;}
 	.i-label{margin: 0 20rpx;}
-	.info-tit{margin-top: 100rpx;margin-bottom: 120rpx;}
+	.info-tit{margin-top: 100rpx;margin-bottom: 100rpx;padding-left: 20rpx;}
 	.choose-p{flex: 1;flex-wrap: wrap;}
 
 	.province{height: 68rpx;line-height: 68rpx;width: 155rpx;text-align: center;border:  2rpx solid #BDBDBD;color: #828282;margin: 11rpx;border-radius: 16rpx;}
-	.cur{color: #FFF;background: #bdbdbd;}
+	
 	.radioStyle{width: 0;height: 0;opacity: 0;}
 	radio-group label,checkbox-group label{padding-right: 0;}
 	.links > .uni-button-gray{ margin-bottom: 40rpx; margin-top: 60rpx;}
 	.links > .uni-button-withe{ margin-bottom: 40rpx; }
+.subject{ padding-left: 30rpx; margin: 60rpx 0 30rpx 0;}
+.course{height: 68rpx;line-height: 68rpx;text-align: center;border:  2rpx solid #BDBDBD;color: #828282;margin: 11rpx;border-radius: 16rpx;  margin: 20rpx 5% 14rpx 0;flex-basis: 28%;}
+.course:nth-of-type(3n){margin-right: 0;}
 
+.uni-common-mt{ margin-top: 0;}
+.uni-list-cell{ margin-bottom: 10rpx;}
+.uni-form-item{ margin-bottom: 60rpx;}
+.choose-subject{ margin-top: 10rpx;}
+.wenli{margin-bottom: 60rpx; }
+.wenli radio-group{width: 36%;height: 50rpx;line-height: 50rpx;margin-bottom: 10rpx;border-radius: 30rpx;border:  2rpx solid #BDBDBD; overflow: hidden;color: #828282;}
+.wenli radio-group label.course-wenli{ width: 50%;text-align: center;}
+.wenli radio-group label.course-wenli:first-child{ border-right: 2rpx solid #BDBDBD;}
+.cur{color: #FFF;background: #bdbdbd;}
+
+.fill-radio .checkmark{ opacity: 0;} 
+.fill-radio label[aria-checked="true"] .checkmark{ opacity: 1;}
+
+.fill-radio .icon{background-color: #EEEEEE;height: 32rpx;width: 32rpx; line-height: 32rpx; border-radius: 8rpx; margin-right: 20rpx; text-align: center;}
+.fill-radio label[aria-checked="true"] .icon{ background: #BDBDBD;}
+.uni-form-item .title { padding: 16rpx 20rpx;}
 </style>
