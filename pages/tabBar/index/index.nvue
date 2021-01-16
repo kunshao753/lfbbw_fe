@@ -19,10 +19,10 @@
 			<button class="top-btn" @tap="goSchool('schools')">学校优先填报</button>
 			<button class="top-btn" @tap="goSchool('specialities')">专业优先填报</button>
 		</view>
-		<view class="uni-flex i-links uni-common-mt">
+		<!-- <view class="uni-flex i-links uni-common-mt">
 			<button class="top-btn" @tap="goProbability('schools')">院校录取概率</button>
 			<button class="top-btn" @tap="goProbability('majors')">专业录取概率</button>
-		</view>
+		</view> -->
 		<view class="uni-panel" v-for="(item, index) in list" :key="item.id">
             <view class="uni-panel-h" :class="item.open ? 'uni-panel-h-on' : ''" @click="triggerCollapse(index)">
                 <text class="uni-panel-text">{{item.name}}</text>

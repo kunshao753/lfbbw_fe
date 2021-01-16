@@ -1,15 +1,26 @@
 const state={
-	    user_id:"",
+	    user_id:"zmy",
 			year:2020,
-		  province_id:"",
-			score:0,
-			rank:0,
-			sceneId:0,
-			wenli:0,
+		  province_id:"130000000000",
+			score:636,
+			rank:12058,
+			sceneId:123,
+			wenli:2,
 			
 			//专科5 本科7
-			diploma_id:7
+			diploma_id:7,
+			//用户选科 逗号分隔
+			courseListIds:""
 }
+
+// "user_id": "zmy",
+//   "year": 2020,
+//   "province_id": 13,
+//   "score": 636,
+//   "rank": 12058,
+//   "sceneId": 123,
+//   "wenli": 2,
+//   "diploma_id": 7
 
 const getters={
 	

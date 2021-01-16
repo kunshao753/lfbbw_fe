@@ -8,10 +8,10 @@
 			<swiper :current="tabIndex" class="swiper-box"  :duration="300" @change="ontabchange">
 				<swiper-item class="swiper-item" catchtouchmove='catchTouchMove'>
 			<scroll-view scroll-y="true" class="scroll">		
-		   <view  class="cur-title uni-inline-item uni-jcenter"><text>北京大学</text></view>
+		   <view  class="cur-title uni-inline-item uni-jcenter"><text>{{curschoolInfo.name}}</text></view>
 			 <view  class="uni-inline-item uni-jcenter ">
 				 <uni-icons type="location-filled" size="28" color="#000" class="location-filled"></uni-icons>
-				 <text>北京市</text>
+				 <text>{{curschoolInfo.province}}</text>
 				</view>
 				
 				<!-- 圆弧进度条 -->
@@ -134,7 +134,9 @@
 				        }],
 					
 				   curschoolInfo:{
-						 sch_id:''
+						 sch_id:'',
+						 name:'',
+						 province:''
 					 },
 					 cWidth3: '', //圆弧进度图
 					 cHeight3: '', //圆弧进度图
@@ -255,28 +257,31 @@
 			...mapState(['studentBaseInfo','volunteerInfo'])
 		},
 			onLoad(option) {
+				let option_sch_obj
+				// 目前在某些平台参数会被主动 decode,暂时这样处理.
+				try {
+					option_sch_obj = JSON.parse(decodeURIComponent(option.sch_obj))
+				} catch (error) {
+					option_sch_obj = JSON.parse(option.sch_obj)
+				}
 				
+				//请求院校历年数据信息
 				this.schoolData={
-					sch_id:'52ac2e98747aec013fcf4cca',
-					enroll_unit_id:'52ac2e98747aec013fcf4cca',
-					province_id:'130000000000',
-					wenli:1,
-					batch:1,
-					diploma_id:7,
-					
-					// sch_id:'52ac2e98747aec013fcf4cca',
-					// enroll_unit_id:'52ac2e98747aec013fcf4cca',
-					// province_id:this.studentBaseInfo.province_id,
-					// wenli:this.studentBaseInfo.wenli,
-					// batch:1,
-					// diploma_id:this.studentBaseInfo.diploma_id
+					sch_id:option_sch_obj.base_info.sch_id,
+					enroll_unit_id:option_sch_obj.enroll_info[1].enroll_unit_id,
+					province_id:option_sch_obj.enroll_info[1].stu_province_id,
+					wenli:option_sch_obj.enroll_info[1].wenli,
+					batch:option_sch_obj.enroll_info[1].batch,
+					diploma_id:option_sch_obj.enroll_info[1].diploma_id,
 				}
-				if(option.sch_id){
-					
-				}
-				this.curschoolInfo.sch_id=this.schoolData.sch_id;
-			
 				this.getSchEnrollData(this.schoolData)
+				
+				//院校详情信息
+				this.curschoolInfo.sch_id=option_sch_obj.base_info.sch_id;
+			  this.curschoolInfo.name=option_sch_obj.base_info.name;
+				this.curschoolInfo.province=option_sch_obj.base_info.province;
+				
+				
 				
 				
 				 console.log(option.showTab);

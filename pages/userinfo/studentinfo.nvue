@@ -270,9 +270,9 @@
 					this.$store.commit({
 					      type:'studentBaseInfo/updateState',
 								province_id:t.studentInfo.province_id,	
-								score:t.studentInfo.score,
-								rank:t.studentInfo.rank,
-								wenli:t.studentInfo.wenli							
+								score:parseInt(t.studentInfo.score),
+								rank:parseInt(t.studentInfo.rank),
+								//wenli:t.studentInfo.wenli							
 					})
 					
 					//跳转
@@ -367,7 +367,7 @@
 	.i-links{width: 100%;height: 100rpx;justify-content: space-between;}
 	.top-btn{width: 48%;margin: 0;border-width: 0;background-color: #c4c4c4;color: #fff;line-height: 100rpx;}
 	.top-btn::after{border-width: 0;}
-	.fill-radio label{padding-top: 20rpx;display: flex;align-items: center;}
+	.fill-radio label{padding-top: 20rpx;display: flex;align-items: center; flex-direction: row;}
 	.fill-radio radio{margin: 0 20rpx 0 0;width: 0;height: 0;opacity: 0;}
 	.fill-sub{width: 60%;}
 	.i-label{margin: 0 20rpx;}

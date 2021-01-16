@@ -318,27 +318,29 @@ batch:"本科一批",
 			    this.getProvinceList();
 					const curData={
 						   "user_id": "zmy",
-						     "year": 2020,
-						     "province_id": "130000000000",
-						     "score": 436,
-						     "rank": 112058,
-						     "sceneId": 123,
-						     "wenli": 1
+						     "year": this.studentBaseInfo.year,
+						     "province_id": this.studentBaseInfo.province_id,
+						     "score": this.studentBaseInfo.score,
+						     "rank": this.studentBaseInfo.rank,
+						     "sceneId": this.studentBaseInfo.sceneId,
+						     "wenli": this.studentBaseInfo.wenli,
+								 "diploma_id": this.studentBaseInfo.diploma_id
 					}
-					this.getSchoolList(curData)
+					//this.getSchoolList(curData)
 					
            
-					 setTimeout(()=>{
+					 //setTimeout(()=>{
               this.tabBars.forEach((tabBar) => {
                   this.newsList.push({
                       data: [],
                       isLoading: false,
                       refreshText: "",
-                      loadingText: '加载更多...'
+											loadingText: ''
+                      //loadingText: '加载更多...'
                   });
               });
-              this.getList(0);
-            },350)
+            this.getList(curData,0);
+           // },350)
 					
 						
         },
@@ -366,7 +368,7 @@ batch:"本科一批",
 									})
 									
 									console.log(res)
-														
+									return res;														
 					},
 			// 选择985,211,本省
 			toggleFilter(type){
@@ -396,15 +398,30 @@ batch:"本科一批",
 				this.schoolTypeIndex = index;
 			},
 			// 获取院校列表
-            getList(index) {
+            getList(objData,index) {
+													
                 let activeTab = this.newsList[index];
                 let list = [];
-                for (let i = 1; i <= 10; i++) {
-                    let item = Object.assign({}, newsData['data' + Math.floor(Math.random() * 5)]);
-                    item.id = this.newGuid();
-                    list.push(item);
-                }
-                activeTab.data = activeTab.data.concat(list);
+                // for (let i = 1; i <= 10; i++) {
+                //     let item = Object.assign({}, newsData['data' + Math.floor(Math.random() * 5)]);
+                //     item.id = this.newGuid();
+                //     list.push(item);
+                // }
+								
+								this.getSchoolList(objData).then((res)=>{
+									          const resData=res.data;
+														
+									 					if(resData){
+									 						Object.getOwnPropertyNames(resData).forEach(function(key){
+									 							 let curItem=resData[key]													
+									 					     list.push(curItem)
+									 						});
+															console.log(list.length)
+															activeTab.data = activeTab.data.concat(list);
+									 				}
+								})
+								
+                
             },
 			// 跳转到院校详情
             goDetail(data) {
@@ -428,16 +445,18 @@ batch:"本科一批",
                 });
 			},
 			//跳转到院校录取概率
-			goProbability(sch_id,type){
-				sch_id='52ac2e98747aec013fcf4cca'
+			goProbability(sch_obj,type){
+				if(!sch_obj) return
+				
 				uni.navigateTo({
-				    url: '../probability/probability?showTab=' + type+"&sch_id="+sch_id
+				    url: '../probability/probability?showTab=' + type+"&sch_obj=" + encodeURIComponent(JSON.stringify(sch_obj))
 				});
+				
 			},
             loadMore(e) {
-                setTimeout(() => {
-                    this.getList(this.tabIndex);
-                }, 500)
+                // setTimeout(() => {
+                //     this.getList(this.tabIndex);
+                // }, 500)
             },
 			// tabbar点击切换
             ontabtap(index) {				
@@ -458,7 +477,7 @@ batch:"本科一批",
             },
             switchTab(index) {
                 if (this.newsList[index].data.length === 0) {
-                    this.getList(index);
+                    //this.getList(index);
                 }
 
                 if (this.tabIndex === index) {

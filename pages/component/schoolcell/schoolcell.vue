@@ -1,96 +1,43 @@
 <template>	
-	<!-- #ifdef APP-NVUE -->
-	<list class="scroll-v list" enableBackToTop="true" scroll-y loadmoreoffset="15" @loadmore="loadMore">
-		<refresh class="refresh" @refresh="onrefresh" @pullingdown="onpullingdown" :display="cellData.refreshing ? 'show' : 'hide'">
-			<div class="refresh-view">
-				<image class="refresh-icon" :src="refreshIcon" :style="{width: (cellData.refreshing || pulling) ? 0: '30px'}" :class="{'refresh-icon-active': cellData.refreshFlag}"  mode="aspectFill"></image>
-				<loading-indicator class="loading-icon" animating="true" v-if="cellData.refreshing"></loading-indicator>
-				<text class="loading-text">{{cellData.refreshText}}</text>
-			</div>
-		</refresh>
-		<cell v-for="(newsitem,index2) in cellData.data" :key="newsitem.id">
-			<view class="school-cell">
-				<view class="media-item uni-flex" @click="goProbability(newsitem.id,'schools')">
-					<image class="image-list" :src="newsitem.image_url"></image>
-					<view class="school-r uni-flex-item">
-						<view class="uni-flex uni-space-between">
-							<text class="uni-title" v-text="newsitem.title"></text>
-							
-							<view class="uni-flex uni-acenter mt10">
-								<uni-icons type="location-filled" size="22" color="#000" class="location-filled"></uni-icons>
-								<text>{{newsitem.location}}市</text>
-							</view>
-						</view>
-						<view class="uni-flex uni-space-between">
-							<view class="uni-flex uni-row">
-								<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag" :key="tindex"></text>
-							</view>
-						</view>
-						<view class="uni-flex uni-acenter mt10">
-							<view class="schoolitem">
-																<text class="tag">录取概率</text>
-																<text>{{newsitem.percent}}</text>
-							</view>
-							<view class="schoolitem">
-																<text class="tag">{{thisYear}}年最低次位</text>
-																<text>{{newsitem.lowestRank}}</text>
-							</view>
-							<view class="schoolitem">
-																<text class="tag">录取批次</text>
-																<text>{{newsitem.batch}}</text>
-							</view>
-							  <view class="schoolitem">
-							  									<text class="tag">{{thisYear}}年最低分</text>
-							  									<text>{{newsitem.score}}分</text>
-							  </view>
-						
-							
-						</view>			
-				</view>
-				<view class="uni-inline-item uni-jcenter matching">匹配专业<text>10</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
-			</view>
-			
-		</cell>
-		<cell class="loading-more" v-if="cellData.isLoading || cellData.data.length > 4">
-			<text class="loading-more-text">{{cellData.loadingText}}</text>
-		</cell>
-	</list>
-	<!-- #endif -->
-	<!-- #ifndef APP-NVUE -->
+	
 	<scroll-view class="scroll-v list" enableBackToTop="true" scroll-y @scrolltolower="loadMore">
-		<view class="school-cell" v-for="(newsitem,index2) in cellData.data" :key="newsitem.id">
-			<view class="media-item uni-flex" @click="goProbability(newsitem.id,'schools')">
-				<image class="image-list" :src="newsitem.image_url"></image>
+		<view class="school-cell" v-for="(newsitem,index2) in cellData.data" :key="newsitem.base_info.sch_id">
+			<view class="media-item uni-flex" @click="goProbability(newsitem,'schools')">
+				<image class="image-list" :src="newsitem.base_info.logo"></image>
 				<view class="school-r uni-flex-item">
 					<view class="uni-flex uni-space-between title-box">
-						<text class="uni-title" v-text="newsitem.title"></text>
-						<view class="uni-flex uni-acenter mt10">
+						<text class="uni-title" v-text="newsitem.base_info.name"></text>
+						<view class="uni-flex uni-acenter">
 							<uni-icons type="location-filled" size="22" color="#000" class="location-filled"></uni-icons>
-							<text>{{newsitem.location}}市</text>
+							<text>{{newsitem.base_info.province}}</text>
 						</view>
 					</view>
 					<view class="uni-flex uni-space-between">
 						<view class="uni-flex uni-row">
-							<text class="school-tag" v-for="(tag,tindex) in newsitem.label" v-text="tag" :key="tindex"></text>
+							
+							<text class="school-tag" v-for="(tag,tindex) in newsitem.base_info.tag.split(',').filter(item=>item && item.trim())" v-text="tag" :key="tindex"></text>
+							<text class="school-tag" v-if="newsitem.base_info.type" >{{newsitem.base_info.type}}</text>
+							<text class="school-tag" v-if="newsitem.base_info.grad" >{{newsitem.base_info.grad}}</text>
 						</view>
 					</view>
 					  <!-- 院校优先填报 -->
 					  <view class="uni-flex uni-acenter mt10" v-if="cellType=='schools'">
 							<view class="schoolitem">
 																<text class="tag">录取概率</text>
-																<text>{{newsitem.percent}}</text>
+																<!-- <text>{{newsitem.enroll_info[1].percent}}</text> -->
+																<text>90%</text>
 							</view>
 							<view class="schoolitem">
-																<text class="tag">{{thisYear}}年最低次位</text>
-																<text>{{newsitem.lowestRank}}</text>
+																<text class="tag">{{newsitem.enroll_info[1].academic_year}}年最低次位</text>
+																<text>3453</text>
 							</view>
 							<view class="schoolitem">
 																<text class="tag">录取批次</text>
-																<text>{{newsitem.batch}}</text>
+																<text>本科一批</text>
 							</view>
 							  <view class="schoolitem">
-							  									<text class="tag">{{thisYear}}年最低分</text>
-							  									<text>{{newsitem.score}}分</text>
+							  									<text class="tag">{{newsitem.enroll_info[1].academic_year}}年最低分</text>
+							  									<text>{{newsitem.enroll_info[1].min_score}}分</text>
 							  </view>
 						
 							
@@ -128,14 +75,14 @@
 				
 				
 			</view>
-			<view class="uni-inline-item uni-jcenter matching"  v-if="cellType=='schools'" @click="goProbability(newsitem.id,'schools')">匹配专业<text>{{newsitem.matchingMajor}}</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
+			<view class="uni-inline-item uni-jcenter matching"  v-if="cellType=='schools'" @click="goProbability(newsitem,'schools')">匹配专业<text>{{newsitem.major_count}}</text><uni-icons type="arrowright" size="10" color="#828282"/></view>
 		</view>
 		
 		<view class="loading-more" v-if="cellData.isLoading || cellData.data.length > 4">
 			<text class="loading-more-text">{{cellData.loadingText}}</text>
 		</view>
 	</scroll-view>
-	<!-- #endif -->
+	
 </template>
 <script>
 	
@@ -190,8 +137,8 @@
 			goMajor(data){
 				this.$emit('gomajor',data)
 			},
-			goProbability(sch_id,type){
-				this.$emit('goprobability',sch_id,type)
+			goProbability(sch_obj,type){
+				this.$emit('goprobability',sch_obj,type)
 			},
 			
 			addToMajor(e){
@@ -220,9 +167,10 @@
 	}
 	.media-item{
 		/* border-bottom: 1rpx solid #BEBEBE; */
+		padding: 10rpx 26rpx 0 26rpx;
 		justify-content: space-between;
 	}
-	.title-box{padding: 10rpx 0;}
+	.title-box{padding-bottom: 10rpx;align-items: baseline;}
 	.update-tips {
 	    position: absolute;
 	    left: 0;
@@ -292,7 +240,7 @@
 	    font-size: 28rpx;
 	    color: #999;
 	}
-	.matching{padding-top: 20rpx;border-top: 2rpx solid #e0e0e0;margin-top: 20rpx;color: #4f4f4f;}
+	.matching{padding-top: 10rpx;border-top: 2rpx solid #e0e0e0;margin-top: 10rpx;color: #4f4f4f; align-items: center;}
 	.matching text{color: #000;font-weight: bold;margin-right: 30rpx;margin-left: 10rpx;}
 	.sd-addressicon{width: 40rpx;height: 40rpx;}
 	.uni-flex.uni-acenter{ flex-wrap: wrap;flex-direction: row;} 

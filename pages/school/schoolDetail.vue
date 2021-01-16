@@ -15,7 +15,7 @@
 				</view>
 				<view class="uni-inline-item mt10">
 					<view class="sub-box uni-inline-item">
-						<uni-icons type="location-filled" size="22" color="#c4c4c4" class="location-filled"></uni-icons><text>{{schoolInfoData.location}}</text>
+						<uni-icons type="location-filled" size="22" color="#c4c4c4" class="location-filled"></uni-icons><text>{{schoolInfoData.province}}</text>
 					</view>
 					<view class="sub-box uni-inline-item">
 						<uni-icons type="location-filled" size="22" color="#c4c4c4" class="location-filled"></uni-icons>
