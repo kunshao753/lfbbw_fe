@@ -6,7 +6,7 @@
 			<view class="uni-flex-item">
 				<view class="mt10 uni-inline-item">
 					<text class="uni-title">{{schoolInfoData.name}}</text>
-					<button class="sd-add" type="default" size="mini">+关注</button>
+					<button class="sd-add"  size="mini">+关注</button>
 				</view>
 				<view class="uni-inline-item mt20">
 					<text class="school-tag"  v-for="(item,index) in schoolInfoData.tag" :key="index">{{item}}</text>
@@ -101,7 +101,7 @@
 							    {
 							        "name": "国内考研",
 							        "data": 0.85,
-							        "color": "#1890ff"
+							        "color": "#78B1B7"
 							    }
 							]
 						},{
@@ -109,7 +109,7 @@
 							    {
 							        "name": "出国",
 							        "data": 0.25,
-							        "color": "#fc485a"
+							        "color": "#78B1B7"
 							    }
 							]
 						},{
@@ -117,7 +117,7 @@
 							    {
 							        "name": "就业率",
 							        "data": 0.42,
-							        "color": "#deff63"
+							        "color": "#78B1B7"
 							    }
 							]
 						}
@@ -127,7 +127,7 @@
 										series: [{
 											name: 'k',
 											data: [10,20,50,60],
-											color: '#1890ff'
+											color: '#78B1B7'
 										}]
 						 }
 				}
@@ -199,7 +199,7 @@
 <style>
 	.school-top{padding-bottom: 40rpx;}
 	.sub-box{width: 45%; margin-top: 10rpx;}
-	.sd-add{vertical-align: middle;margin-left: 20rpx;background: #C4C4C4;border-radius: 25rpx;}
+	.sd-add{vertical-align: middle;margin-left: 20rpx;background: var(--color-primary);border-radius: 25rpx; color: #FFF;}
 	.sd-addressicon{width: 40rpx; height: 40rpx;margin-right: 30rpx;}
 	.recruit-infos{padding-bottom: 100rpx;}
 	.recruit-infos .item {display: flex;flex-direction: row; justify-content: space-between; height: 80rpx; line-height: 80rpx; padding: 20rpx 4% 0 4%; text-align: center;}

@@ -48,7 +48,7 @@
 					  <scroll-view scroll-y="true" class="scroll">	
 			       <view class="majors-outers">
 							    <view class="item gray"><text>专业10</text><text>录取概率</text></view>
-							    <view class="item" v-for="(item,index) in majorsData" @click="openPopup(item)" :key="index"><text>{{item.name}}</text><text>{{item.probability}}%</text></view>													
+							    <view class="item" v-for="(item,index) in majorsData" @click="openPopup(item)" :key="index"><text>{{item.name}}</text><text class="probability-info">{{item.probability}}%</text></view>													
 						 </view>
 						 </scroll-view>	
 			  </swiper-item>
@@ -112,7 +112,7 @@
         {
             "name": "录取概率",
             "data": 0.85,
-            "color": "#1890ff"
+            "color": "#78B1B7"
         }
     ]
 }
@@ -160,7 +160,7 @@
 					         {
 					             "name": "录取概率",
 					             "data": 0.85,
-					             "color": "#1890ff"
+					             "color": "#78B1B7"
 					         }
 					     ]
 					 },
@@ -174,7 +174,7 @@
 										series: [{
 											name: '分数',
 											data: [],
-											color: '#1890ff'
+											color: '#78B1B7'
 										}]
 									 }
 						 }, {
@@ -185,7 +185,7 @@
 									series: [{
 										name: '位次',
 										data: [],
-										color: '#00ff00'
+										color: '#78B1B7'
 									}]
 								 }
 						 }, {
@@ -196,7 +196,7 @@
 										series: [{
 											name: '人数',
 											data: [],
-											color: '#ff00ff'
+											color: '#78B1B7'
 										}]
 									 }
 						 }],
@@ -444,7 +444,7 @@
 									fontSize: 11,
 									title: {
 										name: Math.round(chartData.series[0].data * 100) + '%',
-										color: '#333',
+										color: '#78B1B7',
 										fontSize: 40 * _self.pixelRatio,
 										offsetY:-20* _self.pixelRatio,
 									},
@@ -625,7 +625,7 @@
 
 <style>
 	 .cur-tab{position: fixed;left: 0;top: 0;right: 0; z-index:999;padding: 0 20rpx;  padding-bottom: 8rpx;}
-	 .cur-tab /deep/ .uni-tab-item {margin-left: 60rpx; margin-right: 60rpx;flex-grow:1;}
+	 .cur-tab .uni-tab-item {margin-left: 60rpx; margin-right: 60rpx;flex-grow:1;}
 	 .cur-title{font-size: 38rpx;margin-top: 20rpx;}
 	 .sd-addressicon{width: 60rpx;height: 60rpx;}
 	 /* 圆弧进度样式 */
@@ -636,13 +636,15 @@
 	  margin-top: 20rpx;
 	  margin-bottom: 60rpx;
 	 }
-	 .qiun-charts3 /deep/ button{position: absolute;
+	 .qiun-charts3 button{position: absolute;
 	     left:50%;
 			 transform: translateX(-50%);
 			 bottom: 88rpx;
 	     height: 60rpx;
 	     line-height: 60rpx;
 	     font-size: 28rpx; 
+			 color: #FFF;
+			 background-color: var(--color-primary);
 		}
 	 .charts3 {
 	 	margin: 0 auto;
@@ -655,10 +657,10 @@
 	 .chartsLine{height: 400rpx; width: 100%;}
 	 
 	 .score-info{border-top:1px solid #ccc; }
-	 .select-chart-info /deep/{ height: 60rpx; margin-bottom: 48rpx; margin-top: 24rpx; flex-direction: row;}
+	 .select-chart-info{ height: 60rpx; margin-bottom: 48rpx; margin-top: 24rpx; flex-direction: row;}
 	 .select-chart-info text{ background: #eee;height: 60rpx;line-height: 60rpx;padding: 0 24rpx;margin-right: 24rpx;border-radius: 16rpx; text-align: center; flex: 1 0 auto;}
 	 .select-chart-info text:last-of-type{ margin-right: 0; }
-	 .select-chart-info text.select{color: #fff; background: #ccc;}
+	 .select-chart-info text.select{color: #fff; background: var(--color-primary);}
 	 
 	 .swiper-box{min-height: 100vh;}
 	 .scroll{
@@ -668,6 +670,8 @@
 	 .majors-outers >  .item{ flex-direction: row; justify-content: space-between; height: 100rpx; line-height: 100rpx; border-bottom:1px solid #ccc;}
 	  .majors-outers {margin-bottom: 200rpx;}
 	  .majors-outers >  .item.gray{color: #828282; border-bottom:none; line-height: 50rpx; height: 50rpx; margin-top: 34rpx;}
+		
+		.probability-info{color: var(--color-primary);}
 		
 		
 		.majors-popup-title{font-size: 36rpx;text-align: center; margin-bottom: 30rpx;}
