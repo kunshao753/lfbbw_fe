@@ -19,7 +19,7 @@
 		<!-- fliterPopup start -->
 		<uni-popup ref="fliterPopup" type="bottom" :animation="true">
 			<view class="uni-popup-box  uni-bg-white">
-					 <uni-icons type="closeempty"  class="close" @click="closePopup"></uni-icons>
+					 <uni-icons type="closeempty"  class="close" @click="closePopup"  size="20"></uni-icons>
 					 <view class="filter-popup-title"><text class="uni-share-title-text">{{curPopupData.title}}</text></view>
 					<scroll-view class="filter-popup-content"  scroll-y="true" enable-flex="true" show-scrollbar="false">
 						   <text v-for="(item,index) in curPopupData.dataList" @click="selectFilterItemInfo(item,index)" :class="{'selected':curPopupData.cur_data_select_index==index}" :key="index">{{item.name}}</text>
@@ -659,11 +659,11 @@ batch:"本科一批",
 	}
 	.filter-popup-title{font-size: 36rpx;text-align: center; margin-bottom: 30rpx;}
 	.filter-popup-content{ flex-direction: row; flex-wrap: wrap; max-height:60vh; flex: 1;justify-content: flex-start; padding-bottom: 25rpx;}
-	.filter-popup-content text{ color: #bdbdbd; border: 2rpx solid #bdbdbd; border-radius: 16rpx;  height: 68rpx;  line-height: 68rpx; padding: 0 20rpx;margin-right: 3%;ext-align: center; margin-bottom: 20rpx;flex-basis: 22%;  text-align: center;}
+	.filter-popup-content text{ color: var(--color-light-shape); border: 2rpx solid var(--color-light-shape); border-radius: 16rpx;  height: 68rpx;  line-height: 68rpx; padding: 0 20rpx;margin-right: 3%;ext-align: center; margin-bottom: 20rpx;flex-basis: 22%;  text-align: center;}
 	.filter-popup-content text:nth-of-type(4n){ margin-right: 0;}
-	.filter-popup-content text.selected{border-color: #000000;color: #000000;}
+	.filter-popup-content text.selected{ border-color: var(--color-primary);  background: var(--color-primary);color: #FFF;}
 	.filter-popup-button-box{border-top: 2rpx solid #ccc;justify-content: space-between; flex-flow: row;height: 128rpx;  padding-top: 20rpx;}
-	.filter-popup-button-box .uni-share-button{font-size: 30rpx; color: #fff; background-color: #c4c4c4;    height: 80rpx;
+	.filter-popup-button-box .uni-share-button{font-size: 30rpx; color: #fff; background-color: var(--color-primary);    height: 80rpx;
     line-height: 80rpx;
     width: 140rpx;}
 	.filter-popup-button-box .uni-share-button.reset{ background: transparent;color: #ccc;text-decoration: underline;}

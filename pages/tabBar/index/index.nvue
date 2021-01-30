@@ -16,7 +16,7 @@
 			<button class="top-btn" @tap="goSpecialities()">专业选择</button>
 		</view>
 		<view class="uni-flex i-links uni-common-mt">
-			<button class="top-btn" @tap="goSchool('schools')">学校优先填报</button>
+			<button class="top-btn" @tap="goSchool('schools')">院校优先填报</button>
 			<button class="top-btn" @tap="goSchool('specialities')">专业优先填报</button>
 		</view>
 		<!-- <view class="uni-flex i-links uni-common-mt">

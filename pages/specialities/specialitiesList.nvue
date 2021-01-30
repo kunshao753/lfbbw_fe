@@ -8,7 +8,7 @@
 		 
 		<view class="wrapper uni-flex uni-jcenter diploma-box">
 			<view v-for="(item,index) in tabBars" :key="item.id" class="uni-inline-item diploma" :class="{'cur':tabIndex==index&&isOpen}" @click="switchTab(index,item.id)">
-				<text>{{item.name}}</text><uni-icons type="arrowdown"></uni-icons>
+				<text>{{item.name}}</text><uni-icons type="arrowdown" :color="{'#FFF':tabIndex==index&&isOpen}"></uni-icons>
 			</view>
 		</view>		
 		<view class="wrapper uni-bg-white" v-show="!isOpen">
@@ -25,7 +25,7 @@
 		<scroll-view class="scroll-v wrapper" enableBackToTop="true" scroll-y v-if="isOpen">
 			<view v-show="!isSub">
 				<view v-for="(newsitem,index2) in newsList[tabIndex].data" :key="newsitem.sid">						
-					<view class="uni-bold mt20">{{newsitem.sname}}</view>
+					<view class="uni-bold">{{newsitem.sname}}</view>
 					<view class="uni-inline-item major-list">
 						<text v-for="(subitem1,subindex1) in newsitem.cinfo" :key="subitem1.cid" v-text="subitem1.cname" :class="{'select':curMajor.includes(subitem1.cid)}" @click="chooseMajor(subitem1.cid)"></text>
 					</view>				
@@ -36,14 +36,14 @@
 			</view>
 			<view v-show="isSub">
 				<view v-for="(item,index) in majorSubList" :key="item.cid">						
-					<view class="uni-bold mt20">{{item.cname}}</view>
+					<view class="uni-bold">{{item.cname}}</view>
 					<view class="uni-inline-item major-list">
 						<text v-for="(subitem1,subindex1) in item.minfo" :key="subitem1.mid" v-text="subitem1.mname" :class="{'select':curMajor.includes(subitem1.mid)}" @click="chooseMajor(subitem1.mid)"></text>
 					</view>				
 				</view>
 				<view class="bottom-btn uni-inline-item go-search-chool">
-					<button class="major-btn" @click="clearInfo">返回专业大类</button>
-					<button class="major-btn" type="default" @click="clickBtn(isSub)">搜索院校</button>
+					<button class="uni-button-withe"  @click="clearInfo">返回专业大类</button>
+					<button class="uni-button-gray"  @click="clickBtn(isSub)">搜索院校</button>
 				</view>
 			</view>
 		</scroll-view>
@@ -286,14 +286,14 @@
 	}
 	.diploma-box{padding: 20rpx;border-bottom:2rpx solid #e0e0e0;}
 	.diploma{margin: 0 22rpx;padding: 0 30rpx;border: 2rpx solid #000;border-radius: 28rpx;height: 56rpx;}
-	.diploma text{padding-right: 10rpx;}
-	.cur{border-color: #C4C4C4;background: #C4C4C4;}
-	.scroll-v{background: #F2F2F2;flex: 1; padding-bottom:150rpx;}
+	.diploma text{padding-right: 6rpx;}
+	.cur{border-color: var(--color-primary);background: var(--color-primary); color: #FFF;}
+	.scroll-v{background: #F2F2F2;flex: 1; padding-bottom:150rpx; padding-top: 20rpx;}
 	.major-list{flex-wrap: wrap;}
-	.major-list text{height: 56rpx;line-height: 56rpx;padding: 0 24rpx;  margin-right: 16rpx;margin-bottom: 24rpx;border-radius: 16rpx;border: 2rpx solid #bdbdbd;color: #828282;}
+	.major-list text{height: 56rpx;line-height: 56rpx;padding: 0 24rpx;  margin-right: 16rpx;margin-bottom: 24rpx;border-radius: 16rpx;border: 2rpx solid var(--color-light-shape);color: #828282;}
 	.bottom-btn{position: fixed;bottom: 0;left: 0;right: 0;background: #c4c4cc4;padding: 28rpx;border-top:2rpx solid #e0e0e0; z-index:100; background-color: #F2F2F2;}
-	.major-btn{width: 100%; background-color: #c4c4c4;}
-	.major-list text.select{background: #bdbdbd; color: #fff;}
+	.major-btn{width: 100%; background-color: var(--color-primary);  height: 100rpx; line-height: 100rpx;border-radius: 50rpx;color: #fff; font-size: 38rpx;}
+	.major-list text.select{background: var(--color-primary); border-color: var(--color-primary);  color: #fff;}
 	.go-search-chool{justify-content: space-between;}
-	.go-search-chool .major-btn{width: 46%;}
+	.go-search-chool button{width: 46%; border-radius: 20rpx;}
 </style>

@@ -230,7 +230,7 @@ export default {
   z-index: 99;
 }
 .delete{padding: 0 10px;color: #fff;background-color: #CE3C39;margin-left: 5px;}
-.item-index{ background:#c4c4c4; height:50rpx; width: 50rpx; line-height: 50rpx; color:#000; text-align: center;  margin-right: 20rpx; border-radius: 16rpx;}
+.item-index{ background:var(--color-primary); height:50rpx; width: 50rpx; line-height: 50rpx; color:#fff; text-align: center;  margin-right: 20rpx; border-radius: 16rpx;}
 .item-major{margin-right: 5%;}
 .uni-flex{align-content: center;align-items: center;}
 </style>

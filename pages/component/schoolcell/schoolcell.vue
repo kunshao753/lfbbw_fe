@@ -8,7 +8,7 @@
 					<view class="uni-flex uni-space-between title-box">
 						<text class="uni-title" v-text="newsitem.base_info.name"></text>
 						<view class="uni-flex uni-acenter">
-							<uni-icons type="location-filled" size="22" color="#000" class="location-filled"></uni-icons>
+							<uni-icons type="location-filled" size="22" color="var(--color-primary)" class="location-filled"></uni-icons>
 							<text>{{newsitem.base_info.province}}</text>
 						</view>
 					</view>

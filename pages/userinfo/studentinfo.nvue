@@ -29,7 +29,7 @@
 						<text class="i-label">分</text>
 					</view>
 					<view class="uni-list-cell">
-						<view class="uni-list-cell-left">全省排名(非必填)</view>
+						<view class="uni-list-cell-left">全省排名</view>
 						<input class="uni-list-cell-db" v-model="studentInfo.rank" type="number" name="rank" style="text-align: right;" />
 						<text class="i-label">名</text>
 					</view>
@@ -374,14 +374,14 @@
 	.info-tit{margin-top: 100rpx;margin-bottom: 100rpx;padding-left: 20rpx;}
 	.choose-p{flex: 1;flex-wrap: wrap;}
 
-	.province{height: 68rpx;line-height: 68rpx;width: 155rpx;text-align: center;border:  2rpx solid #BDBDBD;color: #828282;margin: 11rpx;border-radius: 16rpx;}
+	.province{height: 68rpx;line-height: 68rpx;width: 155rpx;text-align: center;border:  2rpx solid var(--color-light-shape);color: #777;margin: 11rpx;border-radius: 16rpx;}
 	
 	.radioStyle{width: 0;height: 0;opacity: 0;}
 	radio-group label,checkbox-group label{padding-right: 0;}
 	.links > .uni-button-gray{ margin-bottom: 40rpx; margin-top: 60rpx;}
 	.links > .uni-button-withe{ margin-bottom: 40rpx; }
 .subject{ padding-left: 30rpx; margin: 60rpx 0 30rpx 0;}
-.course{height: 68rpx;line-height: 68rpx;text-align: center;border:  2rpx solid #BDBDBD;color: #828282;margin: 11rpx;border-radius: 16rpx;  margin: 20rpx 5% 14rpx 0;flex-basis: 28%;}
+.course{height: 68rpx;line-height: 68rpx;text-align: center;border:  2rpx solid var(--color-light-shape);color: #777;margin: 11rpx;border-radius: 16rpx;  margin: 20rpx 5% 14rpx 0;flex-basis: 28%;}
 .course:nth-of-type(3n){margin-right: 0;}
 
 .uni-common-mt{ margin-top: 0;}
@@ -389,15 +389,18 @@
 .uni-form-item{ margin-bottom: 60rpx;}
 .choose-subject{ margin-top: 10rpx;}
 .wenli{margin-bottom: 60rpx; }
-.wenli radio-group{width: 36%;height: 50rpx;line-height: 50rpx;margin-bottom: 10rpx;border-radius: 30rpx;border:  2rpx solid #BDBDBD; overflow: hidden;color: #828282;}
-.wenli radio-group label.course-wenli{ width: 50%;text-align: center;}
-.wenli radio-group label.course-wenli:first-child{ border-right: 2rpx solid #BDBDBD;}
-.cur{color: #FFF;background: #bdbdbd;}
+.wenli radio-group{width: 36%;height: 50rpx;line-height: 50rpx;margin-bottom: 10rpx;color: #828282;}
+.wenli radio-group label.course-wenli{width: 50%;text-align: center;border-radius: 0 30rpx 30rpx 0;border:  2rpx solid var(--color-light-shape); overflow: hidden;}
+.wenli radio-group label.course-wenli:first-child{ border-right: none;border-radius: 30rpx 0 0 30rpx;}
+.wenli radio-group label[aria-checked="true"].course-wenli{ border-color: var(--color-primary);}
+.wenli radio-group label[aria-checked="true"].course-wenli + label{ border-left-color: var(--color-primary);}
+
+.cur{color: #FFF;background: var(--color-primary); border-color: var(--color-primary);}
 
 .fill-radio .checkmark{ opacity: 0;} 
 .fill-radio label[aria-checked="true"] .checkmark{ opacity: 1;}
 
-.fill-radio .icon{background-color: #EEEEEE;height: 32rpx;width: 32rpx; line-height: 32rpx; border-radius: 8rpx; margin-right: 20rpx; text-align: center;}
-.fill-radio label[aria-checked="true"] .icon{ background: #BDBDBD;}
+.fill-radio .icon{background-color: #F6F6F6;height: 32rpx;width: 32rpx; line-height: 32rpx; border-radius: 8rpx; margin-right: 20rpx; text-align: center;border: 2rpx solid #E8E8E8;}
+.fill-radio label[aria-checked="true"] .icon{ background: var(--color-primary); border-color: var(--color-primary);}
 .uni-form-item .title { padding: 16rpx 20rpx;}
 </style>

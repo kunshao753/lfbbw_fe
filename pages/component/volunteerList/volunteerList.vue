@@ -19,7 +19,7 @@
 					</view> -->
 					<drag-sort :list="fillList" :props="props" @change="onDragSortChange"></drag-sort>
 					<text> 志愿id信息是： {{volunteerInfo.volunteerIds.join(',')}}</text>
-					<button class="to-volunteering" @click="volunteerBtnClick">生成志愿</button>
+					<button class="uni-button-gray" @click="volunteerBtnClick">生成志愿</button>
 				</view>
 				
 			</view>			
@@ -85,7 +85,7 @@
 	}
 </script>
 <style>
-	.fixed{position: fixed;bottom: 100rpx;right: 36rpx;padding: 20rpx; width: 104rpx;height: 104rpx;text-align: center;justify-content: center;line-height: 40rpx;border-radius: 52rpx;background-color: #C4C4C4;}
+	.fixed{position: fixed;bottom: 100rpx;right: 36rpx;padding: 20rpx; width: 104rpx;height: 104rpx;text-align: center;justify-content: center;line-height: 40rpx;border-radius: 52rpx;background-color: var(--color-primary);box-shadow: 0px 4px 4px rgba(0,0,0,0.25); color: #FFFFFF;}
 	.fixed .outer{position: relative;}
 	.fixed .inner{position: absolute; top:-24rpx;right: -24rpx;   background: #FF0000; color: #FFFFFF; height: 38rpx; min-width: 38rpx; border-radius: 20rpx; line-height: 38rpx;  text-align: center; padding: 0 8rpx;}
 	
